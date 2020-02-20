@@ -1,0 +1,153 @@
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  --header-height: 60px;
+  --menu-width: 200px;
+}
+
+html, body * {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+.page-menu {
+  position: fixed;
+  width: var(--menu-width);
+  top: var(--header-height);
+  left: calc(50% - 560px);
+  overflow: auto;
+  max-height: calc(100vh - var(--header-height));
+}
+
+.page-content {
+  max-width: 640px;
+  margin: auto;
+  padding-top: calc(var(--header-height) + 20px);
+}
+
+.page-header {
+  position: fixed;
+  height: var(--header-height);
+  top: 0;
+  background: #c82832;
+  width: 100%;
+  color: white;
+}
+
+.page-header .header-content {
+  display: flex;
+  max-width: 640px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.page-header h3 {
+  flex-grow: 1;
+}
+
+.page-header ul {
+  display: flex;
+  justify-self: flex-end;
+}
+
+.page-header ul li {
+  margin: 0 0.5em;
+}
+
+.page-header ul li a {
+  color: white;
+  opacity: 0.7;
+}
+
+.page-header ul li.active a {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.post {
+  margin: auto;
+}
+
+.post p {
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.post p.image {
+  text-align: center;
+  font-size: 0.8em;
+}
+
+.post img {
+  display: block;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  margin: 1em auto;
+  max-width: 100%;
+}
+
+.post .header-anchor {
+  color: black;
+  opacity: 0.1;
+  text-decoration: none;
+}
+
+.post .header-anchor:hover {
+  opacity: 0.3;
+}
+
+.post-list {
+  padding: 1em;
+  background: white;
+}
+
+.post-list li.active > a {
+  font-weight: bold;
+}
+
+.post-list li ul {
+  padding: 0 1em;
+}
+
+.post-list li ul li {
+  margin: 0.5em 0;
+}
+
+.post-list li,
+.page-header li {
+  list-style: none;
+  margin: 1em 0;
+}
+
+.post-list li a,
+.page-header li a {
+  color: black;
+  text-decoration: none;
+}
+
+a {
+  color: blue;
+}
+
+a:visited {
+  color: blue;
+}
+
+blockquote p:before, blockquote p:after {
+  content: '"';
+}
+
+sup {
+  font-size: 0.6em;
+}
+
+.post [id]::before {
+  content: '';
+  display: block;
+  height: var(--header-height);
+  margin-top: calc(var(--header-height) * -1);
+  visibility: hidden;
+}

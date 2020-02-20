@@ -1,0 +1,8 @@
+<div class="header-content">
+  <h3>Rendering Strategies for Web Apps</h3>
+  <ul>
+    <ng-container *ngFor="let option of options">
+      <li [class.active]="isActive(option, 'csr')"><a [href]="getURL(option, 'csr')">{{option.platform}}:csr</a></li>
+    </ng-container>
+  </ul>
+</div>

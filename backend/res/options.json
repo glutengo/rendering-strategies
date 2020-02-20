@@ -1,3 +1,6 @@
 [
-
+  {
+    "platform": "angular",
+    "csr": "http://localhost:4200"
+  }
 ]
