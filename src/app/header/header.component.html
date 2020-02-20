@@ -3,6 +3,7 @@
   <ul>
     <ng-container *ngFor="let option of options">
       <li [class.active]="isActive(option, 'csr')"><a [href]="getURL(option, 'csr')">{{option.platform}}:csr</a></li>
+      <li [class.active]="isActive(option, 'csr')"><a [href]="getURL(option, 'ssr')">{{option.platform}}:ssr</a></li>
     </ng-container>
   </ul>
 </div>

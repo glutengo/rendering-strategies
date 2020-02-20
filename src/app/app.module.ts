@@ -14,7 +14,7 @@ import { BackendBaseUrlProvider } from './config';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     PostListModule,
     PostModule,
