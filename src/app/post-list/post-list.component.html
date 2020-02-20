@@ -1,0 +1,10 @@
+<ul class="post-list">
+  <li><a [routerLink]="['/']">Home</a></li>
+  <li *ngFor="let post of posts" [class.active]="isActive(post)">
+    <a [routerLink]="['posts/' + post.path]">{{post.title}}</a>
+    <ul *ngIf="post.children">
+      <li *ngFor="let child of post.children" [class.active]="isActive(child)">
+        <a [routerLink]="['posts/' + child.path]">{{child.title}}</a>
+    </ul>
+  </li>
+</ul>
