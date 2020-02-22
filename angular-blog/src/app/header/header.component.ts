@@ -6,8 +6,8 @@ import { DOCUMENT } from '@angular/common';
 
 interface Option {
   platform: string;
-  csr: string;
-  ssr: string;
+  technique: string;
+  url: string;
 }
 
 @Component({
@@ -19,26 +19,37 @@ export class HeaderComponent implements OnInit {
 
   options: Option[];
 
+  activeOption;
+
   constructor(private http: HttpClient,
               private router: Router,
               @Inject(DOCUMENT) private document: Document,
-              @Inject(BACKEND_BASE_URL) private baseUrl: string) { }
+              @Inject(BACKEND_BASE_URL) private baseUrl: string) {
+  }
 
   ngOnInit(): void {
-    this.http.get(`${this.baseUrl}/options.json`).subscribe((options: any) => this.options = options);
+    this.http.get(`${this.baseUrl}/options.json`).subscribe((options: any) => {
+      this.options = options;
+      this.activeOption = this.options.find(o => this.isActive(o));
+    });
   }
 
-  getURL(option: Option, technique: 'ssr' | 'csr') {
-    return `${option[technique]}${this.router.url}`;
+  getURL(option: Option) {
+    return this.getPageURL(option.url);
   }
 
-  isActive(option: Option, technique: 'ssr' | 'csr') {
-    if (option[technique]) {
-      const url = new URL(option[technique]);
-      return url.protocol === this.document.location.protocol &&
-        url.hostname === this.document.location.hostname &&
-        url.port === this.document.location.port;
-    }
+  getPageURL(optionUrl: string) {
+    return `${optionUrl}${this.router.url}`;
   }
 
+  isActive(option: Option) {
+    const url = new URL(option.url);
+    return url.protocol === this.document.location.protocol &&
+      url.hostname === this.document.location.hostname &&
+      url.port === this.document.location.port;
+  }
+
+  onSelectChanged(url: string) {
+    window.location.href = this.getPageURL(url);
+  }
 }

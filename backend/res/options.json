@@ -1,7 +1,17 @@
 [
   {
     "platform": "angular",
-    "csr": "http://localhost:4200",
-    "ssr": "http://localhost:4201"
+    "technique": "csr",
+    "url": "http://localhost:4200"
+  },
+  {
+    "platform": "angular",
+    "technique": "ssr",
+    "url": "http://localhost:4201"
+  },
+  {
+    "platform": "react",
+    "technique": "csr",
+    "url": "http://localhost:3000"
   }
 ]

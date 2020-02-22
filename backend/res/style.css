@@ -70,6 +70,7 @@ h1 {
 
 .post {
   margin: auto;
+  padding: 0 1em;
 }
 
 .post p {
@@ -150,4 +151,18 @@ sup {
   height: var(--header-height);
   margin-top: calc(var(--header-height) * -1);
   visibility: hidden;
+}
+
+.post pre {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  max-height: 400px;
+}
+
+select {
+  -webkit-appearance: none;
+  border: none;
+  color: white;
+  background: transparent;
 }
