@@ -3,4 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const { toc, postContent, renderingOptions } = window.REACT_HTTP_CACHE;
+
+ReactDOM.render(<App toc={toc} postContent={postContent}
+                     renderingOptions={renderingOptions}/>, document.getElementById('root'));

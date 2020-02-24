@@ -11,9 +11,11 @@ export function PostList(props) {
   const location = useLocation();
 
   useEffect(() => {
+    if (!posts.length) {
       getToc()
         .then(data => setPosts(data));
-  }, []);
+    }
+  }, [posts.length]);
 
   function getActiveClass(post) {
     return !!location.pathname.split('#')[0].split('/').find(p => post.path === p) ? 'active' : '';

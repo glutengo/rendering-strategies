@@ -25,6 +25,8 @@ export default (req, res, next) => {
     const postContent = await getPost(id);
     const renderingOptions = await getOptions();
 
+    const cachedData = { toc, postContent, renderingOptions };
+
     process.request = req;
 
     // render the app as a string
@@ -36,6 +38,10 @@ export default (req, res, next) => {
       htmlData
         .replace('__DOCUMENT_TITLE__', id)
         .replace('__OG_TITLE__', id)
+        .replace(
+          '<script>window.REACT_HTTP_CACHE={}</script>',
+          `<script>window.REACT_HTTP_CACHE=${JSON.stringify(cachedData)}</script>`,
+        )
         .replace(
         '<div id="root"></div>',
         `<div id="root">${html}</div>`

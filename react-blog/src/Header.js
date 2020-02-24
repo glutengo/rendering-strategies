@@ -31,9 +31,11 @@ export function Header(props) {
   }
 
   useEffect(() => {
+    if (!options.length) {
       getOptions()
         .then(data => setOptions(data));
-  }, []);
+    }
+  }, [options.length]);
 
   const postId = location.pathname.split('/').pop();
 
