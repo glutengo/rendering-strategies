@@ -18,5 +18,10 @@
     "platform": "react",
     "technique": "ssr",
     "url": "http://localhost:3001"
+  },
+  {
+    "platform": "next",
+    "technique": "ssr",
+    "url": "http://localhost:3002"
   }
 ]
