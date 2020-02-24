@@ -30,6 +30,10 @@ export function Header(props) {
     return activeOption && activeOption.url;
   }
 
+  function onClickMenu() {
+    document.body.classList.toggle('menu-open');
+  }
+
   useEffect(() => {
     if (!options.length) {
       getOptions()
@@ -45,6 +49,7 @@ export function Header(props) {
       <meta property="og:title" content={postId}/>
     </Helmet>
     <div className="header-content">
+      <button className="toggle-menu" onClick={ () => onClickMenu()}></button>
       <h3>Rendering Strategies for Web Apps</h3>
       <select value={getActiveValue()} onChange={ event => onSelectChanged(event.target.value)}>
         {

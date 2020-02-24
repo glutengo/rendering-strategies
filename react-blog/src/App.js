@@ -17,10 +17,14 @@ function App(props) {
 
   const { renderingOptions, postContent, toc } = props;
 
+  function onClickMenu() {
+    document.body.classList.remove('menu-open');
+  }
+
   return (
     <Router location={props.location}>
       <Header options={renderingOptions}></Header>
-      <section className="page-menu">
+      <section className="page-menu" onClick={() => onClickMenu()}>
         <PostList toc={toc}></PostList>
       </section>
       <section className="page-content">

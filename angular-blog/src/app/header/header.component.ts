@@ -52,4 +52,8 @@ export class HeaderComponent implements OnInit {
   onSelectChanged(url: string) {
     window.location.href = this.getPageURL(url);
   }
+
+  onClickMenu() {
+    this.document.body.classList.toggle('menu-open');
+  }
 }
