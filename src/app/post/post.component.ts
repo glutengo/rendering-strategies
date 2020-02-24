@@ -39,25 +39,17 @@ export class PostComponent implements OnInit {
 
   onClick(event) {
     const href = event.target.getAttribute('href');
-    if (href && !(href.startsWith('http'))) {
-      this.router.navigateByUrl(event.target.getAttribute('href'));
-      event.preventDefault();
+    if (href) {
+      if (href.startsWith('http')) {
+        return;
+      } else if (href.startsWith('#')) {
+        this.router.navigateByUrl(`${this.router.url}${href}`);
+        event.preventDefault();
+      } else {
+        this.router.navigateByUrl(href);
+        event.preventDefault();
+      }
     }
   }
 }
-
-function replaceRelativeSrcs(text: string, baseUrl: string) {
-  return text.replace(new RegExp(/src="(\.\/)/, 'g'), (match, group) => match.replace(group, baseUrl));
-}
-
-function replaceRelativeHrefs(text: string, route: ActivatedRoute) {
-  const url = route.snapshot.url.map(segment => segment.path).slice(0, route.snapshot.url.length - 1).join('/');
-  return text.replace(new RegExp(/href="(\.)\//, 'g'), (match, group) => match.replace(group, url));
-}
-
-function replaceAnchors(text: string, route: ActivatedRoute) {
-  const url = route.snapshot.url.map(segment => segment.path).join('/');
-  return text.replace(new RegExp('#ref-\\d*', 'g'), (match, hash) => url + match);
-}
-
 

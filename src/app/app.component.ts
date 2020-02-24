@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-blog';
+
+  constructor(@Inject(DOCUMENT) private document: Document) {
+  }
+
+  onClickMenu() {
+    this.document.body.classList.remove('menu-open');
+  }
 }
