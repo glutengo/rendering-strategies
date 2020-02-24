@@ -2,24 +2,31 @@ import React from 'react';
 import './App.css';
 import {Post} from './Post';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
+  StaticRouter,
   Switch,
   Route,
 } from 'react-router-dom';
 import {PostList} from './PostList';
 import {Header} from './Header';
+import {isBrowser} from './util/env.util';
 
-function App() {
+function App(props) {
+
+  const Router = isBrowser() ? BrowserRouter : StaticRouter;
+
+  const { renderingOptions, postContent, toc } = props;
+
   return (
-    <Router>
-      <Header></Header>
+    <Router location={props.location}>
+      <Header options={renderingOptions}></Header>
       <section className="page-menu">
-        <PostList></PostList>
+        <PostList toc={toc}></PostList>
       </section>
       <section className="page-content">
         <Switch>
           <Route path="/posts/:id">
-            <Post></Post>
+            <Post content={postContent}></Post>
           </Route>
         </Switch>
       </section>

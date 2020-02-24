@@ -3,16 +3,16 @@ import {
   Link,
   useLocation
 } from 'react-router-dom';
+import {getToc} from './util/data.util';
 
-export function PostList() {
+export function PostList(props) {
 
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(props.toc || []);
   const location = useLocation();
 
   useEffect(() => {
-    fetch(`http://localhost:8082/posts/toc.json`)
-      .then(response => response.json())
-      .then(data => setPosts(data));
+      getToc()
+        .then(data => setPosts(data));
   }, []);
 
   function getActiveClass(post) {

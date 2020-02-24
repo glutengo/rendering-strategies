@@ -13,5 +13,10 @@
     "platform": "react",
     "technique": "csr",
     "url": "http://localhost:3000"
+  },
+  {
+    "platform": "react",
+    "technique": "ssr",
+    "url": "http://localhost:3001"
   }
 ]

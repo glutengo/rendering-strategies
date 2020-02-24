@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   useParams
 } from 'react-router-dom';
+import {getPost} from './util/data.util';
 
-export function Post() {
+export function Post(props) {
 
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(props.content);
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:8082/post/${id}`)
-      .then(response => response.text())
-      .then(data => setContent(data));
+      getPost(id)
+        .then(data => setContent(data));
   }, [ id ]);
 
 
