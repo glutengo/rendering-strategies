@@ -1,9 +1,10 @@
 import React from 'react';
 import {useRouter} from 'next/router';
+import {useCache, withCache} from '../util/http-cache.util';
 
 export function Header(props) {
 
-  const { options, location } = props;
+  const { options, location } = withCache(props);
   const router = useRouter();
 
   function getPageUrl(url) {
@@ -58,6 +59,6 @@ Header.getInitialProps = async function(context) {
       protocol: 'http'
     };
   }
-  const options = await (await fetch(`http://localhost:8082/options.json`)).json();
+  const options = await useCache(`http://localhost:8082/options.json`, 'options');
   return { options, location };
 };

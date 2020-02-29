@@ -2,10 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 import 'isomorphic-fetch';
+import {useCache, withCache} from '../util/http-cache.util';
 
 export function PostList(props) {
 
-  const { posts } = props;
+  const { posts } = withCache(props);
   const router = useRouter();
 
   function getActiveClass(post) {
@@ -35,6 +36,6 @@ export function PostList(props) {
 }
 
 PostList.getInitialProps = async function(context) {
-  return { posts: await (await fetch(`http://localhost:8082/posts/toc.json`)).json() };
+  return { posts: await useCache(`http://localhost:8082/posts/toc.json`, 'posts') };
 };
 
