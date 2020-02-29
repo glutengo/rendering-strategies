@@ -10,6 +10,8 @@ const fs = require('fs');
 
 export default (req, res, next) => {
 
+  process.request = req;
+
   // point to the html file created by CRA's build tool
   const filePath = path.resolve(__dirname, '..', '..', 'build', 'index.html');
 
@@ -26,8 +28,6 @@ export default (req, res, next) => {
     const renderingOptions = await getOptions();
 
     const cachedData = { toc, postContent, renderingOptions };
-
-    process.request = req;
 
     // render the app as a string
     const html = ReactDOMServer.renderToString(<App location={req.baseUrl} toc={toc} postContent={postContent}

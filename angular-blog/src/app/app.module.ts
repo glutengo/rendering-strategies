@@ -8,7 +8,7 @@ import { PostListModule } from './post-list/post-list.module';
 import { PostModule } from './post/post.module';
 import { HeaderModule } from './header/header.module';
 import { NotFoundModule } from './not-found/not-found.module';
-import { BackendBaseUrlProvider } from './config';
+import { BackendService } from './backend.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { BackendBaseUrlProvider } from './config';
     TransferHttpCacheModule
   ],
   providers: [
-    BackendBaseUrlProvider
+    BackendService
   ],
   bootstrap: [AppComponent]
 })

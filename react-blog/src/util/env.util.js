@@ -12,9 +12,9 @@ export function getRequestLocation() {
   } else {
     const host = process.request.get('Host').split(':');
     return {
-      port: parseInt(host[1]),
+      port: host[1],
       hostname: host[0],
-      protocol: process.request.protocol
+      protocol: process.request.protocol + ':'
     };
   }
 }

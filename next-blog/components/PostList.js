@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import 'isomorphic-fetch';
 import {useCache, withCache} from '../util/http-cache.util';
+import {getBaseURL} from '../util/env.util';
 
 export function PostList(props) {
 
@@ -36,6 +37,6 @@ export function PostList(props) {
 }
 
 PostList.getInitialProps = async function(context) {
-  return { posts: await useCache(`http://localhost:8082/posts/toc.json`, 'posts') };
+  return { posts: await useCache(`${getBaseURL(context)}/posts/toc.json`, 'posts') };
 };
 

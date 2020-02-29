@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BACKEND_BASE_URL } from '../config';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { BackendService } from '../backend.service';
 
 interface Option {
   platform: string;
@@ -19,23 +19,14 @@ export class HeaderComponent implements OnInit {
 
   options: Option[];
 
-  activeOption;
-
   constructor(private http: HttpClient,
               private router: Router,
               @Inject(DOCUMENT) private document: Document,
-              @Inject(BACKEND_BASE_URL) private baseUrl: string) {
+              private backendService: BackendService) {
   }
 
   ngOnInit(): void {
-    this.http.get(`${this.baseUrl}/options.json`).subscribe((options: any) => {
-      this.options = options;
-      this.activeOption = this.options.find(o => this.isActive(o));
-    });
-  }
-
-  getURL(option: Option) {
-    return this.getPageURL(option.url);
+    this.http.get(`${this.backendService.getBaseURL()}/options`).subscribe((options: any) => this.options = options);
   }
 
   getPageURL(optionUrl: string) {

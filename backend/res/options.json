@@ -2,26 +2,31 @@
   {
     "platform": "angular",
     "technique": "csr",
-    "url": "http://localhost:4200"
+    "port": 4200
   },
   {
     "platform": "angular",
     "technique": "ssr",
-    "url": "http://localhost:4201"
+    "port": 4201
   },
   {
     "platform": "react",
     "technique": "csr",
-    "url": "http://localhost:3000"
+    "port": 3000
   },
   {
     "platform": "react",
     "technique": "ssr",
-    "url": "http://localhost:3001"
+    "port": 3001
   },
   {
     "platform": "next",
     "technique": "ssr",
-    "url": "http://localhost:3002"
+    "port": 3002
+  },
+  {
+    "platform": "vue",
+    "technique": "csr",
+    "port": 8080
   }
 ]

@@ -5,5 +5,11 @@ import App from './App';
 
 const { toc, postContent, renderingOptions } = window.REACT_HTTP_CACHE;
 
-ReactDOM.render(<App toc={toc} postContent={postContent}
-                     renderingOptions={renderingOptions}/>, document.getElementById('root'));
+if (toc && postContent && renderingOptions) {
+  ReactDOM.hydrate(<App toc={toc} postContent={postContent}
+                        renderingOptions={renderingOptions}/>, document.getElementById('root'));
+
+} else {
+  ReactDOM.render(<App/>, document.getElementById('root'))
+}
+

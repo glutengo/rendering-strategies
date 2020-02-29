@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, Meta, SafeHtml, Title } from '@angular/platform-browser';
-import { BACKEND_BASE_URL } from '../config';
 import { ViewportScroller } from '@angular/common';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-post',
@@ -21,12 +21,11 @@ export class PostComponent implements OnInit {
               private title: Title,
               private viewportScroller: ViewportScroller,
               private changeDetectorRef: ChangeDetectorRef,
-
-              @Inject(BACKEND_BASE_URL) private baseUrl: string) {
+              private backendService: BackendService) {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(p => this.http.get(`${this.baseUrl}/post/${p.name}`, { responseType: 'text' })
+    this.route.params.subscribe(p => this.http.get(`${this.backendService.getBaseURL()}/post/${p.name}`, { responseType: 'text' })
       .subscribe((data: string) => {
           this.meta.updateTag({ name: 'title', content: p.name });
           this.title.setTitle(p.name);

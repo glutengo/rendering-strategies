@@ -1,8 +1,8 @@
 <div class="header-content">
   <button class="toggle-menu" (click)="onClickMenu()"></button>
   <h3>Rendering Strategies for Web Apps</h3>
-  <select [value]="activeOption" (change)="onSelectChanged($event.target.value)">
-    <option *ngFor="let option of options" [value]="option.url">
+  <select (change)="onSelectChanged($event.target.value)">
+    <option *ngFor="let option of options" [value]="option.url" [selected]="isActive(option)">
       {{option.platform}}:{{option.technique}}</option>
   </select>
 </div>

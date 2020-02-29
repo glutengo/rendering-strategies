@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Layout from '../../components/Layout'
 import React from 'react';
 import 'isomorphic-fetch';
+import {getBaseURL} from '../../util/env.util';
 
 const Post = props => (
   <Layout { ...props.layoutProps } >
@@ -15,7 +16,7 @@ const Post = props => (
 
 
 Post.getInitialProps = async function(context) {
-  const content = await (await fetch(`http://localhost:8082/post/${context.query.id}`)).text();
+  const content = await (await fetch(`${getBaseURL(context)}/post/${context.query.id}`)).text();
   return {
     layoutProps: await Layout.getInitialProps(context),
     content,

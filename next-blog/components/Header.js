@@ -1,6 +1,7 @@
 import React from 'react';
 import {useRouter} from 'next/router';
 import {useCache, withCache} from '../util/http-cache.util';
+import {getBaseURL, getLocation} from '../util/env.util';
 
 export function Header(props) {
 
@@ -17,7 +18,7 @@ export function Header(props) {
 
   function isActive(option) {
     const url = new URL(option.url);
-    return url.protocol.split(':')[0] === location.protocol &&
+    return url.protocol === location.protocol &&
       url.hostname === location.hostname &&
       parseInt(url.port) === location.port;
   }
@@ -50,15 +51,7 @@ export function Header(props) {
 }
 
 Header.getInitialProps = async function(context) {
-  let location = {};
-  if (context && context.req) {
-    const host = context.req.headers['host'].split(':');
-    location = {
-      port: parseInt(host[1]),
-      hostname: host[0],
-      protocol: 'http'
-    };
-  }
-  const options = await useCache(`http://localhost:8082/options.json`, 'options');
+  let location = getLocation(context);
+  const options = await useCache(`${getBaseURL(context)}/options`, 'options');
   return { options, location };
 };

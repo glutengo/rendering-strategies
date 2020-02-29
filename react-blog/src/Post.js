@@ -25,7 +25,7 @@ export function Post(props) {
       getPost(id)
         .then(data => setContent(data));
     }
-  }, [ id, content ]);
+  }, [ id, content, previousId ]);
 
   function onClick(event) {
     const href = event.target.getAttribute('href');

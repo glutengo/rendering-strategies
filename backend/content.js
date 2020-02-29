@@ -21,6 +21,12 @@ module.exports = function bootstrap(port) {
     res.end();
   });
 
+  app.get('/options', (req, res) => {
+    const options = JSON.parse(fs.readFileSync(join(RES_FOLDER, 'options.json'), 'utf-8'));
+    options.forEach(option => option.url = `${req.protocol}://${req.hostname}:${option.port}`);
+    res.json(options);
+  });
+
   app.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
