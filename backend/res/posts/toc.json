@@ -2,5 +2,75 @@
   {
     "title": "Motivation",
     "path": "motivation"
+  },
+  {
+    "title": "Horizontal Topics",
+    "path": "horizontal",
+    "children": [
+      {
+        "title": "Metrics",
+        "path": "metrics"
+      },
+      {
+        "title": "Universal JS vs. Pre-Rendering",
+        "path": "universal-prerendering"
+      },
+      {
+        "title": "JS bundle sizes",
+        "path": "bundle-sizes"
+      },
+      {
+        "title": "What to SSR?",
+        "path": "what-to-ssr"
+      }
+    ]
+  },
+  {
+    "title": "Rendering Strategies",
+    "path": "rendering-strategies",
+    "children": [
+      {
+        "title": "Server Rendering",
+        "path": "server-rendering"
+      },
+      {
+        "title": "Static Rendering",
+        "path": "static-rendering"
+      },
+      {
+        "title": "SSR with (Re)hydration",
+        "path": "ssr-rehydration"
+      },
+      {
+        "title": "CSR with Prerendering",
+        "path": "csr-prerendering"
+      },
+      {
+        "title": "Full CSR",
+        "path": "full-csr"
+      }
+    ]
+  },
+  {
+    "title": "Case Study",
+    "path": "case-study",
+    "children": [
+      {
+        "title": "Angular",
+        "path": "angular"
+      },
+      {
+        "title": "React",
+        "path": "react"
+      },
+      {
+        "title": "Vue.js",
+        "path": "vue"
+      }
+    ]
+  },
+  {
+    "title": "Glossary",
+    "path": "glossary"
   }
 ]

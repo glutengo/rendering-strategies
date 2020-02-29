@@ -68,29 +68,3 @@ This leaves the developer with only two options: he could either use very genera
 <a name="ref-12">[12]</a> [Understand the JavaScript SEO basics
 ](https://developers.google.com/search/docs/guides/javascript-seo-basics?hl=en)  
 <a name="ref-13">[13]</a> [The Open Graph protocol](https://ogp.me/)  
-
-VueJS 
-
-linkedin:
-1 React
-2 Angular
-3 React
-4 /
-5 React  
-6 React & Angular
-7 /
-8 React & Angular
-9 /
-10 /
-
-monster:
-1 /
-2 Angular
-3 Angular
-4 Angular
-5 / 
-6 React & Angular
-7 / 
-8 React & Angular
-9 / 
-10 React & Angular
