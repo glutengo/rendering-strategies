@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev:ssr": "ng run angular-blog:serve-ssr",
+    "serve": "serve -s dist/angular-blog/browser -l 4200",
+    "dev:ssr": "ng run angular-blog:serve-ssr --port 4201",
     "serve:ssr": "node dist/angular-blog/server/main.js",
     "build:ssr": "ng build --prod && ng run angular-blog:server:production",
     "prerender": "ng run angular-blog:prerender"
@@ -26,8 +27,10 @@
     "@angular/router": "~9.0.0",
     "@nguniversal/common": "^9.0.0",
     "@nguniversal/express-engine": "^9.0.0",
+    "compression": "^1.7.4",
     "express": "^4.15.2",
     "rxjs": "~6.5.4",
+    "serve": "^11.3.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

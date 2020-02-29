@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BACKEND_BASE_URL } from '../config';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BackendService } from '../backend.service';
 
 interface Post {
   title: string;
@@ -19,11 +19,11 @@ export class PostListComponent implements OnInit {
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
               private router: Router,
-              @Inject(BACKEND_BASE_URL) private baseUrl: string) {
+              private backendService: BackendService) {
   }
 
   ngOnInit() {
-    this.http.get(`${this.baseUrl}/posts/toc.json`)
+    this.http.get(`${this.backendService.getBaseURL()}/posts/toc.json`)
       .subscribe((data: Post[]) => this.posts = data);
   }
 
