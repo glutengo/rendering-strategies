@@ -4,7 +4,8 @@
       <button class="toggle-menu" v-on:click="onClickMenu"></button>
       <h3>Rendering Strategies for Web Apps</h3>
       <select v-on:change="onSelectChanged">
-        <option v-for="option of options" v-bind:key="option.url" v-bind:value="option.url" v-bind:selected="isActive(option)">
+        <option v-for="option of options" v-bind:key="option.url" v-bind:value="option.url"
+                v-bind:selected="isActive(option)">
           {{option.platform}}:{{option.technique}}
         </option>
       </select>
@@ -14,6 +15,7 @@
 
 <script>
   import {getOptions} from '../util/data.util';
+  import {getRequestLocation} from '../util/env.util';
 
   export default {
     name: 'Header',
@@ -22,15 +24,18 @@
         options: []
       }
     },
-    created() {
+    mounted() {
       this.fetchData();
+    },
+    async serverPrefetch() {
+      await this.fetchData();
     },
     methods: {
       async fetchData() {
         this.options = await getOptions();
       },
       isActive(option) {
-        const location = document.location;
+        const location = getRequestLocation();
         const url = new URL(option.url);
         return url.protocol === location.protocol &&
           url.hostname === location.hostname &&

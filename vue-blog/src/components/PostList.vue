@@ -27,8 +27,13 @@
         posts: []
       }
     },
-    created() {
-      this.fetchData();
+    mounted() {
+      if (!this.posts.length) {
+        this.fetchData();
+      }
+    },
+    async serverPrefetch() {
+      await this.fetchData();
     },
     methods: {
       async fetchData() {

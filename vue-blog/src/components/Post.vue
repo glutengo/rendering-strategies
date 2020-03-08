@@ -5,6 +5,7 @@
 
 <script>
   import {getPost} from '../util/data.util';
+  import {isBrowser} from '../util/env.util';
 
   export default {
     name: 'Post',
@@ -13,7 +14,8 @@
         content: null
       }
     },
-    created() {
+    mounted() {
+      console.log('mounted');
       this.setMeta(this.$route.params.id);
       this.fetchData(this.$route.params.id);
     },
@@ -22,13 +24,22 @@
       this.fetchData(to.params.id);
       next();
     },
+    async serverPrefetch() {
+      this.setMeta(this.$route.params.id);
+      await this.fetchData(this.$route.params.id);
+    },
     methods: {
       async fetchData(id) {
         this.content = await getPost(id);
       },
       setMeta(title) {
-        document.title = title;
-        document.head.querySelector('meta[name="og:title"]').content = title;
+        if (isBrowser()) {
+          document.title = title;
+          const ogTitle = document.head.querySelector('meta[name="og:title"]');
+          if (ogTitle) {
+            ogTitle.content = title;
+          }
+        }
       },
       clickPost(event) {
         const href = event.target.getAttribute('href');

@@ -3,15 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vue-cli-service serve",
+    "build": "npm run build:server && npm run build:client",
+    "build:watch": "run-p build:server:watch build:client:watch",
+    "lint": "vue-cli-service lint",
+    "serve:csr": "serve -s dist -l 8080",
+    "serve:ssr": "nodemon server.js",
+    "build:server": "TARGET_ENV='server' vue-cli-service build --no-clean",
+    "build:client": "TARGET_ENV='client' vue-cli-service build --no-clean",
+    "build:server:watch": "TARGET_ENV='server' vue-cli-service build --no-clean --watch",
+    "build:client:watch": "TARGET_ENV='client' vue-cli-service build --no-clean --watch"
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "express": "^4.17.1",
     "isomorphic-fetch": "^2.2.1",
     "vue": "^2.6.11",
-    "vue-router": "^3.1.6"
+    "vue-router": "^3.1.6",
+    "vue-server-renderer": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
@@ -20,7 +29,12 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.1.2",
-    "vue-template-compiler": "^2.6.11"
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "serve": "^11.3.0",
+    "vue-template-compiler": "^2.6.11",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "eslintConfig": {
     "root": true,
