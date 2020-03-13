@@ -19,13 +19,14 @@ server.get('*', (req, res) => {
   const context = {url: req.url};
 
   process.request = req;
+  process.VUE_HTTP_CACHE = {};
 
   // No need to pass an app here because it is auto-created by
   // executing the bundle. Now our server is decoupled from our Vue app!
   renderer.renderToString(context, (err, html) => {
 
     // handle error...
-    res.end(html)
+    res.end(html.replace('VUE_HTTP_CACHE_OUTLET', JSON.stringify(process.VUE_HTTP_CACHE)));
   })
 });
 
