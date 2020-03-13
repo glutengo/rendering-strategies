@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-    <link rel="stylesheet" href="http://localhost:8082/style.css">
-    <script>window.VUE_HTTP_CACHE=VUE_HTTP_CACHE_OUTLET</script>
-  </head>
-  <body>
-    <!--vue-ssr-outlet-->
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="og:title" value="{{ title }}">
+  <link rel="icon" href="/favicon.ico">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="http://localhost:8082/style.css">
+  <script>window.VUE_HTTP_CACHE = VUE_HTTP_CACHE_OUTLET</script>
+</head>
+<body>
+<!--vue-ssr-outlet-->
+</body>
 </html>

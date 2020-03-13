@@ -7,7 +7,7 @@
     "build": "npm run build:server && npm run build:client",
     "build:watch": "run-p build:server:watch build:client:watch",
     "lint": "vue-cli-service lint",
-    "serve:csr": "serve -s dist -l 8080",
+    "serve:csr": "serve -s dist -l 5001",
     "serve:ssr": "nodemon server.js",
     "build:server": "TARGET_ENV='server' vue-cli-service build --no-clean",
     "build:client": "TARGET_ENV='client' vue-cli-service build --no-clean",

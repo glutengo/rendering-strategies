@@ -16,7 +16,10 @@ server.use(express.static('dist'));
 
 // inside a server handler...
 server.get('*', (req, res) => {
-  const context = {url: req.url};
+  const context = {
+    url: req.url,
+    title: req.url.split('/').pop()
+  };
 
   process.request = req;
   process.VUE_HTTP_CACHE = {};
@@ -30,4 +33,4 @@ server.get('*', (req, res) => {
   })
 });
 
-server.listen(8081, () => console.log(`http://localhost:${8081}`));
+server.listen(5002, () => console.log(`http://localhost:${5002}`));

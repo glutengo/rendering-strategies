@@ -27,11 +27,11 @@
   {
     "platform": "vue",
     "technique": "csr",
-    "port": 8080
+    "port": 5001
   },
   {
     "platform": "vue",
     "technique": "ssr",
-    "port": 8081
+    "port": 5002
   }
 ]

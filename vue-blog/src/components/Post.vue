@@ -35,10 +35,7 @@
       setMeta(title) {
         if (isBrowser()) {
           document.title = title;
-          const ogTitle = document.head.querySelector('meta[name="og:title"]');
-          if (ogTitle) {
-            ogTitle.content = title;
-          }
+          document.head.querySelector('meta[name="og:title"]').setAttribute('value', title);
         }
       },
       clickPost(event) {
