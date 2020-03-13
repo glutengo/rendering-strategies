@@ -12,7 +12,9 @@
     "dev:ssr": "ng run angular-blog:serve-ssr --port 4201",
     "serve:ssr": "node dist/angular-blog/server/main.js",
     "build:ssr": "ng build --prod && ng run angular-blog:server:production",
-    "prerender": "ng run angular-blog:prerender"
+    "prerender": "ng run angular-blog:prerender",
+    "build:docker:csr": "docker build -t glutengo/rendering-strategies-angular-csr:latest -f dockerfile-csr .",
+    "build:docker:ssr": "docker build -t glutengo/rendering-strategies-angular-ssr:latest -f dockerfile-ssr ."
   },
   "private": true,
   "dependencies": {

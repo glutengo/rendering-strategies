@@ -12,7 +12,7 @@ export const Layout = props => (
   <div>
     <Head>
       <link rel="icon" href="/favicon.ico"/>
-      <link rel="stylesheet" href="http://localhost:8082/style.css"/>
+      <link rel="stylesheet" href="`${process.env.BACKEND_URL}/>style.css`"/>
     </Head>
     <Header {...props.header}/>
     <section className="page-menu" onClick={() => onClickMenu()}>

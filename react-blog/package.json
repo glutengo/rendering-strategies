@@ -25,7 +25,9 @@
     "eject": "react-scripts eject",
     "serve": "serve -s build -l 3000",
     "serve:ssr": "node server/bootstrap.js",
-    "dev:ssr": "nodemon server/bootstrap.js"
+    "dev:ssr": "nodemon server/bootstrap.js",
+    "build:docker:csr": "docker build -t glutengo/rendering-strategies-react-csr:latest -f dockerfile-csr .",
+    "build:docker:ssr": "docker build -t glutengo/rendering-strategies-react-ssr:latest -f dockerfile-ssr ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,6 +49,7 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@babel/register": "^7.8.3",
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.2"
   }
 }

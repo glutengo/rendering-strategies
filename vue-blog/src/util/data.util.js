@@ -1,4 +1,4 @@
-import {getRequestLocation, isBrowser} from './env.util';
+import {isBrowser} from './env.util';
 
 require('isomorphic-fetch');
 
@@ -22,18 +22,17 @@ const fetchWithCache = (url, json) => new Promise((resolve, reject) => {
 });
 
 function getBaseURL() {
-  const location = getRequestLocation();
-  return `${location.protocol}//${location.hostname}`;
+  return process.env.VUE_APP_BACKEND_URL;
 }
 
 export function getPost(id) {
-  return fetchWithCache(`${getBaseURL()}:8082/post/${id}`);
+  return fetchWithCache(`${getBaseURL()}/post/${id}`);
 }
 
 export function getToc() {
-  return fetchWithCache(`${getBaseURL()}:8082/posts/toc.json`, true);
+  return fetchWithCache(`${getBaseURL()}/posts/toc.json`, true);
 }
 
 export function getOptions() {
-  return fetchWithCache(`${getBaseURL()}:8082/options`, true);
+  return fetchWithCache(`${getBaseURL()}/options`, true);
 }

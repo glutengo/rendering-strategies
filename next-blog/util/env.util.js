@@ -1,6 +1,5 @@
-export function getBaseURL(context) {
-  const location = getLocation(context);
-  return `${location.protocol}//${location.hostname}:8082`;
+export function getBaseURL() {
+  return process.env.BACKEND_URL;
 }
 
 export function getLocation(context) {

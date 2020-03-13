@@ -2,36 +2,36 @@
   {
     "platform": "angular",
     "technique": "csr",
-    "port": 4200
+    "url": "ANGULAR_CSR_URL"
   },
   {
     "platform": "angular",
     "technique": "ssr",
-    "port": 4201
+    "url": "ANGULAR_SSR_URL"
   },
   {
     "platform": "react",
     "technique": "csr",
-    "port": 3000
+    "url": "REACT_CSR_URL"
   },
   {
     "platform": "react",
     "technique": "ssr",
-    "port": 3001
+    "url": "REACT_SSR_URL"
   },
   {
     "platform": "next",
     "technique": "ssr",
-    "port": 3002
+    "url": "NEXT_URL"
   },
   {
     "platform": "vue",
     "technique": "csr",
-    "port": 5001
+    "url": "VUE_CSR_URL"
   },
   {
     "platform": "vue",
     "technique": "ssr",
-    "port": 5002
+    "url": "VUE_SSR_URL"
   }
 ]

@@ -1,4 +1,6 @@
 const content = require('./content');
+require('dotenv').config();
 
-content(8082  );
 
+
+content(process.env.BACKEND_PORT);
