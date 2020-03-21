@@ -6,7 +6,7 @@ export function getLocation(context) {
   if (context && context.req) {
     const host = context.req.headers['host'].split(':');
     return {
-      port: parseInt(host[1]),
+      port: host[1] || '',
       hostname: host[0],
       protocol: 'http:'
     };

@@ -26,8 +26,12 @@
     "serve": "serve -s build -l 3000",
     "serve:ssr": "node server/bootstrap.js",
     "dev:ssr": "nodemon server/bootstrap.js",
-    "build:docker:csr": "docker build -t glutengo/rendering-strategies-react-csr:latest -f dockerfile-csr .",
-    "build:docker:ssr": "docker build -t glutengo/rendering-strategies-react-ssr:latest -f dockerfile-ssr ."
+    "docker:build:csr": "docker build -t glutengo/rendering-strategies-react-csr:latest -f dockerfile-csr .",
+    "docker:build:ssr": "docker build -t glutengo/rendering-strategies-react-ssr:latest -f dockerfile-ssr .",
+    "docker:push:csr": "docker push glutengo/rendering-strategies-react-csr:latest",
+    "docker:push:ssr": "docker push glutengo/rendering-strategies-react-ssr:latest",
+    "docker:update:csr": "npm run docker:build:csr && npm run docker:push:csr",
+    "docker:update:ssr": "npm run docker:build:ssr && npm run docker:push:ssr"
   },
   "eslintConfig": {
     "extends": "react-app"

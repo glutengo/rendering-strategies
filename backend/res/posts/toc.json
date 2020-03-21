@@ -4,52 +4,20 @@
     "path": "motivation"
   },
   {
-    "title": "Horizontal Topics",
-    "path": "horizontal",
-    "children": [
-      {
-        "title": "Metrics",
-        "path": "metrics"
-      },
-      {
-        "title": "Universal JS vs. Pre-Rendering",
-        "path": "universal-prerendering"
-      },
-      {
-        "title": "JS bundle sizes",
-        "path": "bundle-sizes"
-      },
-      {
-        "title": "What to SSR?",
-        "path": "what-to-ssr"
-      }
-    ]
+    "title": "Metrics",
+    "path": "metrics"
   },
   {
     "title": "Rendering Strategies",
-    "path": "rendering-strategies",
-    "children": [
-      {
-        "title": "Server Rendering",
-        "path": "server-rendering"
-      },
-      {
-        "title": "Static Rendering",
-        "path": "static-rendering"
-      },
-      {
-        "title": "SSR with (Re)hydration",
-        "path": "ssr-rehydration"
-      },
-      {
-        "title": "CSR with Prerendering",
-        "path": "csr-prerendering"
-      },
-      {
-        "title": "Full CSR",
-        "path": "full-csr"
-      }
-    ]
+    "path": "rendering-strategies"
+  },
+  {
+    "title": "Universal JS vs. Pre-Rendering",
+    "path": "universal-prerendering"
+  },
+  {
+    "title": "What to SSR?",
+    "path": "what-to-ssr"
   },
   {
     "title": "Case Study",
@@ -70,7 +38,7 @@
     ]
   },
   {
-    "title": "Glossary",
-    "path": "glossary"
+    "title": "Results",
+    "path": "results"
   }
 ]

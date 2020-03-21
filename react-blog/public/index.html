@@ -4,17 +4,14 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <title>__DOCUMENT_TITLE__</title>
-    <meta property="og:title" content="__OG_TITLE__" />
+    <meta property="og:type" content="website">
+    <title>%REACT_APP_TITLE%</title>
+    <meta property="og:title" content="%REACT_APP_TITLE%" />
     <link rel="stylesheet" href="%REACT_APP_BACKEND_URL%/style.css">
   </head>
-  <body>
+  <body class="react">
+    <div id="root"></div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script>window.REACT_HTTP_CACHE={}</script>
-    <div id="root"></div>
   </body>
 </html>

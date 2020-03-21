@@ -13,7 +13,7 @@ This has lead to a high popularity of these libraries and frameworks among devel
 
 While all of the introduced frameworks offer support for a number of different use cases, the default setup seems to be tailored for building so-called single-page applications. The React docs list [create-react-app](https://github.com/facebook/create-react-app), a tool for building single-page-applications with react as the first of four recommended toolchains.<sup>[[7]](#ref-7)</sup> The Vue installation Guide introduces its CLI as a tool for "quickly scaffolding ambitious Single Page Applications"<sup>[[8]](#ref-8)</sup> and Angular docs state that "Angular is an app-design framework and development platform for creating efficient and sophisticated single-page apps"<sup>[[9]](#ref-9)</sup>.
 
-> A *single page application* is exactily what its name implies: a JavaScript-driven web application that requires only a single page load<sup>[[10]](#ref-10)</sup>
+> "A *single page application* is exactily what its name implies: a JavaScript-driven web application that requires only a single page load" <sup>[[10]](#ref-10)</sup>
 
 The response of the single page requested from the server only contains references to further resources (CSS, Scripts) and a very small amount of markup. The actual rendering is performed in the browser by a script. Data may be fetched asynchronously by a script as well.
 
@@ -23,7 +23,7 @@ Visiting a different sub-site of the application does not require a full page re
 
 <p class="image">
 <img src="./angular-spa.gif"/>
-Single-page application example: Angular Website
+Single-page application example: <a href="https://angular.io/">Angular Website</a>
 </p>
 
 The Angular Website is an example of a such single-page application. Whilst we are navigating through the application, we are never presented a blank screen, even if the network connection is bad.
@@ -33,7 +33,7 @@ The described way of building an application comes with a few downsides. The fac
 
 <p class="image">
 <img src="./angular-js-disabled.png"/>
-Angular Website with JavaScript disabled
+<a href="https://angular.io/">Angular Website</a> with JavaScript disabled
 </p>
 
 "Who disables JavaScript in their browser?" or "Who has a browser with no JavaScript in 2020?" one might ask. People usually do not, but robots may. 
@@ -41,7 +41,7 @@ A very important robot which may visit your site is the Googlebot, Google's web 
 
 <p class="image">
 <img src="./googlebot-crawl-render-index.png"/>
-Googlebot JavaScript Processing
+Googlebot JavaScript Processing<sup><a href="#ref-12">[12]</a></sup>
 </p>
 
 The good news is: Googlebot does process JavaScript. It does work with an evergreen version of Chromium which needs to be considered when selecting the JavaScript language features used in the application. But: The JavaScript is not processed on the first visit of the site. Googlebot first just crawls the initial HTML and puts the JavaScript-based rendering (or more general: execution of any JavaScript) into a qeueue which it processes "once Googlebot resources allow"<sup>[[12]](#ref-12)</sup> it. Google does not make definite statements on how long it may take for a queue entry to be processed.<sup>[[12]](#ref-12)</sup>
@@ -49,10 +49,6 @@ The good news is: Googlebot does process JavaScript. It does work with an evergr
 When the server answers each initial request with the same static HTML file, there is also no room for optimizing the sharing behavior for inidividual sub pages of the application. Facebook, for instance, uses the [Open Graph Protocol](https://ogp.me) to generate its sharing previews on their platform. 
 There are a number of predefined Meta Tags (e.g. `og:title` and `og:image`) which need to be set for a good sharing performance.<sup>[[13]](#ref-13)</sup> If these are only defined once, the sharing preview for each sub page (e.g. `/home` and `/about`) will always look the same. 
 This leaves the developer with only two options: he could either use very general values which are feasible for all pages or he could use specific values for the page he judges the most important. Both options are not really satisfactory.        
-
-
-* JS size
-
 
 <a name="ref-1">[1]</a> [Job Search on monster.com, February 8th 2020](https://www.monster.com/jobs/search/?q=frontend-developer&intcid=skr_navigation_nhpso_searchMain)  
 <a name="ref-2">[2]</a> [Job Search on linkedin.com, February 8th 2020](https://www.linkedin.com/jobs/search?keywords=Frontend%20Developer)  

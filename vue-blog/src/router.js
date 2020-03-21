@@ -8,8 +8,11 @@ export function createRouter() {
   const routes = [
     {
       path: '/posts/:id', component: Post
+    },
+    {
+      path: '/', redirect: '/posts/motivation'
     }
   ];
 
-  return  new Router({ routes, mode: 'history' });
+  return new Router({routes, mode: 'history'});
 }

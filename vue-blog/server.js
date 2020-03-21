@@ -13,6 +13,10 @@ const renderer = createBundleRenderer(serverBundle, {
   clientManifest
 });
 
+server.get('^/$', (req, res) => {
+  res.redirect(302, '/posts/motivation');
+});
+
 server.use(express.static('dist'));
 
 // inside a server handler...

@@ -6,6 +6,19 @@ html, body {
   padding: 0;
   --header-height: 60px;
   --menu-width: 200px;
+  --header-background: black;
+}
+
+body.angular {
+  --header-background: rgb(223, 0, 53);
+}
+
+body.react {
+  --header-background: rgb(94, 218, 250);
+}
+
+body.vue {
+  --header-background: rgb(58, 184, 132);
 }
 
 code {
@@ -29,6 +42,7 @@ h1 {
   left: calc(50% - 600px);
   overflow: auto;
   max-height: calc(100vh - var(--header-height));
+  transition: transform 300ms ease;
 }
 
 .page-content {
@@ -41,7 +55,7 @@ h1 {
   position: fixed;
   height: var(--header-height);
   top: 0;
-  background: #c82832;
+  background: var(--header-background);
   width: 100%;
   color: white;
 }
@@ -116,6 +130,34 @@ h1 {
   max-width: 100%;
 }
 
+.post table {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-spacing: 0;
+  font-size: .9em;
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.post thead th {
+  background-color: rgb(230, 230, 230);
+  padding: 1em;
+}
+
+.post tbody td {
+  padding: 1em;
+  border-bottom: 1px solid rgba(0, 0, 0, .15);
+  background-color: white;
+}
+
+.post thead th:first-child,
+.post tbody td:first-child {
+  width: 30%;
+  position: sticky;
+  left: 0;
+  border-right: 1px solid rgba(0, 0, 0, .15);
+}
+
 .post .header-anchor {
   color: black;
   opacity: 0.1;
@@ -166,10 +208,6 @@ h1 {
   color: rgb(255, 0, 0);
 }
 
-blockquote p:before, blockquote p:after {
-  content: '"';
-}
-
 sup {
   font-size: 0.7em;
 }
@@ -190,7 +228,7 @@ sup {
   padding: 1em;
   width: 100%;
   overflow: auto;
-  max-height: 400px;
+  max-height: 500px;
   box-shadow: 0 5px 15px 0px rgba(0, 0, 0, .5);
 }
 
@@ -248,7 +286,7 @@ select {
     max-height: none;
     color: white;
     background-color: rgb(50, 50, 50);
-    transition: transform 300ms ease;
+    z-index: 1;
   }
 
   body.menu-open .page-menu {

@@ -5,7 +5,10 @@ import {getBaseURL, getLocation} from '../util/env.util';
 
 export function Header(props) {
 
-  const { options, location } = withCache(props);
+  let { options, location } = withCache(props);
+  if (process.browser) {
+    location = getLocation();
+  }
   const router = useRouter();
 
   function getPageUrl(url) {
@@ -20,15 +23,13 @@ export function Header(props) {
     const url = new URL(option.url);
     return url.protocol === location.protocol &&
       url.hostname === location.hostname &&
-      parseInt(url.port) === location.port;
+      url.port === location.port;
   }
 
-  function getActiveValue() {
-    const activeOption = options.find(o => {
-      const active = isActive(o);
-      return active;
-    });
-    return activeOption && activeOption.url;
+  function getSelectedValue() {
+    const selectedOption = options.find(o => isActive(o));
+    console.log(selectedOption);
+    return selectedOption && selectedOption.url;
   }
 
   function onClickMenu() {
@@ -39,10 +40,10 @@ export function Header(props) {
     <div className="header-content">
       <button className="toggle-menu" onClick={ () => onClickMenu()}></button>
       <h3>Rendering Strategies for Web Apps</h3>
-      <select value={getActiveValue()} onChange={ event => onSelectChanged(event.target.value)}>
+      <select onChange={ event => onSelectChanged(event.target.value)}>
         {
           options.map((option, index) =>
-            <option key={index} value={option.url}>{option.platform}:{option.technique}</option>
+            <option key={index} value={option.url} selected={isActive(option)}>{option.platform}:{option.technique}</option>
           )
         }
       </select>

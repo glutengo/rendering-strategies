@@ -12,7 +12,8 @@ export const Layout = props => (
   <div>
     <Head>
       <link rel="icon" href="/favicon.ico"/>
-      <link rel="stylesheet" href="`${process.env.BACKEND_URL}/>style.css`"/>
+      <link rel="stylesheet" href={`${process.env.BACKEND_URL}/style.css`}/>
+      <meta property="og:type" content="website"/>
     </Head>
     <Header {...props.header}/>
     <section className="page-menu" onClick={() => onClickMenu()}>

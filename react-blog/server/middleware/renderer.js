@@ -29,15 +29,21 @@ export default (req, res, next) => {
 
     const cachedData = { toc, postContent, renderingOptions };
 
+    const context = {};
+
     // render the app as a string
-    const html = ReactDOMServer.renderToString(<App location={req.baseUrl} toc={toc} postContent={postContent}
+    const html = ReactDOMServer.renderToString(<App context={context} location={req.baseUrl} toc={toc} postContent={postContent}
                                                     renderingOptions={renderingOptions}/>);
+
+    if (context.url) {
+      res.redirect(302, context.url);
+      return;
+    }
 
     // inject the rendered app into our html and send it
     return res.send(
       htmlData
-        .replace('__DOCUMENT_TITLE__', id)
-        .replace('__OG_TITLE__', id)
+        .replace(/%REACT_APP_TITLE%/g, id)
         .replace(
           '<script>window.REACT_HTTP_CACHE={}</script>',
           `<script>window.REACT_HTTP_CACHE=${JSON.stringify(cachedData)}</script>`,

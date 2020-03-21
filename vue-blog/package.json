@@ -13,8 +13,12 @@
     "build:client": "TARGET_ENV='client' vue-cli-service build --no-clean",
     "build:server:watch": "TARGET_ENV='server' vue-cli-service build --no-clean --watch",
     "build:client:watch": "TARGET_ENV='client' vue-cli-service build --no-clean --watch",
-    "build:docker:csr": "docker build -t glutengo/rendering-strategies-vue-csr:latest -f dockerfile-csr .",
-    "build:docker:ssr": "docker build -t glutengo/rendering-strategies-vue-ssr:latest -f dockerfile-ssr ."
+    "docker:build:csr": "docker build -t glutengo/rendering-strategies-vue-csr:latest -f dockerfile-csr .",
+    "docker:build:ssr": "docker build -t glutengo/rendering-strategies-vue-ssr:latest -f dockerfile-ssr .",
+    "docker:push:csr": "docker push glutengo/rendering-strategies-vue-csr:latest",
+    "docker:push:ssr": "docker push glutengo/rendering-strategies-vue-ssr:latest",
+    "docker:update:csr": "npm run docker:build:csr && npm run docker:push:csr",
+    "docker:update:ssr": "npm run docker:build:ssr && npm run docker:push:ssr"
   },
   "dependencies": {
     "core-js": "^3.6.4",

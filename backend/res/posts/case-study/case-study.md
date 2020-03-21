@@ -34,7 +34,15 @@ It is a Node.JS server application which has the main purpose of serving static 
 The frontend applications contain hardly any style declarations. This is decision was made to ensure that the three frontend applications have the same look and file. 
 It is therefore required that the frontend applications produce the same (or at least a compatible) DOM tree which so combined with a central stylesheet provided by the backend they have the same appearance.   
 
-While reading this blog, you can switch between the different frameworks and implementation variations anytime by using the dropdown menu in the page header.     
+While reading this blog, you can switch between the different frameworks and implementation variations anytime by using the dropdown menu in the page header.
+
+## Deployment
+
+The application is hosted on [Amazon Web Services (AWS)](https://aws.amazon.com/). Each sub application (i.e. the different frontend implementations and the backend application) run in a [Docker Container](https://www.docker.com/resources/what-container) on a [EC2 Instance](https://aws.amazon.com/ec2/).
+The required ports are made available to a load balancer which ensures that each application has a fixed URL regardless of any reboots and potentials changed IP addresses of the underlying EC2 machine.
+
+To improve the performance (especially of the SSR variants), a [CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html) distribution has been set up for the load balancer of each frontend implementation to ensure that every HTML document is only generated once and not for every single request.
+
 
 [Angular](./angular)  
 [React](./react)  

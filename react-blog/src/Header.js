@@ -22,12 +22,7 @@ export function Header(props) {
     const url = new URL(option.url);
     return url.protocol === requestLocation.protocol &&
       url.hostname === requestLocation.hostname &&
-      url.port === requestLocation.port;
-  }
-
-  function getActiveValue() {
-    const activeOption = options.find(o => isActive(o));
-    return activeOption && activeOption.url;
+      url.port === requestLocation.port ? 'selected' : undefined;
   }
 
   function onClickMenu() {
@@ -51,10 +46,10 @@ export function Header(props) {
     <div className="header-content">
       <button className="toggle-menu" onClick={ () => onClickMenu()}></button>
       <h3>Rendering Strategies for Web Apps</h3>
-      <select value={getActiveValue()} onChange={ event => onSelectChanged(event.target.value)}>
+      <select onChange={ event => onSelectChanged(event.target.value)}>
         {
           options.map((option, index) =>
-            <option key={index} value={option.url}>{option.platform}:{option.technique}</option>
+            <option key={index} value={option.url} selected={isActive(option)}>{option.platform}:{option.technique}</option>
           )
         }
       </select>

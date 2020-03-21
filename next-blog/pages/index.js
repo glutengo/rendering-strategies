@@ -5,18 +5,15 @@ import React from 'react';
 const Home = props => (
   <Layout { ...props.layoutProps } >
     <Head>
-      <title>Home</title>
+      <title>Next Blog</title>
     </Head>
-    <p>Hello, Home</p>
   </Layout>
 );
 
 
 Home.getInitialProps = async function(context) {
-  await Layout.getInitialProps();
-  return {
-    layoutProps: await Layout.getInitialProps(context)
-  };
+  context.res.writeHead(302, { Location: "/posts/motivation" });
+  context.res.end();
 };
 
 export default Home

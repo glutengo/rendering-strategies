@@ -8,6 +8,7 @@ COPY pages ./pages
 COPY public ./public
 COPY components ./components
 COPY util ./util
+COPY .env ./
 
 RUN npm install
 RUN npm run build

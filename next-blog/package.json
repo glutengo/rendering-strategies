@@ -6,12 +6,18 @@
     "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start -p 3002",
-    "build:docker": "docker build -t glutengo/rendering-strategies-next:latest ."
+    "docker:build": "docker build -t glutengo/rendering-strategies-next:latest .",
+    "docker:push": "docker push glutengo/rendering-strategies-next:latest",
+    "docker:update": "npm run docker:build && npm run docker:push"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "next": "9.2.2",
+    "next-absolute-url": "^1.2.2",
     "react": "16.12.0",
     "react-dom": "16.12.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

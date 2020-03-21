@@ -14,26 +14,10 @@ This scaffolds a react application. To realize our blog, we implement the requir
 The application is started by running `npm start` which is mapped to `react-scripts start` and runs a dev server on port `3000`.
 If the app is visited with a browser with no JavaScript, the user is presented an empty screen as a result of a content-less HTML file provided by the web server:
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <title>React App</title>
-    <link rel="stylesheet" href="http://localhost:8082/style.css">
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  <script src="/static/js/bundle.js"></script><script src="/static/js/1.chunk.js"></script><script src="/static/js/main.chunk.js"></script><script src="/main.c0c49f6cb7748403f357.hot-update.js"></script></body>
-</html>
-``` 
+<p class="image">
+<img src="./react-csr-no-js.png"/>
+React CSR App visited with JavaScript disabled 
+</p>
 
 The source code for this status of development can be assessed [here](https://github.com/glutengo/rendering-strategies/tree/6d477da19d1c339620cbb64c3187ef3d8843540f/react-blog).
 
@@ -69,132 +53,12 @@ The currently selected method is preselected.
 The function which set this preselection used the location property of the browser-only global `document` variable which resulted in errors when running on the server.
 To bypass this problem, a util function was written which returns an object containing the required properties when run on the server by reading these from the express request object instead.
 
-After these issues were resolved, server-side rendering was achieved and the intial HTML payload was content-ful:
+After these issues were resolved, server-side rendering was achieved and the initial HTML payload was content-ful:
 
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <link rel="icon" href="/favicon.ico"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="Web site created using create-react-app"/>
-  <title>React App</title>
-  <link rel="stylesheet" href="http://localhost:8082/style.css">
-  <link href="/static/css/main.27fd15f6.chunk.css" rel="stylesheet">
-</head>
-<body>
-<noscript>You need to enable JavaScript to run this app.</noscript>
-<div id="root">
-  <section class="page-header">
-    <div class="header-content"><h3>Rendering Strategies for Web Apps</h3><select>
-      <option value="http://localhost:4200">angular<!-- --> :<!-- --> csr</option>
-      <option value="http://localhost:4201">angular<!-- --> :<!-- --> ssr</option>
-      <option value="http://localhost:3000">react<!-- --> :<!-- --> csr</option>
-      <option value="http://localhost:3001">react<!-- --> :<!-- --> ssr</option>
-    </select></div>
-  </section>
-  <section class="page-menu">
-    <ul class="post-list">
-      <li><a href="/">Home</a></li>
-      <li class=""><a href="/posts/motivation">Motivation</a></li>
-      <li class=""><a href="/posts/horizontal">Horizontal Topics</a>
-        <ul>
-          <li class=""><a href="/posts/metrics">Metrics</a></li>
-          <li class=""><a href="/posts/universal-prerendering">Universal JS vs. Pre-Rendering</a></li>
-          <li class=""><a href="/posts/bundle-sizes">JS bundle sizes</a></li>
-          <li class=""><a href="/posts/what-to-ssr">What to SSR?</a></li>
-        </ul>
-      </li>
-      <li class=""><a href="/posts/rendering-strategies">Rendering Strategies</a>
-        <ul>
-          <li class=""><a href="/posts/server-rendering">Server Rendering</a></li>
-          <li class="active"><a href="/posts/static-rendering">Static Rendering</a></li>
-          <li class=""><a href="/posts/ssr-rehydration">SSR with (Re)hydration</a></li>
-          <li class=""><a href="/posts/csr-prerendering">CSR with Prerendering</a></li>
-          <li class=""><a href="/posts/full-csr">Full CSR</a></li>
-        </ul>
-      </li>
-      <li class=""><a href="/posts/case-study">Case Study</a>
-        <ul>
-          <li class=""><a href="/posts/angular">Angular</a></li>
-          <li class=""><a href="/posts/react">React</a></li>
-          <li class=""><a href="/posts/vue">Vue.js</a></li>
-        </ul>
-      </li>
-      <li class=""><a href="/posts/glossary">Glossary</a></li>
-    </ul>
-  </section>
-  <section class="page-content">
-    <div class="post"><h1 id="static-rendering">Static Rendering <a class="header-anchor"
-                                                                    href="./static-rendering#static-rendering"
-                                                                    target="_blank">#</a></h1>
-    </div>
-  </section>
-</div>
-<script>!function (e) {
-    function r(r) {
-        for (var n, l, a = r[0], f = r[1], i = r[2], p = 0, s = []; p < a.length; p++) l = a[p], Object.prototype.hasOwnProperty.call(o, l) && o[l] && s.push(o[l][0]), o[l] = 0;
-        for (n in f) Object.prototype.hasOwnProperty.call(f, n) && (e[n] = f[n]);
-        for (c && c(r); s.length;) s.shift()();
-        return u.push.apply(u, i || []), t()
-    }
-
-    function t() {
-        for (var e, r = 0; r < u.length; r++) {
-            for (var t = u[r], n = !0, a = 1; a < t.length; a++) {
-                var f = t[a];
-                0 !== o[f] && (n = !1)
-            }
-            n && (u.splice(r--, 1), e = l(l.s = t[0]))
-        }
-        return e
-    }
-
-    var n = {}, o = {1: 0}, u = [];
-
-    function l(r) {
-        if (n[r]) return n[r].exports;
-        var t = n[r] = {i: r, l: !1, exports: {}};
-        return e[r].call(t.exports, t, t.exports, l), t.l = !0, t.exports
-    }
-
-    l.m = e, l.c = n, l.d = function (e, r, t) {
-        l.o(e, r) || Object.defineProperty(e, r, {enumerable: !0, get: t})
-    }, l.r = function (e) {
-        'undefined' != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {value: 'Module'}), Object.defineProperty(e, '__esModule', {value: !0})
-    }, l.t = function (e, r) {
-        if (1 & r && (e = l(e)), 8 & r) return e;
-        if (4 & r && 'object' == typeof e && e && e.__esModule) return e;
-        var t = Object.create(null);
-        if (l.r(t), Object.defineProperty(t, 'default', {
-            enumerable: !0,
-            value: e
-        }), 2 & r && 'string' != typeof e) for (var n in e) l.d(t, n, function (r) {
-            return e[r]
-        }.bind(null, n));
-        return t
-    }, l.n = function (e) {
-        var r = e && e.__esModule ? function () {
-            return e.default
-        } : function () {
-            return e
-        };
-        return l.d(r, 'a', r), r
-    }, l.o = function (e, r) {
-        return Object.prototype.hasOwnProperty.call(e, r)
-    }, l.p = '/';
-    var a = this['webpackJsonpreact-blog'] = this['webpackJsonpreact-blog'] || [], f = a.push.bind(a);
-    a.push = r, a = a.slice();
-    for (var i = 0; i < a.length; i++) r(a[i]);
-    var c = f;
-    t()
-}([])</script>
-<script src="/static/js/2.acea1a9c.chunk.js"></script>
-<script src="/static/js/main.ae56939d.chunk.js"></script>
-</body>
-</html>
-```
+<p class="image">
+<img src="./react-ssr-no-js.png"/>
+React SSR App visited with JavaScript disabled 
+</p>
 
 The required changes can be inspected [here](). Please note that this also includes the needed adjustments for route specific meta data (see below). 
 
@@ -398,6 +262,11 @@ This checks if the requested key exists in the cache and responds with its data 
 
 With the http cache added, there are no more duplicated requests, neither for the initial page load, nor for any further navigation. 
 The changes required to add the http cache are summarized in [this commit](https://github.com/glutengo/rendering-strategies/commit/43767a2d9d598aa298ffc544a510352108c1129c).
+
+<p class="image">
+<img src="./next-no-js.png"/>
+Next App visited with JavaScript disabled 
+</p>
 
 
 <a name="ref-1">[1]</a> [React docs: ReactDOMServer](https://reactjs.org/docs/react-dom-server.html)  

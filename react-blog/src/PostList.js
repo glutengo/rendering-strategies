@@ -22,7 +22,6 @@ export function PostList(props) {
   }
 
   return <ul className="post-list">
-    <li><Link to="/">Home</Link></li>
     {
       posts.map((post, index) =>
         <li className={getActiveClass(post)} key={index}>

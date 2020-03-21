@@ -6,6 +6,7 @@ import {
   StaticRouter,
   Switch,
   Route,
+  Redirect
 } from 'react-router-dom';
 import {PostList} from './PostList';
 import {Header} from './Header';
@@ -22,7 +23,7 @@ function App(props) {
   }
 
   return (
-    <Router location={props.location}>
+    <Router location={props.location} context={props.context}>
       <Header options={renderingOptions}></Header>
       <section className="page-menu" onClick={() => onClickMenu()}>
         <PostList toc={toc}></PostList>
@@ -31,6 +32,9 @@ function App(props) {
         <Switch>
           <Route path="/posts/:id">
             <Post content={postContent}></Post>
+          </Route>
+          <Route path="/">
+            <Redirect to="/posts/motivation"></Redirect>
           </Route>
         </Switch>
       </section>
