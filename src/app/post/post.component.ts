@@ -27,7 +27,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(p => this.http.get(`${this.backendService.getBaseURL()}/post/${p.name}`, { responseType: 'text' })
       .subscribe((data: string) => {
-          this.meta.updateTag({ name: 'title', content: p.name });
+          this.meta.updateTag({ name: 'og:title', content: p.name });
           this.title.setTitle(p.name);
           this.content = this.sanitizer.bypassSecurityTrustHtml(data);
           this.changeDetectorRef.detectChanges();

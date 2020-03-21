@@ -13,8 +13,12 @@
     "serve:ssr": "node dist/angular-blog/server/main.js",
     "build:ssr": "ng build --prod && ng run angular-blog:server:production",
     "prerender": "ng run angular-blog:prerender",
-    "build:docker:csr": "docker build -t glutengo/rendering-strategies-angular-csr:latest -f dockerfile-csr .",
-    "build:docker:ssr": "docker build -t glutengo/rendering-strategies-angular-ssr:latest -f dockerfile-ssr ."
+    "docker:build:csr": "docker build -t glutengo/rendering-strategies-angular-csr:latest -f dockerfile-csr .",
+    "docker:build:ssr": "docker build -t glutengo/rendering-strategies-angular-ssr:latest -f dockerfile-ssr .",
+    "docker:push:csr": "docker push glutengo/rendering-strategies-angular-csr:latest",
+    "docker:push:ssr": "docker push glutengo/rendering-strategies-angular-ssr:latest",
+    "docker:update:csr": "npm run docker:build:csr && npm run docker:push:csr",
+    "docker:update:ssr": "npm run docker:build:ssr && npm run docker:push:ssr"
   },
   "private": true,
   "dependencies": {
