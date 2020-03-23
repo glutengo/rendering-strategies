@@ -34,7 +34,7 @@ function App(props) {
             <Post content={postContent}></Post>
           </Route>
           <Route path="/">
-            <Redirect to="/posts/motivation"></Redirect>
+            <Redirect to="/posts/home"></Redirect>
           </Route>
         </Switch>
       </section>

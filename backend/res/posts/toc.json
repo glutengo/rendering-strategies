@@ -1,5 +1,9 @@
 [
   {
+    "title": "Home",
+    "path": "home"
+  },
+  {
     "title": "Motivation",
     "path": "motivation"
   },
@@ -12,12 +16,8 @@
     "path": "rendering-strategies"
   },
   {
-    "title": "Universal JS vs. Pre-Rendering",
-    "path": "universal-prerendering"
-  },
-  {
-    "title": "What to SSR?",
-    "path": "what-to-ssr"
+    "title": "Considerations",
+    "path": "considerations"
   },
   {
     "title": "Case Study",

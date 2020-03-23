@@ -268,6 +268,7 @@ The changes required to add the http cache are summarized in [this commit](https
 Next App visited with JavaScript disabled 
 </p>
 
+<hr/>
 
 <a name="ref-1">[1]</a> [React docs: ReactDOMServer](https://reactjs.org/docs/react-dom-server.html)  
 <a name="ref-2">[2]</a> [React Developer Brian Vaughn on Twitter](https://twitter.com/brian_d_vaughn/status/1055590462122156033?lang=en)  

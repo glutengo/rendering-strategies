@@ -58,6 +58,7 @@ h1 {
   background: var(--header-background);
   width: 100%;
   color: white;
+  z-index: 2;
 }
 
 .page-header .header-content {
@@ -150,9 +151,14 @@ h1 {
   background-color: white;
 }
 
+.post thead th,
+.post tbody td {
+  width: 5%;
+}
+
 .post thead th:first-child,
 .post tbody td:first-child {
-  width: 30%;
+  width: 20%;
   position: sticky;
   left: 0;
   border-right: 1px solid rgba(0, 0, 0, .15);

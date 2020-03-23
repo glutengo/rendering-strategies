@@ -3,7 +3,7 @@
 The aim of this case study is to find out which steps are required to move from a standard single-page application which is fully rendered in the browser towards an optimized server supported rendering architecture.
  
 The sample application for this undertaking is the blog web app that you are currently using. 
-The blog has been implemented in all three platforms both in a simple CSR manner and in a more sophisticated SSR-enabled version.
+The blog has been implemented in [Angular](./angular), [React](./react) and [Vue.js](./vue) (both in a simple CSR manner and in a more sophisticated SSR-enabled version.
 The official documentation of the respective framework was used as the main resource for instructions and advise.
 
 The full source code is available in this [github repository](https://github.com/glutengo/rendering-strategies). 
@@ -38,12 +38,8 @@ While reading this blog, you can switch between the different frameworks and imp
 
 ## Deployment
 
-The application is hosted on [Amazon Web Services (AWS)](https://aws.amazon.com/). Each sub application (i.e. the different frontend implementations and the backend application) run in a [Docker Container](https://www.docker.com/resources/what-container) on a [EC2 Instance](https://aws.amazon.com/ec2/).
-The required ports are made available to a load balancer which ensures that each application has a fixed URL regardless of any reboots and potentials changed IP addresses of the underlying EC2 machine.
+The application is hosted on [Amazon Web Services (AWS)](https://aws.amazon.com/). 
+Each sub application (i.e. the different frontend implementations and the backend application) runs in a [Docker Container](https://www.docker.com/resources/what-container) on a [EC2 Instance](https://aws.amazon.com/ec2/).
+The required ports are made available to a load balancer which ensures that each application has a fixed URL regardless of any reboots and potentially changed IP addresses of the underlying EC2 machine.
 
-To improve the performance (especially of the SSR variants), a [CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html) distribution has been set up for the load balancer of each frontend implementation to ensure that every HTML document is only generated once and not for every single request.
-
-
-[Angular](./angular)  
-[React](./react)  
-[Vue.js](./vue)
+To improve the performance (especially of the SSR variants), a [CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html) distribution has been set up for each frontend implementation to ensure that every HTML document is only generated once and not for every single request.

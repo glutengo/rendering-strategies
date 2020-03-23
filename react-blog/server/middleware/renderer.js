@@ -23,9 +23,7 @@ export default (req, res, next) => {
 
     const id = req.baseUrl.split('/').pop();
 
-    const toc = await getToc();
-    const postContent = await getPost(id);
-    const renderingOptions = await getOptions();
+    const [ toc, postContent, renderingOptions ] = await (Promise.all([getToc(), getPost(id), getOptions()]));
 
     const cachedData = { toc, postContent, renderingOptions };
 
@@ -39,6 +37,7 @@ export default (req, res, next) => {
       res.redirect(302, context.url);
       return;
     }
+
 
     // inject the rendered app into our html and send it
     return res.send(

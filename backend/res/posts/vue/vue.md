@@ -151,7 +151,7 @@ We simply need to set the `title` attribute of the context and reference this at
 * The changes needed for the SSR setup require a solid knowledge of webpack and the vue build process.
 The docs mention <a href="https://nuxtjs.org/">Nuxt.js</a> as an alternative for new projects<sup>[[6]](#ref-6)</sup>. 
 
-
+<hr/>
 
 <a name="ref-1">[1]</a> [Vue docs: Installation](https://vuejs.org/v2/guide/installation.html#CLI)
 <a name="ref-2">[2]</a> [Github issue regarding meta tags in Vue](https://github.com/vuejs/vue/issues/4379)

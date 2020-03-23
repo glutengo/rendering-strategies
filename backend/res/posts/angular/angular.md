@@ -105,7 +105,7 @@ The required routes need to be added in the `angular.json` configuration file:
     "serverTarget": "angular-blog:server:production",
     "routes": [
       "/",
-      "posts/motivation"
+      "posts/home"
     ]
   },
   "configurations": {
@@ -159,6 +159,8 @@ The changes to enable this feature in our applications can be retraced [here](ht
 A single CLI command sets up the server and all required build steps for on-demand rendering and pre-rendering.
 * There are well documented APIs for dealing with common usecases like `<head>` handling or browser-specific globals
 * The setup for preventing duplicated HTTP requests is straightforward and does not require any own implementations.       
+
+<hr/>
 
 <a name="ref-1">[1]</a> [Google on Meta Tags](https://support.google.com/webmasters/answer/79812?hl=en)  
 <a name="ref-2">[2]</a> [Angular Universal Docs: TransferHttpCacheModule](https://github.com/angular/universal/blob/master/docs/transfer-http.md)

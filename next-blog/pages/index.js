@@ -12,7 +12,7 @@ const Home = props => (
 
 
 Home.getInitialProps = async function(context) {
-  context.res.writeHead(302, { Location: "/posts/motivation" });
+  context.res.writeHead(302, { Location: '/posts/home' });
   context.res.end();
 };
 

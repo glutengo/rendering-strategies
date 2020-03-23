@@ -48,7 +48,9 @@ The good news is: Googlebot does process JavaScript. It does work with an evergr
 
 When the server answers each initial request with the same static HTML file, there is also no room for optimizing the sharing behavior for inidividual sub pages of the application. Facebook, for instance, uses the [Open Graph Protocol](https://ogp.me) to generate its sharing previews on their platform. 
 There are a number of predefined Meta Tags (e.g. `og:title` and `og:image`) which need to be set for a good sharing performance.<sup>[[13]](#ref-13)</sup> If these are only defined once, the sharing preview for each sub page (e.g. `/home` and `/about`) will always look the same. 
-This leaves the developer with only two options: he could either use very general values which are feasible for all pages or he could use specific values for the page he judges the most important. Both options are not really satisfactory.        
+This leaves the developer with only two options: he could either use very general values which are feasible for all pages or he could use specific values for the page he judges the most important. Both options are not really satisfactory.
+
+<hr/>        
 
 <a name="ref-1">[1]</a> [Job Search on monster.com, February 8th 2020](https://www.monster.com/jobs/search/?q=frontend-developer&intcid=skr_navigation_nhpso_searchMain)  
 <a name="ref-2">[2]</a> [Job Search on linkedin.com, February 8th 2020](https://www.linkedin.com/jobs/search?keywords=Frontend%20Developer)  

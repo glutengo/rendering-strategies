@@ -10,7 +10,7 @@ export function createRouter() {
       path: '/posts/:id', component: Post
     },
     {
-      path: '/', redirect: '/posts/motivation'
+      path: '/', redirect: '/posts/home'
     }
   ];
 

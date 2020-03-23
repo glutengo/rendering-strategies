@@ -14,7 +14,7 @@ const renderer = createBundleRenderer(serverBundle, {
 });
 
 server.get('^/$', (req, res) => {
-  res.redirect(302, '/posts/motivation');
+  res.redirect(302, '/posts/home');
 });
 
 server.use(express.static('dist'));

@@ -1,10 +1,10 @@
-# SSR approaches
+# Static Rendering vs. Server Rendering
 
-When it comes to rendering JavaScript based applications on the server, two approaches have emerged.
+When it comes to delivering contentful initial responses for JavaScript based single applications on the server, two approaches have emerged.
 
-## Pre-Rendering
+## Static Rendering
 
-Pre-Rendering describes an approach where the page is visited by an actual web browser. 
+Static Rendering (also Pre-Rendering) describes an approach where the page is visited by an actual web browser. 
 The Browser renders the application and the resulting HTML DOM tree is stored as a static file.
 
 This task can be performed manually. If we have our single page application which is rendered in the browser, we can wait for the application to finish loading.
@@ -36,25 +36,6 @@ This includes stylesheets, images or even videos. These resources are not requir
 
 ## Universal JavaScript
 
-[Universal JavaScript](https://cdb.reacttraining.com/universal-javascript-4761051b7ae9) (also: Isomorphic JavaScript) means that the same application "can execute both on the client and the server"<sup>[[1]](#ref-1)</sup>. 
-To make use of this technique for server side rendering, the target is to be able to run the code of our single page application on a server.
-To achieve that, instead of mounting the application to a DOM element, the renderer needs to produce a string representation rather than the actual HTML elements.
-
-When using JavaScript frameworks, we barely use calls like `Document.createElement` to create our DOM Elements. 
-Instead, we use higher level APIs provided by these frameworks which then execute the required lower level calls for us.
-The idea behind Universal JavaScript is to keep the high level API the same and swap the implementation provided by the framework. 
-The browser implementation of the framework may still use the mentioned `Document.createElement`, while the server implementation may simply put together a string.
-
-When developing applications in this manner, it is important to keep up to framework standards and be careful when it comes to using browser specific JavaScript features like the global variables `document` and `window`.
-These are usually not available when running the code in a Node.js server environment. 
-If we still want to use these, we need to either check for their availability first or make use of techniques provided by the used framework.
-This topic is covered in the case study (LINK).
-
-Universal JavaScript is more efficient regarding computing resources. When simply putting together the HTML Dom tree on the server, no additional resources like stylesheets, images or videos will be loaded.
- 
-On the other hand it is more complex to implement and depending on the framework.
-
-Rendering the application on the server with universal JavaScript still requires more computing resources than a simple file server, so a sensitive strategy regarding caching and selection of server side rendered pages is recommended.    
      
 
 https://www.netlify.com/blog/2016/11/22/prerendering-explained/

@@ -3,12 +3,20 @@ const fs = require('fs');
 const dotenv = require('dotenv');
 const table = require('markdown-table');
 
-const RUNS = 11;
+const RUNS = 3;
 const CACHE = true;
 const METRICS = ['time-to-first-byte', 'first-contentful-paint', 'first-meaningful-paint', 'interactive', 'max-potential-fid'];
-const APPS = ['Angular CSR', 'Angular SSR', 'React CSR', 'React SSR', 'Next', 'Vue CSR', 'Vue SSR'];
+const APPS = [
+  'Angular CSR',
+  'Angular SSR',
+  /*'React CSR',
+  'React SSR',
+  'Next',
+  'Vue CSR',
+  'Vue SSR'*/
+];
 
-const METRICS_TRANSLATIONS = [ 'TTFB', 'FCP', 'FMP', 'TTI', 'MP FID' ];
+const METRICS_TRANSLATIONS = ['TTFB', 'FCP', 'FMP', 'TTI', 'MP FID'];
 
 const THROTTLING_CONFIGS = {
   none: {
@@ -19,7 +27,7 @@ const THROTTLING_CONFIGS = {
       uploadThroughputKbps: 50000,
       cpuSlowdownMultiplier: 4,
     }
-  },
+  }/*,
   fast3G: {
     throttlingMethod: 'devtools',
     throttling: {
@@ -37,7 +45,7 @@ const THROTTLING_CONFIGS = {
       uploadThroughputKbps: 64,
       cpuSlowdownMultiplier: 4,
     }
-  }
+  }*/
 };
 
 function getSiteUrl(targetSite) {
