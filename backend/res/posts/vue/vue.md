@@ -1,16 +1,16 @@
-# Vue
+# Vue.js
 
 ## Standard CSR Setup
 
-Just like Angular and React, Vue offers its own command line interface "for quickly scaffolding ambitious Single Page Applications"<sup>[[2]](#ref-2)</sup>.
+Just like Angular and React, Vue.js offers its own command line interface "for quickly scaffolding ambitious Single Page Applications"<sup>[[2]](#ref-2)</sup>.
 To get started, we create a new Vue application:
 
 ```vue create vue-blog```
 
-Starting with a scaffolded vue application, we implement the [required components](./case-study#frontend) for realizing our blog application.
+Starting with a scaffolded Vue.js application, we implement the [required components](./case-study#frontend) for realizing our blog application.
 
 The utility functions for fetching data from the server are identical to those that we use in react.
-We also use `isomorphic-fetch` here to be compatible with both environments (client / server).
+We also use [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch) here to be compatible with both environments (client / server).
 
 To start the application, we run `npm run serve` which is mapped uses `vue-cli-service serve` to run a dev server on port `8080`.
 
@@ -22,15 +22,12 @@ Without JavaScript enabled in the browser, we will not be presented any relevant
 Vue CSR App visited with JavaScript disabled 
 </p>
 
-The source code for this status of development can be assessed [here](TODO:link).
+The source code for this status of development can be assessed [here](https://github.com/glutengo/rendering-strategies/tree/1daef909ad3d04c70d00f3793bea7b10a496021f/vue-blog).
 
 ## Adding SSR Features
 
 Vue provides a very detailed [guide on SSR](https://ssr.vuejs.org/) implementation.
 We will use this guide when we attempt to render our application on the server.
-
-Similar to React (next.js), the vue docs suggest looking into the framework [nuxt.js](https://nuxtjs.org/) instead of manually taking care of server side rendering.
-In the course of this case study, we will first follow the guide and assess nuxt.js later if we find any major drawbacks.
 
 To get started, we need to install the `vue-server-renderer` package from NPM.
 We will also need `express` to handle our http requests.
@@ -60,12 +57,12 @@ As suggested in the guide, we also clone our `index.html` file and make some adj
 </html>
 ```
 
-We also have to make a few adjustments to the build process which was set up for us by vue cli.
+We also have to make a few adjustments to the build process which was set up for us by Vue.js CLI.
 * The creation of our vue app was formerly handled in our `main.js` entrypoint file for client side rendering.
 Now that we need two entrypoints, the creation of the app is wrapped in a function and moved to a `app.js` file.
 We then add `entry-client.js` and `entry-server.js` which uses this function and adds the steps required for the respective platform: `app.$mount()` for browser rendering and a utility function which handles initializing the router with the correct URL and can be used in `createBundleRenderer`.
 The latter is a feature of vue-server-renderer which adds support for productivity enhancements like source maps and hot-reload<sup>[[4]](#ref-4)</sup>.
-* A `vue.config.js` file was added. This is a configuration file which will be loaded by the cli and is used to override parts of the default configuration.
+* A `vue.config.js` file was added. This is a configuration file which will be loaded by the CLI and is used to override parts of the default configuration.
 We add a minimal client configuration and a configuration for server side rendering so we can build either version using an environment variable.
 * The server script imports the built bundles and uses bundleRenderer to render the relevant page and pass the client bundle.
 
@@ -91,7 +88,7 @@ export default {
 }
 ```
 
-With these adjustments, our application is ready to be used with sever side rendering.
+[With these adjustments](https://github.com/glutengo/rendering-strategies/commit/dfcae0ff42b96c034dbeb3e86c055122bd010783), our application is ready to be used with sever side rendering.
 
 <p class="image">
 <img src="./vue-ssr-no-js.png"/>
@@ -105,18 +102,20 @@ However our application is performing some unneeded requests because it re-fetch
 So we have three unneeded XHR requests performed by our browser application: The data for the current post, the list of rendering options and the post list.
 All of this data is already given when we load the initial document from the server, so we want to get rid of these redundant requests.
 
-The Vue SSR Guide suggests using the state management library <a href="https://github.com/vuejs/vuex/">Vuex</a> in this scenario<sup>[[5]](#ref-5)</sup>.
+The Vue SSR Guide suggests using the state management library [Vuex](https://github.com/vuejs/vuex) in this scenario<sup>[[5]](#ref-5)</sup>.
 This would require setting up a data store and rethinking the data flow of our application.
 We did not introduce any state management library when working with Angular and React.
 To keep things consistent and minimize dependencies, we will therefore not use Vuex here either.
 
 Instead, we introduce a simple http cache which collects all http calls which were performed by the server.
 We include this object in the response for the initial request and make sure that the client application consults the cache before performing an actual request.
+Thanks to the distinct lifecycle methods which were used on server and client, the changes could be made without touching the components code.
+Instead, only the util function for fetching the data needed major adjustments, as you can see [here](https://github.com/glutengo/rendering-strategies/commit/c8d8fec1c4b3b798552cd850f758d9afc6b6cb6c).
 
 
 ### Sharing
 
-As vue does not offer an official way of updating meta information like the document title or `og:` meta tags<sup>[[2]](#ref-2)</sup>, we manually set these through DOM manipulation:
+As Vue.js does not offer an official way of updating meta information like the document title or `og:` meta tags<sup>[[2]](#ref-2)</sup>, we manually set these through DOM manipulation:
 
 ```javascript
 function setMeta(title) {
@@ -143,15 +142,17 @@ We simply need to set the `title` attribute of the context and reference this at
 ```   
 
 ### Observations
-* Vue provides a detailed guide on how to add server side rendering to an existing Vue app created with the Vue CLI.
+* Vue provides a detailed guide on how to add server side rendering to an existing Vue.js app created with the Vue.js CLI. The steps had to be performed manually.
+* Avoiding duplicated requests without Vuex required some manual implementation
+* Setting the sharing tags required manual implementation and handling the different platforms (server / browser) the code runs on 
 * The changes needed for the SSR setup require a solid knowledge of webpack and the vue build process.
-The docs mention <a href="https://nuxtjs.org/">Nuxt.js</a> as an alternative for new projects<sup>[[6]](#ref-6)</sup>. 
+The docs mention [nuxt.js](https://nuxtjs.org/) as an alternative for new projects or developer teams with limited knowledge in these areas<sup>[[6]](#ref-6)</sup>. 
 
 <hr/>
 
-<a name="ref-1">[1]</a> [Vue docs: Installation](https://vuejs.org/v2/guide/installation.html#CLI)  
-<a name="ref-2">[2]</a> [Github issue regarding meta tags in Vue](https://github.com/vuejs/vue/issues/4379)  
-<a name="ref-3">[3]</a> [Vue docs: vue.config.js](https://cli.vuejs.org/config/#vue-config-js)  
-<a name="ref-4">[4]</a> [Vue SSR Guide: BundleRenderer](https://ssr.vuejs.org/guide/bundle-renderer.html#enter-bundlerenderer)  
-<a name="ref-5">[5]</a> [Vue SSR Guide: Data Pre-Fetching and State](https://ssr.vuejs.org/guide/data.html#data-store)  
-<a name="ref-6">[6]</a> [Vue docs: SSR](https://vuejs.org/v2/guide/ssr.html)  
+<a name="ref-1">[1]</a> [vuejs.org. Installation: CLI, visited March 2nd 2020](https://vuejs.org/v2/guide/installation.html#CLI)  
+<a name="ref-2">[2]</a> [Blake Newman on github.com. Official way to modify page metadata/title/etc.](https://github.com/vuejs/vue/issues/4379#issuecomment-266907339)  
+<a name="ref-3">[3]</a> [cli.vuejs.org. Configuration Reference: vue.config.js](https://cli.vuejs.org/config/#vue-config-js)  
+<a name="ref-4">[4]</a> [ssr.vuejs.org. Introducing BundleRenderer](https://ssr.vuejs.org/guide/bundle-renderer.html)  
+<a name="ref-5">[5]</a> [ssr.vuejs.org. Data Pre-Fetching and State](https://ssr.vuejs.org/guide/data.html)  
+<a name="ref-6">[6]</a> [ssr.vuejs.org. Server Side Rendering](https://vuejs.org/v2/guide/ssr.html)  

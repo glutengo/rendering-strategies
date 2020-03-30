@@ -29,6 +29,12 @@ The must straightforward function is `ReactDOMServer.renderToString()` which ren
 There is no simple tool which allows us to just add server side rendering to an existing React app created with CRA. 
 Instead we need to manually set up a Node.js server which uses the method mentioned above. 
 [This post](https://medium.com/bucharestjs/upgrading-a-create-react-app-project-to-a-ssr-code-splitting-setup-9da57df2040a) gives a good overview of the required steps.
+To summarize, we need to:
+* Install [express](https://expressjs.com/)
+* Set up a server script which is able to route the HTTP request to our renderer (see below) and serve static files
+* Set up a renderer script as a [express middleware](https://expressjs.com/en/guide/using-middleware.html) which parses our index.html file and eventually calls `ReactDOMServer.renderToString()`
+* Install [babel](https://babeljs.io/) and some utilities
+* Set up a bootstrap script which initializes babel and imports the server script. This step is required because NodeJS does not understand JSX.
 
 If we follow these instructions, we can get to a version of our app which is running on the server. 
 
@@ -39,7 +45,7 @@ We need to use `StaticRouter` on the server instead and pass the location from t
 * The client app needs to be built before starting the server and the server app has to be restarted on any change manually. 
 The latter can be overcome by using [nodemon](https://www.npmjs.com/package/nodemon) when starting the server.
 If we want the client bundle to be rebuilt on any change as well, we can add a separate script for this, as demonstrated [here](https://gist.github.com/int128/e0cdec598c5b3db728ff35758abdbafd).
-* Backend data is fetched in the `useEffect` hook in the client app and then added to the component state as suggested in the react docs (TODO: LINK). 
+* Backend data is fetched in the `useEffect` hook in the client app and then added to the component state as suggested in the [react docs](https://reactjs.org/docs/hooks-intro.html#complex-components-become-hard-to-understand). 
 This hook is not run when rendering a react app on the server.<sup>[[2]](#ref-2)</sup> 
 The same applies to the `ComponentDidMount` lifecycle method<sup>[[5]](#ref-5)</sup>. 
 Instead it is required to prefetch all required data and pass it down to the components.
@@ -48,10 +54,11 @@ This value is passed to the root component (`App`) when rendering on the server.
 The data is fetched from the backend prior to this.
 To avoid any duplicated code, the actual fetch call is moved to a util file which is used in the `useEffect` hook in the component and in the server rendering middleware.
 To be able to use the same code in both environments, [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch) is used.
-* The Header contains a select element which allows to switch between rendering implementations. 
+* The Header contains a `<select>` element which allows to switch between rendering implementations. 
 The currently selected method is preselected. 
 The function which set this preselection used the location property of the browser-only global `document` variable which resulted in errors when running on the server.
 To bypass this problem, a util function was written which returns an object containing the required properties when run on the server by reading these from the express request object instead.
+(Note: this was simplified later on. In the current version, the platform is hardcoded (react) and the rendering technique (csr/ssr) is set as an environment variable during the build process)
 
 After these issues were resolved, server-side rendering was achieved and the initial HTML payload was content-ful:
 
@@ -60,7 +67,8 @@ After these issues were resolved, server-side rendering was achieved and the ini
 React SSR App visited with JavaScript disabled 
 </p>
 
-The required changes can be inspected [here](). Please note that this also includes the needed adjustments for route specific meta data (see below). 
+The required changes can be inspected [here](https://github.com/glutengo/rendering-strategies/commit/4a2eba30cba9eb41135abc7def711b03c59b81af). 
+Please note that this also includes the needed adjustments for route specific meta data (see below). 
 
 #### Sharing
 
@@ -109,7 +117,7 @@ We do not want the component to fetch any data initially because we know the dat
 However we do want the component to fetch the data for another post if the id of the post changes i.e. if the user navigates to another blog post.
 To ensure this, we follow the [react docs](https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state) and compare the current post id to the previous post id and only fetch the post data from the backend if the id has changed.
 
-[This commit](TODO: Link) includes all required changes to avoid any unneeded XHR requests.
+[This commit](https://github.com/glutengo/rendering-strategies/commit/e956081bef95f4f3f9e211a440a63d17b13d789a) includes all required changes to avoid any unneeded XHR requests.
  
 ### Observations
 * Adding SSR to a React App which was created with CRA is possible. However, 
@@ -270,8 +278,8 @@ Next App visited with JavaScript disabled
 
 <hr/>
 
-<a name="ref-1">[1]</a> [React docs: ReactDOMServer](https://reactjs.org/docs/react-dom-server.html)  
-<a name="ref-2">[2]</a> [React Developer Brian Vaughn on Twitter](https://twitter.com/brian_d_vaughn/status/1055590462122156033?lang=en)  
-<a name="ref-3">[3]</a> [React docs: Recommended Toolchains](https://reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)  
-<a name="ref-4">[4]</a> [Next.js docs: getInitialProps](https://nextjs.org/docs/api-reference/data-fetching/getInitialProps)  
-<a name="ref-5">[5]</a> This can be validated for instance by adding a simple `console.log` statement in the `componentDidMount` lifecycle function of a component and then rendering it on the server.      
+<a name="ref-1">[1]</a> [reactjs.org. ReactDOMServer, visited February 22nd 2020](https://reactjs.org/docs/react-dom-server.html)  
+<a name="ref-2">[2]</a> [Vaughn, Brian on twitter.com, visited February 23rd 2020](https://twitter.com/brian_d_vaughn/status/1055590462122156033?lang=en)  
+<a name="ref-3">[3]</a> [reactjs.org. Create a New React App: Recommended Toolchains, visited February 24th 2020](https://reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)      
+<a name="ref-4">[4]</a> [nextjs.org. getInitialProps, visited February 24th 2020](https://nextjs.org/docs/api-reference/data-fetching/getInitialProps)  
+<a name="ref-5">[5]</a> This can be validated for instance by adding a simple `console.log` statement in the `componentDidMount` lifecycle function of a component and then rendering it on the server.  

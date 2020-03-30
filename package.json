@@ -1,43 +1,16 @@
 {
   "name": "rendering-strategies",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This repository contains the source code for a blog application which was developed to compare the SSR options in Web Frameworks Angular, React and Vue.js.",
   "scripts": {
-    "install:backend": "cd backend && npm install",
-    "install:angular": "cd angular-blog && npm install",
-    "install:react": "cd react-blog && npm install",
-    "install:next": "cd next-blog && npm install",
-    "install:vue": "cd vue-blog && npm install",
-    "install:all": "run-p install:backend install:angular install:react install:next install:vue",
-    "build:angular": "cd angular-blog && npm run build:ssr",
-    "build:react": "cd react-blog && npm run build",
-    "build:next": "cd next-blog && npm run build",
-    "build:vue": "cd vue-blog && npm run build",
-    "build:all": "run-p build:angular build:react build:next build:vue",
-    "start:backend": "cd backend && npm run start",
-    "start:angular:csr": "cd angular-blog && npm run serve",
-    "start:angular:ssr": "cd angular-blog && npm run serve:ssr",
-    "start:react:csr": "cd react-blog && npm run serve",
-    "start:react:ssr": "cd react-blog && npm run serve:ssr",
-    "start:next": "cd next-blog && npm run start",
-    "start:vue:csr": "cd vue-blog && npm run serve:csr",
-    "start:vue:ssr": "cd vue-blog && npm run serve:ssr",
-    "start:all": "run-p start:backend start:angular:ssr start:angular:csr start:react:csr start:react:ssr start:next start:vue:csr start:vue:ssr",
-    "build-and-start:all": "run-s build:all start:all",
-    "install-and-build-and-start:all": "run-s install:all build:all start:all",
-    "start": "node index.js",
-    "docker:build": "docker build -t glutengo/rendering-strategies:latest .",
-    "docker:start": "docker container run -p 8082:8082 -p 3000:3000 -p 3001:3001 -p 3002:3002 -p 4200:4200 -p 4201:4201 -p: 5001:5001 -p 5002:5002 -d rendering-strategies:latest",
-    "analyze": "node scripts/lighthouse.js",
-    "lighthouse": "lighthouse"
+    "analyze": "node scripts/lighthouse.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/glutengo/rendering-strategies.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Markus Glutting <markus.glutting@student.htw-berlin.de>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/glutengo/rendering-strategies/issues"
   },

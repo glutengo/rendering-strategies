@@ -1,6 +1,6 @@
 {
   "name": "react-blog",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -19,14 +19,16 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "watch": "node scripts/watch.js",
     "build:csr": "env-cmd -f .env.client react-scripts build",
     "build:ssr": "env-cmd -f .env.server react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve:csr": "serve -s build -l 3000",
     "serve:ssr": "env-cmd -f .env.server node server/bootstrap.js",
-    "dev:ssr": "nodemon server/bootstrap.js",
+    "dev:csr": "env-cmd -f .env.local.client react-scripts start",
+    "dev:ssr": "run-p dev:ssr:watch dev:ssr:nodemon",
+    "dev:ssr:watch": "env-cmd -f .env.local.server node scripts/watch.js",
+    "dev:ssr:nodemon": "env-cmd -f .env.local.server nodemon server/bootstrap.js",
     "docker:build:csr": "docker build -t glutengo/rendering-strategies-react-csr:latest -f dockerfile-csr .",
     "docker:build:ssr": "docker build -t glutengo/rendering-strategies-react-ssr:latest -f dockerfile-ssr .",
     "docker:push:csr": "docker push glutengo/rendering-strategies-react-csr:latest",

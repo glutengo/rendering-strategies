@@ -5,7 +5,8 @@ const paths = require('react-scripts/config/paths');
 const webpack = require('webpack');
 const config = require('react-scripts/config/webpack.config');
 
-webpack(config('development')).watch({}, (err, stats) => {
+
+webpack(config(process.env.NODE_ENV)).watch({}, (err, stats) => {
   if (err) {
     console.error(err);
   } else {

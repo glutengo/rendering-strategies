@@ -20,14 +20,14 @@ Angular CSR App visited with JavaScript disabled
 </p>
 
 
-When the first version of the angular application was ready, its source code was in [this state](https://github.com/glutengo/rendering-strategies/tree/angular-csr/angular-blog).
+When the first version of the angular application was ready, its source code was in [this state](https://github.com/glutengo/rendering-strategies/tree/fedb5690a7df18c1861cd41f0c00132dbd803d51/angular-blog).
 
 ## Adding SSR Features
 
 The Angular Website provides a very helpful [guide](https://angular.io/guide/universal) to set up server-side rendering for Angular applications which proved good reference for this case study.
 
 To add SSR behavior to an Angular app, we need to add [Angular Universal](https://github.com/angular/universal) to our project. 
-The required steps can be performed by adding the corresponding schematic:
+The required steps can be performed by adding the corresponding [schematic](https://angular.io/guide/schematics):
 
 ```ng add @nguniversal/express-engine```
 
@@ -79,7 +79,7 @@ constructor(@Inject(DOCUMENT) private document: Document) {...}
 Instead of relying on the global objects, we let Angular decide which version of the object to use. 
 When we are in the browser, Angular provides the e.g. the well-known Standard DOM `document` Object.
 When the application is run on the server, Angular provides another implementation which supports the same API, but different implementations for some methods.
-By this means we can still use the API without breaking the app when running on the server.
+By this means we can still use the API without breaking the app when running on the server or explicitly checking
 
 ### Prerender
 
@@ -115,7 +115,7 @@ The required routes need to be added in the `angular.json` configuration file:
 ```
 
 This may be sufficient for static websites where the routes are fixed and always known.
-If we are in the context of a Content Management System or a simple blog like this one, not all routes are known at build time.      
+If we are in the context of a Content Management System or a simple blog like this one, usually not all routes are known at build time. 
 
 ### Sharing
 
@@ -130,7 +130,7 @@ class AppComponent {
   constructor(private meta: Meta) {}
 
   ngOnInit() {
-    this.meta.updateTag({ name: 'title', content: this.name });
+    this.meta.updateTag({ name: 'og:title', content: this.name });
   }
 }
 
@@ -143,11 +143,11 @@ A very similar approach can be followed for setting the document title (see [Ang
 
 When we observe the network tab of our SSR application in the browser we will see that some data is needlessly fetched in the browser although it is already available and visible.
 The content of the current post is an excellent example for this. As we have seen earlier, the full content of our post is available in the HTML file provided by the server because the Angular application was executed on the server and this was the result of server side rendering.
-Our application is then executed in the browser again and ouro `PostComponent` again fetches the post contents from the backend. 
+Our application is then executed in the browser again and our `PostComponent` again fetches the post contents from the backend. 
 This fetches data that we already know and in fact the user is already able to see. It is desirable to avoid these sorts of duplicated requests.
 
 Angular provides a solution for this. 
-As described in their docs<sup>[[2]](#ref-2)</sup>, by use of the `TransferHttpCacheModule` (part of the @nguniversal/common package) in the App Module and the `ServerTransferStateModule` in the Server Module, all Requests performed with Angular's HttpClient on the server are stored in a key-value store.
+As described in their docs<sup>[[2]](#ref-2)</sup>, by the use of the `TransferHttpCacheModule` (part of the @nguniversal/common package) in the App Module and the `ServerTransferStateModule` in the Server Module, all Requests performed with Angular's HttpClient on the server are stored in a key-value store.
 This store is transferred to the client. HttpClient Requests in the browser are then answered by the store if possible.
 This way requests that were already performed on the server are not sent from the browser again. Any other requests are performed as usual.
 
@@ -162,5 +162,5 @@ A single CLI command sets up the server and all required build steps for on-dema
 
 <hr/>
 
-<a name="ref-1">[1]</a> [Google on Meta Tags](https://support.google.com/webmasters/answer/79812?hl=en)  
-<a name="ref-2">[2]</a> [Angular Universal Docs: TransferHttpCacheModule](https://github.com/angular/universal/blob/master/docs/transfer-http.md)
+<a name="ref-1">[1]</a> [support.google.com. Special tags that Google understands, visited February 9th 2020](https://support.google.com/webmasters/answer/79812?hl=en)  
+<a name="ref-2">[2]</a> [github.com. TransferHttpCacheModule, visited February 21st 2020](https://github.com/angular/universal/blob/master/docs/transfer-http.md)

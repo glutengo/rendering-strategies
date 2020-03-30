@@ -146,10 +146,10 @@ For our blog implementation, the impact of the cache seems negligible user perfo
 The tests also reveal that Server Side Rendering provides improvements regarding bot performance.
 The fact that the intitial response is contentful and the sharing preview is individual for each sub page represent advantages.
 The TTFB has proved to be slightly worse in the SSR setups.
-This can be bypassed by using setting up a http cache.
+This can be bypassed by setting up a http cache.
 
 <hr/>
 
-<a name="ref-1">[1]</a> [High Performance Browser Netowrking: Mobile Networks](https://hpbn.co/mobile-networks)  
-<a name="ref-2">[2]</a> The values were selected after consulting [[1]](#ref-1). The article contains a table which lists bounds for 3G (among others) data rates and latency. For both setups, values near the upper / lower edge of the stated scala were picked.
-<a name="ref-3">[3]</a> [Amazon Cloudfront](https://aws.amazon.com/cloudfront/)     
+<a name="ref-1">[1]</a> [Grigorik, Ilya on hpbn.co. High Performance Browser Netowrking: Mobile Networks, visited March 16th 2020](https://hpbn.co/mobile-networks)  
+<a name="ref-2">[2]</a> The values were selected after consulting [[1]](#ref-1). The article contains a table which lists bounds for 3G (among others) data rates and latency. For both setups, values near the upper / lower edge of the stated scala were picked.  
+<a name="ref-3">[3]</a> [aws.amazon.com. Amazon Cloudfront, visited March 16th 2020](https://aws.amazon.com/cloudfront/)

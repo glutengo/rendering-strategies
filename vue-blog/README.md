@@ -1,24 +1,50 @@
-# vue-blog
+# Rendering Strategies Vue Blog
 
-## Project setup
-```
-npm install
-```
+This project was bootstrapped with [Vue.js CLI](https://cli.vuejs.org).
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+SR Port: `5001`  
+SSR Port: `5002`
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Dependencies
 
-### Lints and fixes files
-```
-npm run lint
-```
+`npm install`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Build
+
+### CSR
+
+`npm run build:csr`
+
+### SSR
+
+`npm run build:ssr`
+
+## Startup
+
+### CSR
+
+`npm run serve:csr`
+
+### SSR
+
+`npm run serve:ssr`
+
+## Development
+
+### CSR
+
+`npm run dev:csr`
+
+### SSR
+
+`npm run dev:ssr`
+
+## Deployment
+
+### CSR
+
+`npm run docker:update:csr`
+
+### SSR
+
+`npm run docker:update:ssr`

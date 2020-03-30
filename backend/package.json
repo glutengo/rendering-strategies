@@ -1,18 +1,17 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "The Rendering Strategies Backend application is a simple Node.JS server application which has the main purpose of serving static files and prepare the blog contents which are Markdown files so they can easily be rendered in the browser.",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "docker:build": "docker build -t glutengo/rendering-strategies-backend:latest .",
     "docker:push": "docker push glutengo/rendering-strategies-backend:latest",
     "docker:update": "npm run docker:build && npm run docker:push"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Markus Glutting <markus.glutting@student.htw-berlin.de>",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

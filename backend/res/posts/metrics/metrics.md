@@ -93,13 +93,14 @@ We will paste the URL of each blog implementation into both debugger tools and e
 
 <hr/>
 
-<a name="ref-1">[1]</a> [web.dev: User Centric Performance Metrics](https://web.dev/user-centric-performance-metrics/)  
-<a name="ref-2">[2]</a> [web.dev: First Contentful Paint](https://web.dev/fcp/)  
-<a name="ref-3">[3]</a> [web.dev: Largest Contentful Paint](https://web.dev/lcp/)  
-<a name="ref-4">[4]</a> [web.dev: First Meaningful Paint](https://web.dev/first-meaningful-paint/)  
-<a name="ref-5">[5]</a> [web.dev: First Input Delay](https://web.dev/fid/)  
-<a name="ref-6">[6]</a> [web.dev: Max Potential FID to Interactive](https://web.dev/lighthouse-max-potential-fid/)  
-<a name="ref-7">[7]</a> [web.dev: Time to Interactive](https://web.dev/tti/)  
-<a name="ref-8">[8]</a> [Billy Hoffmann: How Website Speed Actually Impacts Search Ranking](https://moz.com/blog/how-website-speed-actually-impacts-search-ranking)  
-<a name="ref-9">[9]</a> [Are Search Engines Ready for JavaScript Crawling](https://moz.com/blog/search-engines-ready-for-javascript-crawling)  
-<a name="ref-10">[10]</a> [Lighthouse Release Releases, from March 16th, 2020](https://github.com/GoogleChrome/lighthouse/releases)
+<a name="ref-1">[1]</a> [Walton, Philip on web.dev. User-centric performance metrics, visited March 7th 2020](https://web.dev/user-centric-performance-metrics/)  
+<a name="ref-2">[2]</a> [Walton, Philip on web.dev. First Contentful Paint (FCP), visited March 7th 2020](https://web.dev/fcp/)  
+<a name="ref-3">[3]</a> [Walton, Philip on web.dev. Largest Contentful Paint (LCP), visited March 7th 2020](https://web.dev/lcp/)  
+<a name="ref-4">[4]</a> [web.dev: First Meaningful Paint, visited March 7th 2020](https://web.dev/first-meaningful-paint/)  
+<a name="ref-5">[5]</a> [Walton, Philip on web.dev. First Input Delay (FID), visited March 7th 2020](https://web.dev/fid/)  
+<a name="ref-6">[6]</a> [web.dev. Max Potential First Input Delay, visited March 7th 2020](https://web.dev/lighthouse-max-potential-fid/)  
+<a name="ref-7">[7]</a> [Walton, Philip on web.dev. Time to Interactive, visited March 7th 2020](https://web.dev/tti/)  
+<a name="ref-8">[8]</a> [Hoffmann, Billy on moz.com. How Website Speed Actually Impacts Search Ranking, visited March 7th 2020](https://moz.com/blog/how-website-speed-actually-impacts-search-ranking)  
+<a name="ref-9">[9]</a> [Góralewicz, Bartosz on moz.com. Going Beyond Google: Are Search Engines Ready for JavaScript Crawling & Indexing?, visited March 7th 2020](https://moz.com/blog/search-engines-ready-for-javascript-crawling)  
+<a name="ref-10">[10]</a> [github.com. Lighthouse Releases, visited March 7th 2020](https://github.com/GoogleChrome/lighthouse/releases)
+

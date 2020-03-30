@@ -270,6 +270,10 @@ select {
   padding-right: 30px;
 }
 
+hr + p:last-child {
+  font-size: 0.9em;
+}
+
 @media screen and (max-width: 1168px) {
   .page-menu {
     left: 0;

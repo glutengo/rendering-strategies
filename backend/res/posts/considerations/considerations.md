@@ -123,15 +123,14 @@ This may seem obvious and straightforward but still deserves to be mentioned as 
   
 <hr/>
 
-<a name="ref-1">[1]</a> [developers.google.com: Dynamic Rendering](https://developers.google.com/search/docs/guides/dynamic-rendering)  
-<a name="ref-2">[2]</a> [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)  
-<a name="ref-3">[3]</a> [Amazon EC2 pricing](https://aws.amazon.com/ec2/pricing/on-demand/) Based on a t2.micro instance running 750 hours / month  
-<a name="ref-4">[4]</a> [Martin Fowler: Serverless](https://martinfowler.com/articles/serverless.html)  
-<a name="ref-5">[5]</a> [AWS Lambda pricing](https://aws.amazon.com/lambda/pricing/)
-<a name="ref-6">[6]</a> [Tim Brady's Blog citing Phil Karlton](http://www.tbray.org/ongoing/When/200x/2005/12/23/UPI)
-<a name="ref-7">[7]</a> [developers.gooole.com: Rendering on the web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
-<a name="ref-8">[8]</a> [React: Partial Rehydration](https://github.com/facebook/react/pull/14717)
-<a name="ref-9">[9]</a> [Angular: Partial Rehydration](https://github.com/angular/angular/issues/13446)  
-<a name="ref-10">[10]</a> [What's New With Server-Side Rendering in React 16](https://hackernoon.com/whats-new-with-server-side-rendering-in-react-16-9b0d78585d67)  
-   
- 
+<a name="ref-1">[1]</a> [developers.google.com. Implement dynamic rendering, visited March 30th 2020](https://developers.google.com/search/docs/guides/dynamic-rendering)    
+<a name="ref-2">[2]</a> [aws.amazon.com. Amazon S3 pricing, visited March 30th 2020](https://aws.amazon.com/s3/pricing/)  
+<a name="ref-3">[3]</a> [aws.amazon.com. Amazon EC2 Pricing, visited March 30th 2020](https://aws.amazon.com/ec2/pricing/on-demand/) Based on a t2.micro instance running 750 hours / month  
+<a name="ref-4">[4]</a> [Roberts, Mike on martinfowler.com. Serverless Architectures](https://martinfowler.com/articles/serverless.html)  
+<a name="ref-5">[5]</a> [aws.amazon.com. AWS Lambda Pricing, visited March 30th 2020](https://aws.amazon.com/lambda/pricing/)  
+<a name="ref-6">[6]</a> [Bray, Tim on tbray.org, citing Phil Karlton, visited March 30th 2020](http://www.tbray.org/ongoing/When/200x/2005/12/23/UPI)  
+<a name="ref-7">[7]</a> [Miller, Jason and Osmani, Addy on developers.gooole.com. Rendering on the Web, visited March 30th 2020](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)  
+<a name="ref-8">[8]</a> [Markbage, Sebastian on github.com. Partial Rehydration, visited March 30th 2020](https://github.com/facebook/react/pull/14717)  
+<a name="ref-9">[9]</a> [Cross, Jeff on github.com. Partial Rehydration, visited March 30th 2020](https://github.com/angular/angular/issues/13446)  
+<a name="ref-10">[10]</a> [hackernoon.com. What's New With Server-Side Rendering in React 16, visited March 30th 2020](https://hackernoon.com/whats-new-with-server-side-rendering-in-react-16-9b0d78585d67)  
+    

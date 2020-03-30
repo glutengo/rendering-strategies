@@ -3,7 +3,7 @@ FROM node:10
 WORKDIR /usr/src/app
 
 COPY *.json ./
-COPY *.js ./
+COPY src ./src
 COPY res ./res
 COPY .env ./
 

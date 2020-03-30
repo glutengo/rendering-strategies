@@ -83,11 +83,11 @@ Examples for this technique:
 * [airbnb.com](https://www.airbnb.com/)<sup><a href="#ref-5">[5]</a></sup>
 * [onefootball.com](https://onefootball.com/)<sup><a href="#ref-4">[5]</a></sup>
   
-<hr/>  
+<hr/> 
   
-<a name="ref-1">[1]</a> [developers.gooole.com: Rendering on the web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)  
+<a name="ref-1">[1]</a> [Miller, Jason and Osmani, Addy on developers.gooole.com. Rendering on the Web, visited March 30th 2020](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)  
 <a name="ref-2">[2]</a> These diagrams were created based on the insights gained in the [measurements results](./results) of the [case study](./case-study) and inspired by [[1]](#ref-1) and the [performance tab](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance) in Chrome developer tools.  
-<a name="ref-3">[3]</a> [Next.js Showcase](https://nextjs.org/showcase)
-<a name="ref-4">[4]</a> [made with angular](https://www.madewithangular.com/categories/angular/)
-<a name="ref-5">[5]</a> [stackshare: Airbnb](https://stackshare.io/airbnb/airbnb)
-<a name="ref-6">[6]</a> [The Cost Of Client-side Rehydration](https://addyosmani.com/blog/rehydration/)
+<a name="ref-3">[3]</a> [nextjs.org. Showcase, visited March 30th 2020](https://nextjs.org/showcase)  
+<a name="ref-4">[4]</a> [madewithangular.com. Angular, visited March 30th 2020](https://www.madewithangular.com/categories/angular/)  
+<a name="ref-5">[5]</a> [stackshare.io. Airbnb, visited March 30th 2020](https://stackshare.io/airbnb/airbnb)  
+<a name="ref-6">[6]</a> [Osmani, Addy on addyosmani.com. The Cost Of Client-side Rehydration, visited March 30th 2020](https://addyosmani.com/blog/rehydration/)

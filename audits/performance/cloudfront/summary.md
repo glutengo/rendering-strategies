@@ -1,5 +1,3 @@
-Cache on
-
 ## Throttling: none
 | Implementation | TTFB | FCP   | FMP   | TTI   | MP FID | CIR | ISP |
 | -------------- | ---- | ----- | ----- | ----- | ------ | --- | --- |
