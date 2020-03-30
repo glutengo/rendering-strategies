@@ -7,18 +7,26 @@ html, body {
   --header-height: 60px;
   --menu-width: 200px;
   --header-background: black;
+  --link-color: rgb(120, 120, 120);
+  --link-hover-color: rgb(80, 80, 80);
 }
 
 body.angular {
   --header-background: rgb(223, 0, 53);
+  --link-color: rgb(160, 0, 0);
+  --link-hover-color: rgb(223, 0, 53);
 }
 
 body.react {
   --header-background: rgb(94, 218, 250);
+  --link-color: rgb(66, 149, 170);
+  --link-hover-color: rgb(94, 218, 250);
 }
 
 body.vue {
   --header-background: rgb(58, 184, 132);
+  --link-color: rgb(40, 131, 94);
+  --link-hover-color: rgb(58, 184, 132);
 }
 
 code {
@@ -205,13 +213,13 @@ h1 {
 .post a,
 .post a:visited {
   text-decoration: none;
-  color: rgb(160, 0, 0);
+  color: var(--link-color);
   font-weight: 500;
 }
 
 .post a:hover,
 .post a:visited:hover {
-  color: rgb(255, 0, 0);
+  color: var(--link-hover-color);
 }
 
 sup {

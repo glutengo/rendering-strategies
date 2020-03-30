@@ -3,30 +3,30 @@
 ## Web Frameworks
 
 Job descriptions for frontend web developer jobs barely hold great surprises these days and this has been the case for the last few years. They very often match in their requirements regarding their applicants' skills in frameworks or pupular libraries for building web applications.
-When searching for the term *frontend developer* on job platforms [linkedin.com](https://linkedin.com)<sup>[[1](#ref-1)]</sup> and [monster.com](https://monster.com)<sup>[[2](#ref-2)]</sup>, 6 out of the 10 first listings contained references to [Angular](https://angular.io/), [React](https://reactjs.org/) or both.
+When searching for the term *frontend developer* on job platforms [linkedin.com](https://linkedin.com)<sup>[[1](#ref-1)]</sup> and [monster.com](https://monster.com)<sup>[[2](#ref-2)]</sup>, six out of the ten first listings contained references to [Angular](https://angular.io/), [React](https://reactjs.org/) or both.
 
-Angular and React are both developed by companies which are considered to be leaders in the digital sector. Their creators [Facebook](https://facebook.com) and [Google](https://google.com) (represented by parent company Alphabet) both make the top 10 of [forbes.com's Top 100 Digital Companies List](https://www.forbes.com/top-digital-companies). Considering that these companies created these tools and continue to use them<sup>[[3]](#ref-3),[[4]](#ref-4)</sup>, their quality is considered to be industry proven and many other organisations and developers decided to utilise them as well. 
+Angular and React are both developed by companies which are considered to be leaders in the digital sector. Their creators [Facebook](https://facebook.com) and [Google](https://google.com) (represented by parent company Alphabet) both make the top ten of [forbes.com's Top 100 Digital Companies List](https://www.forbes.com/top-digital-companies). Considering that these companies created these tools and continue to use them<sup>[[3]](#ref-3)[[4]](#ref-4)</sup>, their quality is considered to be industry proven and many other organisations and developers decided to utilise them as well. 
 
 This has lead to a high popularity of these libraries and frameworks among developers worldwide. React is #4 (143 250 Stars) on the list of the highest ranked code repositories on [github](https://github.com), Angular currently ranks on #41 (57 164 Stars) but might have also been among the top 10, had they not chosen to open a new repository in opposition to continuing their work on the repository of predecessor AngularJS (#35, 59 644 Stars). Another Web Frontend Framwork with a high position on the list is [Vue.js](https://vuejs.org) (#3, 156 499 Stars). In contrast to React and Facebook, Vue.js was started as a private project by a (now former) Google employee<sup>[[5](#ref-5)]</sup>. [stackoverflow.com](https://stackoverflow.com)'s 2019 developer survey shows that React, Vue.js and Angular are the mosted wanted web frameworks.<sup>[[6](#ref-6)]</sup>
 
 ## Single Page Applications
 
-While all of the introduced frameworks offer support for a number of different use cases, the default setup seems to be tailored for building so-called single-page applications. The React docs list [create-react-app](https://github.com/facebook/create-react-app), a tool for building single-page-applications with react as the first of four recommended toolchains.<sup>[[7]](#ref-7)</sup> The Vue installation Guide introduces its CLI as a tool for "quickly scaffolding ambitious Single Page Applications"<sup>[[8]](#ref-8)</sup> and Angular docs state that "Angular is an app-design framework and development platform for creating efficient and sophisticated single-page apps"<sup>[[9]](#ref-9)</sup>.
+While all of the introduced frameworks offer support for a number of different use cases, the default setup seems to be tailored for building so-called *Single Page Applications*. The React docs list [create-react-app](https://github.com/facebook/create-react-app), a tool for building single-page-applications with react as the first of four recommended toolchains.<sup>[[7]](#ref-7)</sup> The Vue installation Guide introduces its CLI as a tool for "quickly scaffolding ambitious Single Page Applications"<sup>[[8]](#ref-8)</sup> and Angular docs state that "Angular is an app-design framework and development platform for creating efficient and sophisticated single-page apps"<sup>[[9]](#ref-9)</sup>.
 
 > "A *single page application* is exactily what its name implies: a JavaScript-driven web application that requires only a single page load" <sup>[[10]](#ref-10)</sup>
 
 The response of the single page requested from the server only contains references to further resources (CSS, Scripts) and a very small amount of markup. The actual rendering is performed in the browser by a script. Data may be fetched asynchronously by a script as well.
 
 ### Benefits
-The payload of the single page requested from the server is usually very low which leads to a quick response because the responsible server does not require to do any computational tasks. Its only purpose is to delivery static resources.  
+The payload of the single page requested from the server is usually very low which leads to a quick response because the responsible server is not required to do any computational tasks. Its only purpose is to delivery static resources.  
 Visiting a different sub-site of the application does not require a full page reload. This is considered a big advantage as it results in a smooth, app-like user experience once the application has loaded.<sup>[[11]](#ref-11)</sup>
 
 <p class="image">
 <img src="./angular-spa.gif"/>
-Single-page application example: <a href="https://angular.io/">Angular Website</a>
+Single Page Application example: <a href="https://angular.io/">Angular Website</a>
 </p>
 
-The Angular Website is an example of a such single-page application. Whilst we are navigating through the application, we are never presented a blank screen, even if the network connection is bad.
+The Angular Website is an example of a such Single Page Application. Whilst we are navigating through the application, we are never presented a blank screen, even if the network connection is bad.
 
 ### Downsides
 The described way of building an application comes with a few downsides. The fact that a script is responsible for rendering the markup and fetching the real data makes it a very critical resource. If we visit the same page with JavaScript disabled, we are presented with a page offering basically no content and no interactivity.
@@ -49,6 +49,9 @@ The good news is: Googlebot does process JavaScript. It does work with an evergr
 When the server answers each initial request with the same static HTML file, there is also no room for optimizing the sharing behavior for inidividual sub pages of the application. Facebook, for instance, uses the [Open Graph Protocol](https://ogp.me) to generate its sharing previews on their platform. 
 There are a number of predefined Meta Tags (e.g. `og:title` and `og:image`) which need to be set for a good sharing performance.<sup>[[13]](#ref-13)</sup> If these are only defined once, the sharing preview for each sub page (e.g. `/home` and `/about`) will always look the same. 
 This leaves the developer with only two options: he could either use very general values which are feasible for all pages or he could use specific values for the page he judges the most important. Both options are not really satisfactory.
+
+Given these disadvantages, we want to have a look at how Single Page Applications are rendered.
+We will compare the used technique to other alternatives and explore potentials to overcome the usual downsides of Single Page Applications.
 
 <hr/>        
 

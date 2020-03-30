@@ -75,7 +75,6 @@ Instead, we are provided with an alternative lifecycle method which is only exec
 So to make sure that our data is fetched in both scenarios, we call our `fetchData` method in lifecycle methods.
 
 ```javascript
-
 export default {
     name: 'Post',
     data() {
@@ -90,7 +89,6 @@ export default {
       await this.fetchData(this.$route.params.id);
     },
 }
-
 ```
 
 With these adjustments, our application is ready to be used with sever side rendering.
@@ -136,14 +134,12 @@ While the the values for the `<title>` and `og:title` `<meta>` tag for the clien
 We simply need to set the `title` attribute of the context and reference this attribute in our template:
 
 ```html
-
 <head>
   <!-- ... -->
   <meta name="og:title" value="{{ title }}">
   <title>{{ title }}</title>
   <!-- ... -->
 </head>
-
 ```   
 
 ### Observations
@@ -153,9 +149,9 @@ The docs mention <a href="https://nuxtjs.org/">Nuxt.js</a> as an alternative for
 
 <hr/>
 
-<a name="ref-1">[1]</a> [Vue docs: Installation](https://vuejs.org/v2/guide/installation.html#CLI)
-<a name="ref-2">[2]</a> [Github issue regarding meta tags in Vue](https://github.com/vuejs/vue/issues/4379)
-<a name="ref-3">[3]</a> [Vue docs: vue.config.js](https://cli.vuejs.org/config/#vue-config-js)
-<a name="ref-4">[4]</a> [Vue SSR Guide: BundleRenderer](https://ssr.vuejs.org/guide/bundle-renderer.html#enter-bundlerenderer)
-<a name="ref-5">[5]</a> [Vue SSR Guide: Data Pre-Fetching and State](https://ssr.vuejs.org/guide/data.html#data-store)
-<a name="ref-6">[6]</a> [Vue docs: SSR](https://vuejs.org/v2/guide/ssr.html)
+<a name="ref-1">[1]</a> [Vue docs: Installation](https://vuejs.org/v2/guide/installation.html#CLI)  
+<a name="ref-2">[2]</a> [Github issue regarding meta tags in Vue](https://github.com/vuejs/vue/issues/4379)  
+<a name="ref-3">[3]</a> [Vue docs: vue.config.js](https://cli.vuejs.org/config/#vue-config-js)  
+<a name="ref-4">[4]</a> [Vue SSR Guide: BundleRenderer](https://ssr.vuejs.org/guide/bundle-renderer.html#enter-bundlerenderer)  
+<a name="ref-5">[5]</a> [Vue SSR Guide: Data Pre-Fetching and State](https://ssr.vuejs.org/guide/data.html#data-store)  
+<a name="ref-6">[6]</a> [Vue docs: SSR](https://vuejs.org/v2/guide/ssr.html)  

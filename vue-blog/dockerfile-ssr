@@ -6,10 +6,10 @@ COPY *.json ./
 COPY *.js ./
 COPY src ./src
 COPY public ./public
-COPY .env.production ./.env
+COPY .env.server ./.env
 
 RUN npm install
-RUN npm run build
+RUN npm run build:ssr
 
 EXPOSE 5002
 

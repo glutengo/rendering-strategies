@@ -15,7 +15,6 @@
 
 <script>
   import {getOptions} from '../util/data.util';
-  import {getRequestLocation} from '../util/env.util';
 
   export default {
     name: 'Header',
@@ -35,11 +34,7 @@
         this.options = await getOptions();
       },
       isActive(option) {
-        const location = getRequestLocation();
-        const url = new URL(option.url);
-        return url.protocol === location.protocol &&
-          url.hostname === location.hostname &&
-          url.port === location.port;
+        return option.platform === 'vue' && option.technique === process.env.VUE_APP_RENDERING_TECHNIQUE;
       },
       onClickMenu() {
         document.body.classList.toggle('menu-open');

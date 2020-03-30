@@ -21,7 +21,7 @@ To summarize, this metrics tells us how long it takes for the user to be shown a
 
 > "The Largest Contentful Paint (LCP) metric reports the render time of the largest content element visible in the viewport."<sup>[[3](#ref-3)]</sup>
 
-In contrast to the the FCP, this metric is not satisfied with just *any* content.
+In contrast to the the FCP, this metric is not satisfied by just *any* content.
 Instead it waits for the largest element in the viewport to become visible. 
 The element matching this criteria may change during the render process as more and more elements become visible.
 Therefore, the LCP changes during the render process whenever the largest visible element changes.
@@ -60,8 +60,8 @@ So the longest blocking JavaScript task gives us the Maximum Potential First Inp
 > "The TTI metric measures the time from when the page starts loading to when its main sub-resources have loaded and it is capable of reliably responding to user input quickly." <sup>[[7](#ref-7)]</sup>
 
 The Time to Interactive (TTI) is strongly related to the Max Potential FID. 
-It also keeps tracks on long tasks which block the main thread. 
-Instead of finding the longest task, it identifies the time when the last of these long tasks has finished and the browser is ready to respond on user interactions reliably.<sup>[[7](#ref-7)]</sup> 
+It also keeps track on long tasks which block the main thread. 
+Instead of just finding the longest task, it identifies the time when the last of these long tasks has finished and the browser is ready to respond on user interactions reliably.<sup>[[7](#ref-7)]</sup> 
 
 ## Machine centric performance metrics
 
@@ -89,7 +89,7 @@ When the user shares a link, these applications usually do not just render the a
 Instead, they generate a preview which displays more insightful information which gives the user an idea of what to expect when following the link.
 To measure the performance of our blog implementations regarding sharing previews, we will use the debugger tools provided by [facebook](https://developers.facebook.com/tools/debug/) and [twitter](https://cards-dev.twitter.com/validator).
 Developers can use these for getting an idea of how the sharing preview of their website would look like if a user shared a link to the website in the respective network.
-We will paste the URL of each blog implementation into both debugger tools and evaluate whether the sharing preview is generic or page specific. (binary)
+We will paste the URL of each blog implementation into both debugger tools and evaluate whether the sharing preview is generic or page specific.
 
 <hr/>
 
@@ -100,6 +100,6 @@ We will paste the URL of each blog implementation into both debugger tools and e
 <a name="ref-5">[5]</a> [web.dev: First Input Delay](https://web.dev/fid/)  
 <a name="ref-6">[6]</a> [web.dev: Max Potential FID to Interactive](https://web.dev/lighthouse-max-potential-fid/)  
 <a name="ref-7">[7]</a> [web.dev: Time to Interactive](https://web.dev/tti/)  
-<a name="ref-8">[8]</a> [Billy Hoffmann: How Website Speed Actually Impacts Search Ranking](https://moz.com/blog/how-website-speed-actually-impacts-search-ranking)
-<a name="ref-9">[9]</a> [Are Search Engines Ready for JavaScript Crawling](https://moz.com/blog/search-engines-ready-for-javascript-crawling)
+<a name="ref-8">[8]</a> [Billy Hoffmann: How Website Speed Actually Impacts Search Ranking](https://moz.com/blog/how-website-speed-actually-impacts-search-ranking)  
+<a name="ref-9">[9]</a> [Are Search Engines Ready for JavaScript Crawling](https://moz.com/blog/search-engines-ready-for-javascript-crawling)  
 <a name="ref-10">[10]</a> [Lighthouse Release Releases, from March 16th, 2020](https://github.com/GoogleChrome/lighthouse/releases)

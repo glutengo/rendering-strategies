@@ -30,7 +30,7 @@ When creating the HTML during the build time, it is still possible to use a stat
 So if our infrastructure or budget does not allow us to use anything else than that, this is the option to choose.
 
 This approach is not very flexible. 
-It requires that all routes to subpages need to be known at the moment when the build is created.
+It requires that all routes to subpages are known at the moment when the build is created.
 This may be suitable for static website which have rare changes, but not for applications with more dynamic content and generic routes like content management systems or blogs.
 
 ### Runtime
@@ -41,6 +41,10 @@ If we create the HTML at runtime, we need a server which is capable of performin
 This tasks requires more computing power and time and is therefore likely to increase costs and the TTFB.
 Amazon for example charges $&nbsp;0.023 for a gigabyte of staticly served files<sup>[[2]](#ref-2)</sup> while a EC2 instance which would be able to render the HTML at runtime would cost about $&nbsp;8.70.<sup>[[3]](#ref-3)</sup>
 It should be added that the costs for rendering on the server could be reduced drastically by using serverless computing.<sup>[[4]](#ref-4)</sup><sup>[[5]](#ref-5)</sup>
+
+The TTFB can be limited by using streaming server rendering.
+This is a feature which was introduced in React 16 and allows the server to send parts of the rendered HTML to the browser before the whole process is finished.
+Modern browsers will then be able to render these parts of the document earlier which can also lead to an improved FCP.<sup>[[10]](#ref10)</sup>
 
 ## How to generate the HTML
 
@@ -82,7 +86,24 @@ When simply putting together the HTML Dom tree on the server, no additional reso
  
 On the other hand it is more complex to implement and depending on the framework.
 
-Rendering the application on the server with universal JavaScript still requires more computing resources than a simple file server, so a sensitive strategy regarding caching and selection of server side rendered pages is recommended.    
+Rendering the application on the server with universal JavaScript still requires more computing resources than a simple file server, so a sensitive strategy regarding caching and selection of server side rendered pages is recommended.
+
+## (Re-)Hydration
+
+When adding SSR to a Single Page Application, (re-)hydration can help to prevent an intermediate state between the server side rendered HTML and the DOM tree assembled by the browser where the user is presented a blank page.
+However, simple hydration implementations do have disadvantages.
+
+> "The primary downside of SSR with rehydration is that it can have a significant negative impact on Time To Interactive, even if it improves First Paint. SSR’d pages often look deceptively loaded and interactive, but can’t actually respond to input until the client-side JS is executed and event handlers have been attached. This can take seconds or even minutes on mobile."<sup>[[7]](#ref-7)</sup>
+       
+The [measurement results of our case study](./results#setup-%234%3A-cloudfront-cache%2C-slow-3g) prove that this is can be the case event for simple applications like this blog when the user is operating on a slow network connection. 
+      
+To overcome these issues, a number of approaches have been developed and are still being explored.
+
+*Partial rehydration* describes an approach where a part of the server rendered result is hydrated "while other parts of the page are still loading the code or data. This means that you can start interacting with parts of the screen while others are still hydrating."<sup>[[8]](#ref-8)</sup>
+While the Pull Request where this was discussed is still merged for React, this topic is still untackled for Angular.
+Google names this approach *progressive*<sup>[[7]](#ref-7)</sup> rather than *partial* because the first assumes that in the end everything is hydrated (just not everything at once) while the second implies that some parts of the application are not hydrated at all.<sup>[[7]](#ref-7)</sup>
+
+Google also suggests a technique called *Trisomorphic Rendering* where streaming server rendering is combined with service workers.<sup>[[7]](#ref-7)</sup>  
 
 ## Caching
 
@@ -103,10 +124,14 @@ This may seem obvious and straightforward but still deserves to be mentioned as 
 <hr/>
 
 <a name="ref-1">[1]</a> [developers.google.com: Dynamic Rendering](https://developers.google.com/search/docs/guides/dynamic-rendering)  
-<a name="ref-2">[1]</a> [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)  
+<a name="ref-2">[2]</a> [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)  
 <a name="ref-3">[3]</a> [Amazon EC2 pricing](https://aws.amazon.com/ec2/pricing/on-demand/) Based on a t2.micro instance running 750 hours / month  
 <a name="ref-4">[4]</a> [Martin Fowler: Serverless](https://martinfowler.com/articles/serverless.html)  
 <a name="ref-5">[5]</a> [AWS Lambda pricing](https://aws.amazon.com/lambda/pricing/)
-<a name="ref-6">[6]</a> [Tim Brady's Blog citing Phil Karlton](http://www.tbray.org/ongoing/When/200x/2005/12/23/UPI)  
+<a name="ref-6">[6]</a> [Tim Brady's Blog citing Phil Karlton](http://www.tbray.org/ongoing/When/200x/2005/12/23/UPI)
+<a name="ref-7">[7]</a> [developers.gooole.com: Rendering on the web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
+<a name="ref-8">[8]</a> [React: Partial Rehydration](https://github.com/facebook/react/pull/14717)
+<a name="ref-9">[9]</a> [Angular: Partial Rehydration](https://github.com/angular/angular/issues/13446)  
+<a name="ref-10">[10]</a> [What's New With Server-Side Rendering in React 16](https://hackernoon.com/whats-new-with-server-side-rendering-in-react-16-9b0d78585d67)  
    
  

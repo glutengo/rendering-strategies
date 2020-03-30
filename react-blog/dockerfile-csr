@@ -5,11 +5,11 @@ WORKDIR /usr/src/app
 COPY *.json ./
 COPY src ./src
 COPY public ./public
-COPY .env ./
+COPY .env.client ./
 
 RUN npm install
-RUN npm run build
+RUN npm run build:csr
 
 EXPOSE 3000
 
-CMD npm run serve
+CMD npm run serve:csr

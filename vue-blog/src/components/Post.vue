@@ -15,7 +15,6 @@
       }
     },
     mounted() {
-      console.log('mounted');
       this.setMeta(this.$route.params.id);
       this.fetchData(this.$route.params.id);
     },

@@ -42,7 +42,7 @@ export class PostComponent implements OnInit {
       if (href.startsWith('http')) {
         return;
       } else if (href.startsWith('#')) {
-        this.router.navigateByUrl(`${this.router.url}${href}`);
+        this.router.navigateByUrl(`${this.router.url.split('#')[0]}${href}`);
         event.preventDefault();
       } else {
         this.router.navigateByUrl(href);

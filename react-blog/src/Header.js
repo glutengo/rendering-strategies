@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from 'react-router-dom';
 import {getOptions} from './util/data.util';
-import {getRequestLocation} from './util/env.util';
 import {Helmet} from 'react-helmet';
 
 export function Header(props) {
@@ -18,11 +17,7 @@ export function Header(props) {
   }
 
   function isActive(option) {
-    const requestLocation = getRequestLocation();
-    const url = new URL(option.url);
-    return url.protocol === requestLocation.protocol &&
-      url.hostname === requestLocation.hostname &&
-      url.port === requestLocation.port ? 'selected' : undefined;
+    return option.platform === 'react' && option.technique === process.env.REACT_APP_RENDERING_TECHNIQUE ?  'selected' : undefined;
   }
 
   function onClickMenu() {

@@ -28,7 +28,6 @@ server.get('*', (req, res) => {
     backendUrl: process.env.VUE_APP_BACKEND_URL
   };
 
-  process.request = req;
   process.VUE_HTTP_CACHE = {};
 
   // No need to pass an app here because it is auto-created by
