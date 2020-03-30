@@ -1,26 +1,54 @@
-# AngularBlog
+# Rendering Strategies Angular Blog
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
 
-## Development server
+CSR Port: `4200`  
+SSR Port: `4201`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Dependencies
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`npm install`
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### CSR
 
-## Running unit tests
+`npm run build:csr`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### SSR
 
-## Running end-to-end tests
+`npm run build:ssr`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Startup
+
+### CSR
+
+`npm run serve:csr`
+
+### SSR
+
+`npm run serve:ssr`
+
+## Development
+
+### CSR
+
+`npm run dev:csr`
+
+### SSR
+
+`npm run dev:ssr`
+
+## Deployment
+
+### CSR
+
+`npm run docker:update:csr`
+
+### SSR
+
+`npm run docker:update:ssr`
+
 
 ## Further help
 
