@@ -5,7 +5,9 @@
 Just like Angular and React, Vue.js offers its own command line interface "for quickly scaffolding ambitious Single Page Applications"<sup>[[2]](#ref-2)</sup>.
 To get started, we create a new Vue application:
 
-```vue create vue-blog```
+```shell
+vue create vue-blog
+```
 
 Starting with a scaffolded Vue.js application, we implement the [required components](./case-study#frontend) for realizing our blog application.
 
@@ -76,7 +78,7 @@ export default {
     name: 'Post',
     data() {
       return {
-        content: null
+        content: getPostFromCache(this.$route.params.id)
       }
     },
     mounted() {

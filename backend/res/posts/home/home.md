@@ -5,12 +5,12 @@ This is a place where developers can gather information about different renderin
 The site is structured as a blog which consists of a number of posts regarding rendering web apps.
 
 The objectives of this blog are as follows:
-* Get an overview of what rendering strategies exist
+* Provide an overview of the existing rendering strategies
 * Find out what it takes to add Server Side Rendering to Web Applications which were built in a modern JavaScript frontend framework
 * Compare the performance of different rendering strategies in different frameworks
 
 The blog posts are listed on the left (or can be displayed by tapping / clicking the burger icon if you are on a small screen).
-While they are largely independent from each other or include links to other passages where needed, it will make most sense to read them in their list order (from top to bottom).
+While they are largely independent from each other or include links to other passages where needed, it will make most sense to read them in the listed order (from top to bottom).
 
 ## About
 

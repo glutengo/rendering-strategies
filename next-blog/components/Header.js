@@ -27,7 +27,7 @@ export function Header(props) {
   return <section className="page-header">
     <div className="header-content">
       <button className="toggle-menu" onClick={ () => onClickMenu()}></button>
-      <h3>Rendering Strategies for Web Apps</h3>
+      <h3><a href="/">Rendering Strategies for Web Apps</a></h3>
       <select onChange={ event => onSelectChanged(event.target.value)}>
         {
           options.map((option, index) =>

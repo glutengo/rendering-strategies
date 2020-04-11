@@ -29,10 +29,28 @@ export function getPost(id) {
   return fetchWithCache(`${getBaseURL()}/post/${id}`);
 }
 
+export function getPostFromCache(id) {
+  return getFromCache(`${getBaseURL()}/post/${id}`);
+}
+
 export function getToc() {
   return fetchWithCache(`${getBaseURL()}/posts/toc.json`, true);
 }
 
+export function getTocFromCache() {
+  return getFromCache(`${getBaseURL()}/posts/toc.json`) || [];
+}
+
 export function getOptions() {
   return fetchWithCache(`${getBaseURL()}/options`, true);
+}
+
+export function getOptionsFromCache() {
+  return getFromCache(`${getBaseURL()}/options`) || [];
+}
+
+function getFromCache(url) {
+  if (isBrowser()) {
+    return window.VUE_HTTP_CACHE && window.VUE_HTTP_CACHE[url];
+  }
 }

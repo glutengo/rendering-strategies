@@ -2,7 +2,7 @@
   <section class="page-header">
     <div class="header-content">
       <button class="toggle-menu" v-on:click="onClickMenu"></button>
-      <h3>Rendering Strategies for Web Apps</h3>
+      <h3><a href="/">Rendering Strategies for Web Apps</a></h3>
       <select v-on:change="onSelectChanged">
         <option v-for="option of options" v-bind:key="option.url" v-bind:value="option.url"
                 v-bind:selected="isActive(option)">
@@ -14,13 +14,13 @@
 </template>
 
 <script>
-  import {getOptions} from '../util/data.util';
+  import {getOptions, getOptionsFromCache} from '../util/data.util';
 
   export default {
     name: 'Header',
     data() {
       return {
-        options: []
+        options: getOptionsFromCache()
       }
     },
     mounted() {

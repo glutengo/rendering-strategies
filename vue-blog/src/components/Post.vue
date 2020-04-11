@@ -4,14 +4,14 @@
 </template>
 
 <script>
-  import {getPost} from '../util/data.util';
+  import {getPost, getPostFromCache} from '../util/data.util';
   import {isBrowser} from '../util/env.util';
 
   export default {
     name: 'Post',
     data() {
       return {
-        content: null
+        content: getPostFromCache(this.$route.params.id)
       }
     },
     mounted() {

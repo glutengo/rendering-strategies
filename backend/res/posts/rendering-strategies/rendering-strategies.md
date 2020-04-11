@@ -22,11 +22,11 @@ Our application needs to load and process further resources (primarily JavaScrip
 For client side rendered applications, the TTFB is usually very low because the server only needs to deliver static resources.
 Once the main JavaScript bundle is loaded, the application can produce its FCP which will usually only contain some static site elements and not the actual content.
 The application may then download the content from an API and render the content so it gets visible to the user (FMP).
-As a result, the FMP and the TTI can be quite high which can lead to a bad perceived performance regarding page load. 
+As a result, the FMP and the TTI can be quite high which can lead to a bad perceived performance regarding page load.<sup>[[1]](#ref-1)</sup>
 Once the application is fully loaded, it feels very quick and does not need full repaints when navigating to other areas of the application because the logic to render the UI has already been downloaded and the newly needed data can be fetched asynchronously.
 
 Examples for this technique:
-* [Microsoft Office Home](https://www.office.com/apps)<sup><a href="#ref-4">[4]</a></sup>
+* [Microsoft Office Home](https://www.office.com/apps)<sup><a href="#ref-3">[3]</a></sup>
 * gmail.com, [default mail client](https://gmail.com) 
 
 ## Server Side Rendering (SSR)
@@ -45,12 +45,12 @@ Typical timeline for the rendering process for SSR<sup><a href="#ref-2">[2]</a><
 In extreme cases, this can lead to FCP, FMP and TTI happening at the same time.
 The application may load and process JavaScript to add enhancements (omitted in the diagram), but these scripts tend to be a lot smaller because they are not responsible for critical tasks like rendering.
 Because the HTML needs to be built on the server and more data is transferred from the server to the client in the initial request, the TTFB is usually higher compared to CSR applications.
-On the other side, the gap between TTI and FMP is smaller (or zero) because the amount of JavaScript that needs to be processed is smaller in most cases.
-After the loading process, the user experience is considered worse because navigation to another (sub) page requires a full repaint of the page.
+On the other side, the gap between TTI and FMP is smaller (or zero) because the amount of JavaScript that needs to be processed is smaller in most cases.<sup>[[1]](#ref-1)</sup>
+After the loading process, the user experience can be considered worse because navigation to another (sub) page requires a full repaint of the page.
 
 Examples for this technique:
 * amazon.com, e.g. the [product detail page](https://www.amazon.de/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
-* [vogue.com](https://vogue.com) as an example for a wordpress website
+* [vogue.com](https://vogue.com) as an example for a wordpress website<sup><a href="#ref-4">[4]</a></sup>
 * github.com, e.g. the [repository page](https://github.com/glutengo/rendering-strategies)
 
 ## SSR with with re-hydration
@@ -75,19 +75,21 @@ It is slower regarding TTFB because the server needs to do more than just delive
 This can be improved by adding a [cache](./considerations#caching).
 The FMP should be comparably low or at least the difference between FMP and TTFB should be small because our single page application does not need to do any rendering or fetch data before the user is presented with the content.
 Probably the biggest downside of this approach is an increased gap between FMP and TTI. 
-The user may be presented the contents very quickly but he still needs to wait until the JavaScript is processed until the application becomes fully reactive.<sup>[[6]](#ref-6)</sup>
-There are some experimental strategies for overcoming this problem or reducing this effects. These are listed in the [considerations](./considerations#(re-)hydration).
+The user may be presented the contents very quickly but he still needs to wait until the JavaScript is processed until the application becomes fully reactive.<sup>[[5]](#ref-5)</sup>
+There are some experimental strategies for overcoming this problem or reducing this effects. 
+These are listed in the [considerations](./considerations#(re-)hydration).
 
 Examples for this technique:
-* [m.twitch.com](https://m.twitch.tv)<sup><a href="#ref-3">[3]</a></sup>
-* [airbnb.com](https://www.airbnb.com/)<sup><a href="#ref-5">[5]</a></sup>
-* [onefootball.com](https://onefootball.com/)<sup><a href="#ref-4">[5]</a></sup>
+* [m.twitch.com](https://m.twitch.tv)<sup><a href="#ref-6">[6]</a></sup>
+* [airbnb.com](https://www.airbnb.com/)<sup><a href="#ref-7">[7]</a></sup>
+* [onefootball.com](https://onefootball.com/)<sup><a href="#ref-3">[3]</a></sup>
   
 <hr/> 
   
-<a name="ref-1">[1]</a> [Miller, Jason and Osmani, Addy on developers.gooole.com. Rendering on the Web, visited March 30th 2020](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)  
+<a name="ref-1">[1]</a> [Miller, Jason and Osmani, Addy on developers.gooole.com. 2019. Rendering on the Web, visited March 30th 2020](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)  
 <a name="ref-2">[2]</a> These diagrams were created based on the insights gained in the [measurements results](./results) of the [case study](./case-study) and inspired by [[1]](#ref-1) and the [performance tab](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance) in Chrome developer tools.  
-<a name="ref-3">[3]</a> [nextjs.org. Showcase, visited March 30th 2020](https://nextjs.org/showcase)  
-<a name="ref-4">[4]</a> [madewithangular.com. Angular, visited March 30th 2020](https://www.madewithangular.com/categories/angular/)  
-<a name="ref-5">[5]</a> [stackshare.io. Airbnb, visited March 30th 2020](https://stackshare.io/airbnb/airbnb)  
-<a name="ref-6">[6]</a> [Osmani, Addy on addyosmani.com. The Cost Of Client-side Rehydration, visited March 30th 2020](https://addyosmani.com/blog/rehydration/)
+<a name="ref-3">[3]</a> [madewithangular.com. Angular. visited March 30th 2020](https://www.madewithangular.com/categories/angular/)  
+<a name="ref-4">[4]</a> [wordpress.org. WordPress Website Showcase- visited April 11th 2020](https://wordpress.org/showcase/)  
+<a name="ref-5">[5]</a> [Osmani, Addy on addyosmani.com. 2019. The Cost Of Client-side Rehydration. visited March 30th 2020](https://addyosmani.com/blog/rehydration/)
+<a name="ref-6">[6]</a> [nextjs.org. Showcase. visited March 30th 2020](https://nextjs.org/showcase)  
+<a name="ref-7">[7]</a> [stackshare.io. Airbnb. visited March 30th 2020](https://stackshare.io/airbnb/airbnb)  
