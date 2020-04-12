@@ -5,21 +5,21 @@ To be able to do this, it is required to find out which metrics could be suitabl
 
 ### User centric performance metrics
 
-Because the perceived user performance is one of the main reasons to care about website rendering, it is required to have metrics which model this user perception. 
+Perceived user performance is one of the main reasons to care about website rendering.
+Therefore it is required to have metrics which model this user perception. 
 Google has identified a number of indicators as user centric performance metrics.<sup>[[1]](#ref-1)</sup>
-For measuring the user centric performance regarding rendering strategies we select the following metrics.
-All of these can be measured using [Google Lighthouse](https://developers.google.com/web/tools/lighthouse). 
-We will perform an audit for each blog implementation and compare the numbers in course of the [case study](./case-study) and have a look at the [results](./results) afterwards.
+Out of these, we select the following metrics for measuring the user centric performance regarding rendering strategies. 
+We will perform an audit with [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) for each blog implementation in course of the [case study](./case-study) and have a look at the [results](./results) afterwards.
 
 ### First Contentful Paint (FCP)
 
-> "The First Contentful Paint (FCP) metric measures the time from when the page starts loading to when any part of the page's content is rendered on the screen."<sup>[[2](#ref-2)]</sup>
+> "The First Contentful Paint (FCP) metric measures the time from when the page starts loading to when any part of the page's content is rendered on the screen." <sup>[[2](#ref-2)]</sup>
 
-To summarize, this metrics tells us how long it takes for the user to be shown any content, which may be either "text, images (including background images), `<svg>` elements, or non-white `<canvas>` elements"<sup>[[2](#ref-2)]</sup>.
+To summarize, this metric tells us how long it takes for the user to be shown any content, which may be either "text, images (including background images), `<svg>` elements, or non-white `<canvas>` elements" <sup>[[2](#ref-2)]</sup>.
 
 ### Largest Contentful Paint (LCP)
 
-> "The Largest Contentful Paint (LCP) metric reports the render time of the largest content element visible in the viewport."<sup>[[3](#ref-3)]</sup>
+> "The Largest Contentful Paint (LCP) metric reports the render time of the largest content element visible in the viewport." <sup>[[3](#ref-3)]</sup>
 
 In contrast to the the FCP, this metric is not satisfied by just *any* content.
 Instead it waits for the largest element in the viewport to become visible. 
@@ -36,7 +36,7 @@ This version has not been released yet<sup>[[5](#ref-5)]</sup> and version 5.6 s
 > "FMP measures when the primary content of a page is visible to the user. The raw score for FMP is the time in seconds between the user initiating the page load and the page rendering the primary above-the-fold content." <sup>[[4](#ref-4)]</sup>
 
 The First Meaningful Paint was introduced to identify the time when the main contents of the page become visible. 
-"Paints with only the page header, navigation bar, or loading indicator such as spinner icon don't qualify"<sup>[[6](#ref-6)]</sup>, which represents a clear difference to FCP. 
+"Paints with only the page header, navigation bar, or loading indicator such as spinner icon don't qualify" <sup>[[6](#ref-6)]</sup>, which represents a clear difference to FCP. 
 
 ### First Input Delay (FID)
 

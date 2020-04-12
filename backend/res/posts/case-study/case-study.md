@@ -1,9 +1,12 @@
 # Case Study
 
 The aim of this case study is to find out which steps are required to move from a standard single-page application which is fully rendered in the browser towards an optimized server supported rendering architecture.
+[Universal JavaScript](./considerations#universal-javascript) is used for generating the HTML.
+This decision was made because in contrast to the other alternative (pre-rendering), this method depends on the used framework.    
  
 The sample application for this undertaking is the blog web app that you are currently using. 
 The blog has been implemented in [Angular](./angular), [React](./react) and [Vue.js](./vue) (both in a simple CSR manner and in a more sophisticated SSR-enabled version.
+You can switch between the different implementations by using the dropdown menu in the page header.
 The official documentation of the respective framework was used as the main resource for instructions and advise.
 
 The full source code is available in this [github repository](https://github.com/glutengo/rendering-strategies). 
@@ -24,7 +27,6 @@ To achieve this, this components needs to load the list of posts from the backen
 When navigating to another post, there should not be a full page reload. 
 The navigation should be handled by the router of the single-page application.
 The currently displayed post is highlighted in the list.
-
 
 ## Backend
 

@@ -9,7 +9,8 @@ To be able to run a larger number of these tests in the same setups, they were s
 
 To evaluate how the implementations fare in different environments, a few different test setups were created. 
 Each test was run 11 times and the median value (based on sorting by FMP) was selected as the result.
-The [metrics](./metrics) post was opened on each test. This post contains a comparably large amount of text but now other resources like images. 
+The [metrics](./metrics) post was opened on each test. 
+This post contains a medium amount of text but now other resources like images. 
 
 The test setups include three types of throttling presets.
 
@@ -30,7 +31,7 @@ Therefore, only the results for the non-cached setup with no network throttling 
 The tests regarding Contentful Initial Request (CIR) and Individual Sharing Preview (ISP) were only run once and copied over because their results are independent from the chosen test setup.
 
 All audit results were collected in the code repository of the case study. 
-Follow this [link](TODO LINK) to view them.
+Follow this [link](https://github.com/glutengo/rendering-strategies/audits) to view them.
 
 ### Setup #1: No Cache, No Network Throttling
      
@@ -137,19 +138,29 @@ This means the the SSR versions are able to display the full content before the 
 
 Among the different JavaScript frameworks, the differences in performance were not significant.
 It is notable that Angular CSR performed comparably bad in the second setup (Cloudfront, no network throttling) and showed a deviation from the typical rendering flow for CSR apps.
-NextJS seems to have the best overall performance (best or joint best in FMP, TTI and MP FID in the first three setups) but it was outperformed by React SSR in the Slow 3G setups.
+Next.js seems to have the best overall performance (best or joint best in FMP, TTI and MP FID in the first three setups) but it was outperformed by React SSR in the Slow 3G setups.
 Vue revealed a significantly low difference between FMP for CSR and SSR in the Slow 3G setup. 
-
-For further tests it would be interesting to see how the numbers change when sub pages with different contents (images, videos, iframes) and more interactivity are visited.  
-For our blog implementation, the impact of the cache seems negligible user performance wise.
+    
+For the blog implementation, the impact of the cache seems negligible user performance wise.
 
 The tests also reveal that Server Side Rendering provides improvements regarding bot performance.
-The fact that the intitial response is contentful and the sharing preview is individual for each sub page represent advantages.
+The fact that the initial response is contentful and the sharing preview is individual for each sub page represent advantages.
 The TTFB has proved to be slightly worse in the SSR setups.
 This can be bypassed by setting up a http cache.
 
+### Outlook
+
+The case study served as a good first point of touch with the topic of server side rendered web applications.
+There is still great potential to extend the research on the topic.
+
+* For further tests it would be interesting to see how the numbers change when sub pages with different contents (images, videos, iframes) and more interactivity are visited.
+* As Next.js performed quite well, extending the case study to include [Nuxt.js](https://nuxtjs.org/) as an alternative setup to Vue.js could provide new insights.
+* In larger applications, state management libraries like redux, ngrx or vuex are used. These require and allow new approaches in the SSR implementation, e.g. when it comes to avoiding duplicated requests.    
+* The negative impacts of re-hydration could be tackled with partial re-hydration, progressive re-hydration or trisomorphic rendering.  
+* A performance comparison between universal JavaScript and pre-rendering would also be interesting.
+
 <hr/>
 
-<a name="ref-1">[1]</a> [Grigorik, Ilya on hpbn.co. High Performance Browser Netowrking: Mobile Networks, visited March 16th 2020](https://hpbn.co/mobile-networks)  
+<a name="ref-1">[1]</a> [Grigorik, Ilya on hpbn.co. High Performance Browser Netowrking: Mobile Networks. visited March 16th 2020](https://hpbn.co/mobile-networks)  
 <a name="ref-2">[2]</a> The values were selected after consulting [[1]](#ref-1). The article contains a table which lists bounds for 3G (among others) data rates and latency. For both setups, values near the upper / lower edge of the stated scala were picked.  
-<a name="ref-3">[3]</a> [aws.amazon.com. Amazon Cloudfront, visited March 16th 2020](https://aws.amazon.com/cloudfront/)
+<a name="ref-3">[3]</a> [aws.amazon.com. Amazon Cloudfront. visited March 16th 2020](https://aws.amazon.com/cloudfront/)

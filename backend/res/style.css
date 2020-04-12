@@ -94,7 +94,7 @@ h1 {
 
 .page-header h3 {
   flex-grow: 1;
-  margin: 0;
+  margin: 0 1em 0 0;
 }
 
 .page-header ul {
@@ -198,6 +198,12 @@ h1 {
   margin: 0.5em 0;
 }
 
+.page-header a,
+.page-header a:visited {
+  text-decoration: none;
+  color: white;
+}
+
 .post-list li,
 .page-header li {
   list-style: none;
@@ -272,6 +278,7 @@ select {
 
 hr + p:last-child {
   font-size: 0.9em;
+  text-align: left;
 }
 
 @media screen and (max-width: 1168px) {
@@ -318,6 +325,10 @@ hr + p:last-child {
 
 @media screen and (max-width: 400px) {
   .page-header h3 {
+    font-size: 0.8em;
+  }
+
+  .page-header select {
     font-size: 0.8em;
   }
 }

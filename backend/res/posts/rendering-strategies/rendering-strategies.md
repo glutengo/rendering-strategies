@@ -1,6 +1,6 @@
 # Rendering Strategies
 
-[We have seen](./motivation) that Single Page Applications built with modern web frameworks are very popular.
+[We have seen](./motivation) that single page applications built with modern web frameworks are very popular.
 It is also known that these single page applications have potential flaws regarding perceived user performance and search engines.
 
 To tackle these flaws it is required to put the rendering strategy which is used in single page applications into perspective.
@@ -9,7 +9,7 @@ To tackle these flaws it is required to put the rendering strategy which is used
 
 In their standard setups, Angular, React and Vue all use a rendering strategy which is described as Client Side Rendering (CSR).
 
-> "Client-side rendering (CSR) means rendering pages directly in the browser using JavaScript. All logic, data fetching, templating and routing are handled on the client rather than the server."<sup>[[1]](#ref-1)</sup>
+> "Client-side rendering (CSR) means rendering pages directly in the browser using JavaScript. All logic, data fetching, templating and routing are handled on the client rather than the server." <sup>[[1]](#ref-1)</sup>
 
 This means that the initial HTML document provided by the server does not contain any content.
 
@@ -33,7 +33,7 @@ Examples for this technique:
 
 The complete opposite of CSR lies in Server Side Rendering (SSR).
   
-> "Server rendering generates the full HTML for a page on the server in response to navigation. This avoids additional round-trips for data fetching and templating on the client, since it’s handled before the browser gets a response."<sup>[[1]](#ref-1)</sup>
+> "Server rendering generates the full HTML for a page on the server in response to navigation. This avoids additional round-trips for data fetching and templating on the client, since it’s handled before the browser gets a response." <sup>[[1]](#ref-1)</sup>
 
 In this case, the initial HTML document contains the actual content of the page.
 
@@ -62,13 +62,13 @@ To achieve that, we need to to render the initially requested page on the server
 If we would just do that and let our single page application clean the DOM Element where it uses as a rendering target, we would end up with a temporarily blank screen.
 To avoid that, a technique called *hydration* or *re-hydration* has emerged.
 
-> "Rehydration: “booting up” JavaScript views on the client such that they reuse the server-rendered HTML’s DOM tree and data."<sup>[[1]](#ref-1)</sup> 
+> "Rehydration: “booting up” JavaScript views on the client such that they reuse the server-rendered HTML’s DOM tree and data." <sup>[[1]](#ref-1)</sup> 
  
 Just like the CSR approach, this solution provides a good user experience in terms of not needing any full page reloads, once the application is fully loaded.
 
 <p class="image">
 <img src="./timeline-ssr-hydration.png"/>
-Typical timeline for the rendering process for SSR with ry-hydration<sup><a href="#ref-2">[2]</a></sup>
+Typical timeline for the rendering process for SSR with re-hydration<sup><a href="#ref-2">[2]</a></sup>
 </p>
 
 It is slower regarding TTFB because the server needs to do more than just deliver static files and the payload of the initial request is bigger.
@@ -89,7 +89,7 @@ Examples for this technique:
 <a name="ref-1">[1]</a> [Miller, Jason and Osmani, Addy on developers.gooole.com. 2019. Rendering on the Web, visited March 30th 2020](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)  
 <a name="ref-2">[2]</a> These diagrams were created based on the insights gained in the [measurements results](./results) of the [case study](./case-study) and inspired by [[1]](#ref-1) and the [performance tab](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance) in Chrome developer tools.  
 <a name="ref-3">[3]</a> [madewithangular.com. Angular. visited March 30th 2020](https://www.madewithangular.com/categories/angular/)  
-<a name="ref-4">[4]</a> [wordpress.org. WordPress Website Showcase- visited April 11th 2020](https://wordpress.org/showcase/)  
-<a name="ref-5">[5]</a> [Osmani, Addy on addyosmani.com. 2019. The Cost Of Client-side Rehydration. visited March 30th 2020](https://addyosmani.com/blog/rehydration/)
+<a name="ref-4">[4]</a> [wordpress.org. WordPress Website Showcase. visited April 11th 2020](https://wordpress.org/showcase/)  
+<a name="ref-5">[5]</a> [Osmani, Addy on addyosmani.com. 2019. The Cost Of Client-side Rehydration. visited March 30th 2020](https://addyosmani.com/blog/rehydration/)  
 <a name="ref-6">[6]</a> [nextjs.org. Showcase. visited March 30th 2020](https://nextjs.org/showcase)  
 <a name="ref-7">[7]</a> [stackshare.io. Airbnb. visited March 30th 2020](https://stackshare.io/airbnb/airbnb)  

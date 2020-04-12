@@ -2,7 +2,7 @@
 
 ## Standard CSR Setup
 
-Just like Angular and React, Vue.js offers its own command line interface "for quickly scaffolding ambitious Single Page Applications"<sup>[[2]](#ref-2)</sup>.
+Just like Angular and React, Vue.js offers its own command line interface "for quickly scaffolding ambitious Single Page Applications" <sup>[[2]](#ref-2)</sup>.
 To get started, we create a new Vue application:
 
 ```shell
@@ -63,10 +63,10 @@ We also have to make a few adjustments to the build process which was set up for
 * The creation of our vue app was formerly handled in our `main.js` entrypoint file for client side rendering.
 Now that we need two entrypoints, the creation of the app is wrapped in a function and moved to a `app.js` file.
 We then add `entry-client.js` and `entry-server.js` which uses this function and adds the steps required for the respective platform: `app.$mount()` for browser rendering and a utility function which handles initializing the router with the correct URL and can be used in `createBundleRenderer`.
-The latter is a feature of vue-server-renderer which adds support for productivity enhancements like source maps and hot-reload<sup>[[4]](#ref-4)</sup>.
+The latter is a feature of `vue-server-renderer` which adds support for productivity enhancements like source maps and hot-reload<sup>[[4]](#ref-4)</sup>.
 * A `vue.config.js` file was added. This is a configuration file which will be loaded by the CLI and is used to override parts of the default configuration.
 We add a minimal client configuration and a configuration for server side rendering so we can build either version using an environment variable.
-* The server script imports the built bundles and uses bundleRenderer to render the relevant page and pass the client bundle.
+* The server script imports the built bundles and uses `bundleRenderer` to render the relevant page and provide the client bundle.
 
 In our initial implementation, the data for our components (e.g. the current blog post in the `Post` component) were loaded in the `mounted` vue lifecycle method.
 This method is not called when our app is rendered on the server.<sup>[[5]](#ref-5)</sup>

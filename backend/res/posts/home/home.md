@@ -6,7 +6,7 @@ The site is structured as a blog which consists of a number of posts regarding r
 
 The objectives of this blog are as follows:
 * Provide an overview of the existing rendering strategies
-* Find out what it takes to add Server Side Rendering to Web Applications which were built in a modern JavaScript frontend framework
+* Find out what it takes to add server side rendering to web applications which were built as single page applications in a modern JavaScript frontend framework
 * Compare the performance of different rendering strategies in different frameworks
 
 The blog posts are listed on the left (or can be displayed by tapping / clicking the burger icon if you are on a small screen).

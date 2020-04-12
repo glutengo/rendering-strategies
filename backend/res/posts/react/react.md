@@ -24,11 +24,11 @@ The source code for this status of development can be assessed [here](https://gi
 ### Adding SSR Features
 
 The React API offers functionality to render a React App on a Node.js server. This is part of the standard [react-dom NPM package](https://www.npmjs.com/package/react-dom).
-The must straightforward function is `ReactDOMServer.renderToString()` which renders the React app to a string which can be rehydrated once loaded in the browser using `ReactDOM.hydrate()`.<sup>[[1]](#ref-1)</sup>
+The most straightforward method is `ReactDOMServer.renderToString()` which renders the React app to a string which can be re-hydrated once loaded in the browser using `ReactDOM.hydrate()`.<sup>[[1]](#ref-1)</sup>
 
 There is no simple tool which allows us to just add server side rendering to an existing React app created with CRA. 
-Instead we need to manually set up a Node.js server which uses the method mentioned above. 
-[This post](https://medium.com/bucharestjs/upgrading-a-create-react-app-project-to-a-ssr-code-splitting-setup-9da57df2040a) gives a good overview of the required steps.
+Instead we need to manually set up a Node.js server which makes use of  the method mentioned above. 
+[This post on medium](https://medium.com/bucharestjs/upgrading-a-create-react-app-project-to-a-ssr-code-splitting-setup-9da57df2040a) gives a good overview of the required steps.
 To summarize, we need to:
 * Install [express](https://expressjs.com/)
 * Set up a server script which is able to route the HTTP request to our renderer (see below) and serve static files
@@ -39,7 +39,7 @@ To summarize, we need to:
 If we follow these instructions, we can get to a version of our app which is running on the server. 
 
 On the way, some obstacles were observed:
-* The bootstrap file was out of date and had to be updated to use newer versions of @babel/register and its presets.
+* The bootstrap file was out of date and had to be updated to use newer versions of `@babel/register` and its presets.
 * Reacts `BrowserRouter` can not be run on the server. 
 We need to use `StaticRouter` on the server instead and pass the location from the request, as suggested in the [docs](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/server-rendering.md).
 * The client app needs to be built before starting the server and the server app has to be restarted on any change manually. 
@@ -60,7 +60,7 @@ The function which set this preselection used the location property of the brows
 To bypass this problem, a util function was written which returns an object containing the required properties when run on the server by reading these from the express request object instead.
 (Note: this was simplified later on. In the current version, the platform is hardcoded (react) and the rendering technique (csr/ssr) is set as an environment variable during the build process)
 
-After these issues were resolved, server-side rendering was achieved and the initial HTML payload was content-ful:
+After these issues were resolved, server side rendering was achieved and the initial HTML payload was content-ful:
 
 <p class="image">
 <img src="./react-ssr-no-js.png"/>
@@ -134,18 +134,18 @@ This is the reason for starting with create-react-app. If server side rendering 
       
 ## Alternative: Next.js
 
-As suggested in the react docs, an alternative to enhancing a react app created with CRA lies in the next.js Framework.
+As suggested in the react docs, an alternative to enhancing a react app created with CRA exists in the Next.js Framework.
 
-We start by creating a new Next application:
+We start by creating a new Next.js application:
 
 ```shell script
 npm init next-app
 ``` 
 
-In contrast to the React application created above, next.js applications are structured a bit differently regarding routing.
+In contrast to the React application created above, Next.js applications are structured a bit differently regarding routing.
 In a CRA app we typically have one root component where we include static elements (in our case: the header and the menu containing the post list) and a placeholder for the actual page content which is filled by the router.
-In a next.js app, each page has an own file, so there is no root component. 
-To still be able to have static elements which appear on each of these pages and not repeat too much code, the [next.js guide](https://nextjs.org/learn/basics/using-shared-components) suggests setting them up as shared components and putting them into a higher order `Layout` component.
+In a Next.js app, each page has an own file, so there is no root component. 
+To still be able to have static elements which appear on each of these pages and not repeat too much code, the [Next.js guide](https://nextjs.org/learn/basics/using-shared-components) suggests setting them up as shared components and putting them into a higher order `Layout` component.
 This Layout component is then included in each page whilst the actual page content is put inside this component. 
 
 ```js
@@ -185,8 +185,8 @@ This pattern also gives us the ability set the meta tags for sharing in a very d
 As we are still using the react library, our components look almost the same as in our react app created with CRA.
 The main difference is that instead of using the `useEffect()` hook, we add a static method called `getInitialProps()` to fetch the required data.
 If a component has this static method and the component is used as a page, it is called by the next framework when it is mounted into the application.
-The method is called on the server if the concerned page is the initially requested page and it is called on the client if the page is displayed after performing a navigation in the browser.
-Given this knowledge, it is important to not use browser-only features here. Therefore, we use `isomorphic-fetch` for getting any data from the backend.<sup>[[4]](#ref-4)</sup>
+The method is called on the server if the concerned page is the initially requested page and it is called on the client if the page is displayed after performing a navigation in the browser.<sup>[[4]](#ref-4)</sup>
+Given this knowledge, it is important to not use browser-only features here. Therefore, we use `isomorphic-fetch` for getting any data from the backend.
 
 Thanks to `getInitialProps`, we have complete server side rendering out of the box and there are no duplicated requests for the initial page.
 To keep the code clear, we would however not want our page component to be responsible for getting the data for each child component used in the page.
@@ -232,7 +232,7 @@ The source code of this version of the application is available [here](https://g
 
 As mentioned earlier, we don't have duplicated requests for the initial page load. 
 However if we navigate to another blog post, not only the content of the post is fetched but also the required data for the header and the menu.
-This is the case because of the next.js architecture which give [pages](https://nextjs.org/docs/basic-features/pages) a central meaning.
+This is the case because of the next.js architecture which gives [pages](https://nextjs.org/docs/basic-features/pages) a central meaning.
 The `Header` and `PostList` component are not reused when the route is changed. 
 Instead, they are re-created and as we are on the client, their `getInitialProps` functions are called on every page load.
 Their content does not change, so we could easily cache this data.
@@ -276,10 +276,20 @@ The changes required to add the http cache are summarized in [this commit](https
 Next App visited with JavaScript disabled 
 </p>
 
+### Observations
+
+* Applications built with Next.js are rendered on the server and on the client by design.
+* The `<head>` can be managed by following the Next.js guide and using a higher-order `Layout` component which wraps the content of each route.
+* There are no duplicated requests on the initial payload. 
+There is potential for unneeded requests when navigating through the application. 
+This can be bypassed by manual implementation of a cache.   
+
 <hr/>
 
 <a name="ref-1">[1]</a> [reactjs.org. ReactDOMServer, visited February 22nd 2020](https://reactjs.org/docs/react-dom-server.html)  
 <a name="ref-2">[2]</a> [Vaughn, Brian on twitter.com, visited February 23rd 2020](https://twitter.com/brian_d_vaughn/status/1055590462122156033?lang=en)  
 <a name="ref-3">[3]</a> [reactjs.org. Create a New React App: Recommended Toolchains, visited February 24th 2020](https://reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)      
 <a name="ref-4">[4]</a> [nextjs.org. getInitialProps, visited February 24th 2020](https://nextjs.org/docs/api-reference/data-fetching/getInitialProps)  
-<a name="ref-5">[5]</a> This can be validated for instance by adding a simple `console.log` statement in the `componentDidMount` lifecycle function of a component and then rendering it on the server.  
+<a name="ref-5">[5]</a> This can be validated for instance by adding a simple `console.log` statement in the `componentDidMount` lifecycle function of a component and then rendering it on the server.
+
+
