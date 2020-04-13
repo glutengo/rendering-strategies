@@ -1,32 +1,32 @@
 ## Throttling: none
-| Implementation | TTFB | FCP   | FMP   | TTI   | MP FID | CIR | ISP |
-| -------------- | ---- | ----- | ----- | ----- | ------ | --- | --- |
-| Angular CSR    | 21ms | 597ms | 797ms | 782ms | 145ms  |     |     |
-| Angular SSR    | 45ms | 777ms | 777ms | 777ms | 16ms   |     |     |
-| React CSR      | 18ms | 457ms | 675ms | 658ms | 144ms  |     |     |
-| React SSR      | 38ms | 632ms | 632ms | 632ms | 16ms   |     |     |
-| Next           | 39ms | 594ms | 594ms | 594ms | 16ms   |     |     |
-| Vue CSR        | 20ms | 505ms | 689ms | 665ms | 143ms  |     |     |
-| Vue SSR        | 40ms | 693ms | 693ms | 693ms | 16ms   |     |     |
+| Implementation | TTFB | FCP    | FMP    | TTI    | MP FID | CIR | ISP |
+| -------------- | ---- | ------ | ------ | ------ | ------ | --- | --- |
+| Angular CSR    | 18ms | 624ms  | 1092ms | 1073ms | 401ms  |     |     |
+| Angular SSR    | 52ms | 1041ms | 1041ms | 1041ms | 16ms   |     |     |
+| React CSR      | 18ms | 453ms  | 940ms  | 912ms  | 405ms  |     |     |
+| React SSR      | 42ms | 869ms  | 869ms  | 869ms  | 16ms   |     |     |
+| Next           | 52ms | 870ms  | 870ms  | 870ms  | 16ms   |     |     |
+| Vue CSR        | 17ms | 622ms  | 1068ms | 1045ms | 407ms  |     |     |
+| Vue SSR        | 40ms | 997ms  | 997ms  | 997ms  | 16ms   |     |     |
 
 ## Throttling: fast3G
 | Implementation | TTFB  | FCP    | FMP    | TTI    | MP FID | CIR | ISP |
 | -------------- | ----- | ------ | ------ | ------ | ------ | --- | --- |
-| Angular CSR    | 131ms | 867ms  | 1081ms | 1065ms | 148ms  |     |     |
-| Angular SSR    | 131ms | 1025ms | 1025ms | 1025ms | 16ms   |     |     |
-| React CSR      | 132ms | 809ms  | 1159ms | 1146ms | 138ms  |     |     |
-| React SSR      | 129ms | 938ms  | 938ms  | 938ms  | 16ms   |     |     |
-| Next           | 130ms | 835ms  | 835ms  | 835ms  | 16ms   |     |     |
-| Vue CSR        | 129ms | 836ms  | 1035ms | 1026ms | 139ms  |     |     |
-| Vue SSR        | 129ms | 864ms  | 864ms  | 1028ms | 165ms  |     |     |
+| Angular CSR    | 128ms | 928ms  | 1408ms | 1375ms | 399ms  |     |     |
+| Angular SSR    | 128ms | 1293ms | 1293ms | 1293ms | 16ms   |     |     |
+| React CSR      | 129ms | 829ms  | 1441ms | 1410ms | 357ms  |     |     |
+| React SSR      | 129ms | 1190ms | 1190ms | 1190ms | 16ms   |     |     |
+| Next           | 131ms | 1103ms | 1103ms | 1103ms | 16ms   |     |     |
+| Vue CSR        | 133ms | 978ms  | 1430ms | 1413ms | 351ms  |     |     |
+| Vue SSR        | 131ms | 1135ms | 1135ms | 1736ms | 252ms  |     |     |
 
 ## Throttling: slow3G
 | Implementation | TTFB  | FCP    | FMP    | TTI    | MP FID | CIR | ISP |
 | -------------- | ----- | ------ | ------ | ------ | ------ | --- | --- |
-| Angular CSR    | 389ms | 2066ms | 2700ms | 2684ms | 136ms  |     |     |
-| Angular SSR    | 393ms | 1728ms | 1728ms | 2032ms | 193ms  |     |     |
-| React CSR      | 394ms | 1835ms | 2550ms | 2537ms | 138ms  |     |     |
-| React SSR      | 394ms | 1803ms | 1803ms | 1900ms | 99ms   |     |     |
-| Next           | 392ms | 1875ms | 1875ms | 2002ms | 123ms  |     |     |
-| Vue CSR        | 400ms | 1829ms | 2384ms | 2378ms | 132ms  |     |     |
-| Vue SSR        | 390ms | 1836ms | 1836ms | 2871ms | 155ms  |     |     |
+| Angular CSR    | 393ms | 2121ms | 2973ms | 2944ms | 357ms  |     |     |
+| Angular SSR    | 386ms | 2081ms | 2081ms | 2309ms | 197ms  |     |     |
+| React CSR      | 394ms | 1916ms | 2831ms | 2815ms | 355ms  |     |     |
+| React SSR      | 385ms | 2049ms | 2049ms | 2130ms | 87ms   |     |     |
+| Next           | 391ms | 2147ms | 2147ms | 2269ms | 126ms  |     |     |
+| Vue CSR        | 385ms | 2630ms | 3420ms | 3387ms | 357ms  |     |     |
+| Vue SSR        | 386ms | 2124ms | 2124ms | 7191ms | 224ms  |     |     |

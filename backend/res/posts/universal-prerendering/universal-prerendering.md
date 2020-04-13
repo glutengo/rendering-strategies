@@ -8,7 +8,7 @@ Static Rendering (also Pre-Rendering) describes an approach where the page is vi
 The Browser renders the application and the resulting HTML DOM tree is stored as a static file.
 
 This task can be performed manually. If we have our single page application which is rendered in the browser, we can wait for the application to finish loading.
-We can then access the DOM tree via the developer tools of our browser, copy the current contents and save them in a HTML file.
+We can then access the DOM tree via the developer tools of our browser, copy the current content and save them in a HTML file.
 
 This means a lot of manual work, especially if our application consists of many different pages.
 Instead of manually creating these files, this can also be achieved by running a script which automates this process.

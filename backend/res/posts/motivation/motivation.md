@@ -3,7 +3,7 @@
 ## Web Frameworks
 
 Job descriptions for frontend web developer jobs barely hold great surprises these days and this has been the case for the last few years. 
-They very often match in their requirements regarding their applicants' skills in frameworks or pupular libraries for building web applications.
+They very often match in the requirements regarding their applicants' skills in frameworks or pupular libraries for building web applications.
 When searching for the term *frontend developer* on job platforms [linkedin.com](https://linkedin.com) and [monster.com](https://monster.com), six out of the ten first listings contained references to [Angular](https://angular.io/), [React](https://reactjs.org/) or both.<sup>[[1](#ref-1)]</sup><sup>[[2](#ref-2)]</sup>
 
 Angular and React are both developed by companies which are considered to be leaders in the digital sector. 
@@ -17,9 +17,9 @@ In contrast to React and Facebook, Vue.js was started as a private project by a 
 
 ## Single Page Applications
 
-While all of the introduced frameworks offer support for a number of different use cases, the default setup seems to be tailored for building so-called *Single Page Applications*. 
-The React docs list [create-react-app](https://github.com/facebook/create-react-app), a tool for building single-page-applications with react as the first of four recommended toolchains.<sup>[[8]](#ref-8)</sup> 
-The Vue installation Guide introduces its CLI as a tool for "quickly scaffolding ambitious Single Page Applications" <sup>[[9]](#ref-9)</sup> and Angular docs state that "Angular is an app-design framework and development platform for creating efficient and sophisticated single-page apps" <sup>[[10]](#ref-10)</sup>.
+While all of the introduced frameworks offer support for a number of different use cases, the default setup seems to be tailored for building so-called *single page applications*. 
+The React docs list [create-react-app](https://github.com/facebook/create-react-app), a tool for building single page applications with react, as the first of four recommended toolchains.<sup>[[8]](#ref-8)</sup> 
+The Vue.js installation guide introduces its CLI as a tool for "quickly scaffolding ambitious Single Page Applications" <sup>[[9]](#ref-9)</sup> and Angular docs state that "Angular is an app-design framework and development platform for creating efficient and sophisticated single-page apps" <sup>[[10]](#ref-10)</sup>.
 
 > "A *single page application* is exactily what its name implies: a JavaScript-driven web application that requires only a single page load" <sup>[[11]](#ref-11)</sup>
 
@@ -39,7 +39,7 @@ This is considered a big advantage as it results in a smooth, app-like user expe
 Single Page Application example: <a href="https://angular.io/">Angular Website</a>
 </p>
 
-The Angular Website is an example of a such Single Page Application. 
+The Angular Website is an example of a such single page application. 
 Whilst we are navigating through the application, we are never presented a blank screen, even if the network connection is bad.
 
 ### Downsides
@@ -69,11 +69,11 @@ When the server answers each initial request with the same static HTML file, the
 There are a number of predefined Meta Tags (e.g. `og:title` and `og:image`) which need to be set for a good sharing performance.<sup>[[14]](#ref-14)</sup> If these are only defined once, the sharing preview for each sub page (e.g. `/home` and `/about`) will always look the same. 
 This leaves the developer with only two options: he could either use very general values which are feasible for all pages or he could use specific values for the page he judges the most important. Both options are not really satisfactory.
 
-At last, Single Page Applications have drawbacks regarding performance.
+At last, single page applications have drawbacks regarding performance.
 Although their initial page load may be quick (we will have a look at some more specific [metrics](./metrics) later), the time it takes for the real content to show can be longer because of a higher amount of HTTP roundtrips, especially on mobile devices, where the network conditions may be bad.<sup>[[15]](#ref-15)</sup>   
 
-Given these disadvantages, we want to have a look at how Single Page Applications are actually rendered.
-We will compare the used technique to other alternatives and explore potentials to overcome the usual downsides of Single Page Applications.
+Given these disadvantages, we want to have a look at how single page applications are actually rendered.
+We will compare the used technique to other alternatives and explore potentials to overcome the usual downsides of single page applications.
 
 <hr/>   
 

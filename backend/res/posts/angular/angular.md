@@ -143,7 +143,7 @@ A very similar approach can be followed for setting the document title (see [Ang
 
 When we observe the network tab of our SSR application in the browser we will see that some data is needlessly fetched in the browser although it is already available and visible.
 The content of the current post is an excellent example for this. As we have seen earlier, the full content of the post is available in the HTML file provided by the server because the Angular application was executed on the server and this was the result of server side rendering.
-Our application is then executed in the browser again and our `PostComponent` again fetches the post contents from the backend. 
+Our application is then executed in the browser again and our `PostComponent` again fetches the post content from the backend. 
 This is no new data in fact the user is already able to see it. 
 It is desirable to avoid these duplicated requests.
 

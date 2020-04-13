@@ -13,10 +13,10 @@ Also the server needs to be capable of performing the rendering or an external s
 Either way, this is likely to produce higher costs than just serving static files.
 Therefore, it is worth questioning which pages to render on the server.
 
-Web crawlers (e.g. those of search engines or social networks) cannot (or at lease should not be able to) access user specific or other access-controlled contents.
+Web crawlers (e.g. those of search engines or social networks) cannot (or at lease should not be able to) access user specific or other access-controlled content.
 If the primary aim is to improve the search engine performance of the application, it is sufficient to only render those sub pages on the server which are available to the public.<sup>[[1]](#ref-1)</sup>
 We could also go as far as using [dynamic rendering](https://developers.google.com/search/docs/guides/dynamic-rendering). 
-In this case requests by visitors using web browsers are answered with the CSR variant while bots are served a server side rendered static HTML document.<sup>[2](#ref-2)</sup>
+In this case requests by visitors using web browsers are answered with the CSR variant while bots are served a server side rendered static HTML document.<sup>[[2](#ref-2)]</sup>
 This can be considered as an option for improving search engine performance while avoiding the risk of changing the user experience.   
 
 If improving perceived user performance is the main objective, this distinction should not be made and server side rendering (given that it is used at all) should be added for all sub pages instead.
@@ -60,7 +60,7 @@ This approach of rendering is also often referred to as *pre-rendering* and can 
 
 In theory, this task can even be performed manually. 
 If we have an existing single page application which is rendered in the browser, we can wait for the application to finish loading.
-We can then access the DOM tree via the developer tools of the browser, copy the current contents and save them in a HTML file.
+We can then access the DOM tree via the developer tools of the browser, copy the current content and save it in a HTML file.
 
 This means a lot of manual work, especially if the application consists of many different pages.
 Instead of manually creating these files, this can also be achieved by running a script which automates this process.

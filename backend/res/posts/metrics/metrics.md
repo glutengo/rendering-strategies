@@ -1,7 +1,7 @@
 # Metrics
 
 One aim of this blog is to compare the performance of different rendering approaches for web applications built with modern JavaScript frameworks.
-To be able to do this, it is required to find out which metrics could be suitable to measure the performance.
+To be able to do this, it is required to find out which metrics are suitable to measure the performance.
 
 ### User centric performance metrics
 
@@ -24,7 +24,7 @@ To summarize, this metric tells us how long it takes for the user to be shown an
 In contrast to the the FCP, this metric is not satisfied by just *any* content.
 Instead it waits for the largest element in the viewport to become visible. 
 The element matching this criteria may change during the render process as more and more elements become visible.
-Therefore, the LCP changes during the render process whenever the largest visible element changes.
+Therefore, the LCP changes whenever the largest visible element changes.
 The last value emitted by the browser is deemed to be the metrics (final) value.<sup>[[3](#ref-3)]</sup>
 
 The LCP is a relatively new metric and was introduced to replace the formerly popular First *Meaningful* Paint (FMP).
@@ -35,7 +35,7 @@ This version has not been released yet<sup>[[5](#ref-5)]</sup> and version 5.6 s
 
 > "FMP measures when the primary content of a page is visible to the user. The raw score for FMP is the time in seconds between the user initiating the page load and the page rendering the primary above-the-fold content." <sup>[[4](#ref-4)]</sup>
 
-The First Meaningful Paint was introduced to identify the time when the main contents of the page become visible. 
+The First Meaningful Paint metric was introduced to identify the time when the main content of the page become visible. 
 "Paints with only the page header, navigation bar, or loading indicator such as spinner icon don't qualify" <sup>[[6](#ref-6)]</sup>, which represents a clear difference to FCP. 
 
 ### First Input Delay (FID)
@@ -74,12 +74,12 @@ We care about two types of bots when measuring our performance.
 
 > "This metric captures how long it takes your browser to receive the first byte of a response from a web server when you request a particular URL. In other words, this metric encompasses the network latency of sending your request to the web server, the amount of time the web server spent processing and generating a response, and amount of time it took to send the first byte of that response back from the server to your browser" <sup>[[10](#ref-10)]</sup>
 
-The Time to First Byte (TTFB) has been found correlated to the google search rank and is therefore an important metric to measure the performance of our blog implementations.<sup>[[10](#ref-10)]</sup>
+The Time to First Byte (TTFB) has been found correlated to the Google search rank and is therefore an important metric to measure the performance of our blog implementations.<sup>[[10](#ref-10)]</sup>
 It is also worth mentioning that a high TTFB also increases the value of FCP, LCP, FMP and TTI, because they all start their timer when the page starts loading. 
 This includes the time it takes the server to process the request.
 
 #### Contentful Initial Response (CIR)
-Most Search Engines require the real content of the page to be present in the initial HTML document provided by the web server and do only process JavaScript in a deferred way or not at all.<sup>[11](#ref-11)]</sup>
+Most search engines require the real content of the page to be present in the initial HTML document provided by the web server and do only process JavaScript in a deferred way or not at all.<sup>[[11](#ref-11)]</sup>
 To determine whether the website is performing well regarding search engines, we will therefore check if the initial HTML document contains real data or not.
 
 ### Sharing previews

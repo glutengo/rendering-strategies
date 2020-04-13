@@ -7,20 +7,20 @@ To tackle these flaws it is required to put the rendering strategy which is used
 
 ## Client Side Rendering (CSR)
 
-In their standard setups, Angular, React and Vue all use a rendering strategy which is described as Client Side Rendering (CSR).
+In their standard setups, Angular, React and Vue all use a rendering strategy which is described as client side rendering (CSR).
 
 > "Client-side rendering (CSR) means rendering pages directly in the browser using JavaScript. All logic, data fetching, templating and routing are handled on the client rather than the server." <sup>[[1]](#ref-1)</sup>
 
-This means that the initial HTML document provided by the server does not contain any content.
+This means that the initial HTML document provided by the server does not contain any real content.
 
 <p class="image">
 <img src="./timeline-csr.png"/>
 Typical timeline for the rendering process for CSR<sup><a href="#ref-2">[2]</a></sup>  
 </p>
 
-Our application needs to load and process further resources (primarily JavaScript) to be able to display the content and allow any interaction.
+The application needs to load and process further resources (primarily JavaScript) to be able to display the content and allow any interaction.
 For client side rendered applications, the TTFB is usually very low because the server only needs to deliver static resources.
-Once the main JavaScript bundle is loaded, the application can produce its FCP which will usually only contain some static site elements and not the actual content.
+Once the main JavaScript bundle is loaded, the application can produce its FCP which will usually only contain some static site elements (e.g. the page header) and not the actual content.
 The application may then download the content from an API and render the content so it gets visible to the user (FMP).
 As a result, the FMP and the TTI can be quite high which can lead to a bad perceived performance regarding page load.<sup>[[1]](#ref-1)</sup>
 Once the application is fully loaded, it feels very quick and does not need full repaints when navigating to other areas of the application because the logic to render the UI has already been downloaded and the newly needed data can be fetched asynchronously.
@@ -31,7 +31,7 @@ Examples for this technique:
 
 ## Server Side Rendering (SSR)
 
-The complete opposite of CSR lies in Server Side Rendering (SSR).
+The complete opposite of CSR lies in server side rendering (SSR).
   
 > "Server rendering generates the full HTML for a page on the server in response to navigation. This avoids additional round-trips for data fetching and templating on the client, since it’s handled before the browser gets a response." <sup>[[1]](#ref-1)</sup>
 
@@ -75,7 +75,7 @@ It is slower regarding TTFB because the server needs to do more than just delive
 This can be improved by adding a [cache](./considerations#caching).
 The FMP should be comparably low or at least the difference between FMP and TTFB should be small because our single page application does not need to do any rendering or fetch data before the user is presented with the content.
 Probably the biggest downside of this approach is an increased gap between FMP and TTI. 
-The user may be presented the contents very quickly but he still needs to wait until the JavaScript is processed until the application becomes fully reactive.<sup>[[5]](#ref-5)</sup>
+The user may be presented the content very quickly but he still needs to wait until the JavaScript is processed until the application becomes fully reactive.<sup>[[5]](#ref-5)</sup>
 There are some experimental strategies for overcoming this problem or reducing this effects. 
 These are listed in the [considerations](./considerations#(re-)hydration).
 
@@ -87,7 +87,8 @@ Examples for this technique:
 <hr/> 
   
 <a name="ref-1">[1]</a> [Miller, Jason and Osmani, Addy on developers.gooole.com. 2019. Rendering on the Web, visited March 30th 2020](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)  
-<a name="ref-2">[2]</a> These diagrams were created based on the insights gained in the [measurements results](./results) of the [case study](./case-study) and inspired by [[1]](#ref-1) and the [performance tab](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance) in Chrome developer tools.  
+<a name="ref-2">[2]</a> These diagrams were created based on the insights gained in the [measurements results](./results) of the [case study](./case-study) and inspired by [[1]](#ref-1) and the [performance tab](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance) in Chrome developer tools. 
+They do not represent real measurement values.   
 <a name="ref-3">[3]</a> [madewithangular.com. Angular. visited March 30th 2020](https://www.madewithangular.com/categories/angular/)  
 <a name="ref-4">[4]</a> [wordpress.org. WordPress Website Showcase. visited April 11th 2020](https://wordpress.org/showcase/)  
 <a name="ref-5">[5]</a> [Osmani, Addy on addyosmani.com. 2019. The Cost Of Client-side Rehydration. visited March 30th 2020](https://addyosmani.com/blog/rehydration/)  

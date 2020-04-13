@@ -12,7 +12,9 @@ Each test was run 11 times and the median value (based on sorting by FMP) was se
 The [metrics](./metrics) post was opened on each test. 
 This post contains a medium amount of text but now other resources like images. 
 
-The test setups include three types of throttling presets.
+Lighthouse allows [throttling](https://github.com/GoogleChrome/lighthouse/blob/master/docs/throttling.md) the network connection when running the audits. 
+For these tests, the *request-level throttling* method was used.
+The test setups include three throttling presets. 
 
 * none: No request latency, no limit for download and upload throughput
 * Fast 3G: 128ms request latency, 4096kbps download throughput, 1024kbps upload throughput<sup>[[2]](#ref-2)</sup>
@@ -30,25 +32,25 @@ Therefore, only the results for the non-cached setup with no network throttling 
 
 The tests regarding Contentful Initial Request (CIR) and Individual Sharing Preview (ISP) were only run once and copied over because their results are independent from the chosen test setup.
 
-All audit results were collected in the code repository of the case study. 
-Follow this [link](https://github.com/glutengo/rendering-strategies/audits) to view them.
+The full audit results were collected in the code repository of the case study. 
+Follow this [link](https://github.com/glutengo/rendering-strategies/tree/master/audits) to view them.
 
 ### Setup #1: No Cache, No Network Throttling
      
-| Implementation | TTFB | FCP   | FMP   | TTI   | MP FID | CIR | ISP |
-| -------------- | ---- | ----- | ----- | ----- | ------ | --- | --- |
-| Angular CSR    | 21ms | 597ms | 797ms | 782ms | 145ms  | no  | no  |
-| Angular SSR    | 45ms | 777ms | 777ms | 777ms | 16ms   | yes | yes |
-| React CSR      | 18ms | 457ms | 675ms | 658ms | 144ms  | no  | no  |
-| React SSR      | 38ms | 632ms | 632ms | 632ms | 16ms   | yes | yes |
-| Next           | 39ms | 594ms | 594ms | 594ms | 16ms   | yes | yes |
-| Vue CSR        | 20ms | 505ms | 689ms | 665ms | 143ms  | no  | no  |
-| Vue SSR        | 40ms | 693ms | 693ms | 693ms | 16ms   | yes | yes |
+| Implementation | TTFB | FCP    | FMP    | TTI    | MP FID | CIR | ISP |
+| -------------- | ---- | ------ | ------ | ------ | ------ | --- | --- |
+| Angular CSR    | 18ms | 624ms  | 1092ms | 1073ms | 401ms  | no  | no  |
+| Angular SSR    | 52ms | 1041ms | 1041ms | 1041ms | 16ms   | yes | yes |
+| React CSR      | 18ms | 453ms  | 940ms  | 912ms  | 405ms  | no  | no  |
+| React SSR      | 42ms | 869ms  | 869ms  | 869ms  | 16ms   | yes | yes |
+| Next           | 52ms | 870ms  | 870ms  | 870ms  | 16ms   | yes | yes |
+| Vue CSR        | 17ms | 622ms  | 1068ms | 1045ms | 407ms  | no  | no  |
+| Vue SSR        | 40ms | 997ms  | 997ms  | 997ms  | 16ms   | yes | yes |
 
 The first tests were run against the loadbalancer with no network throttling.
 
 #### Observations:
-* CSR and SSR for each setup have a difference of ~20ms regarding TTFB. This is the time it takes the server to render the HTML on demand.
+* CSR and SSR for each setup have a difference of ~20-30ms regarding TTFB. This is the time it takes the server to render the HTML on demand.
 * FCP for any CSR setup is lower than all SSR setups. This is caused by the smaller payload of the initial response. The browser also needs to render less content.
 * CSR setups show a gap between FMP and FCP. This is down to the fact that the CSR setups need to fetch the actual data and render again.
 * CSR setups have a high Max Potential FID and a gap between TTI and FCP
@@ -56,40 +58,36 @@ The first tests were run against the loadbalancer with no network throttling.
 
 ### Setup #2: Cloudfront Cache, No Network Throttling
 
-| Implementation | TTFB | FCP   | FMP   | TTI   | MP FID | CIR | ISP |
-| -------------- | ---- | ----- | ----- | ----- | ------ | --- | --- |
-| Angular CSR    | 9ms  | 788ms | 788ms | 788ms | 16ms   | no  | no  |
-| Angular SSR    | 12ms | 719ms | 719ms | 719ms | 16ms   | yes | yes |
-| React CSR      | 10ms | 414ms | 633ms | 607ms | 144ms  | no  | no  |
-| React SSR      | 8ms  | 627ms | 627ms | 627ms | 16ms   | yes | yes |
-| Next           | 10ms | 568ms | 568ms | 568ms | 16ms   | no  | no  |
-| Vue CSR        | 9ms  | 443ms | 644ms | 628ms | 152ms  | no  | no  |
-| Vue SSR        | 9ms  | 617ms | 617ms | 617ms | 16ms   | yes | yes |
+| Implementation | TTFB | FCP    | FMP    | TTI    | MP FID | CIR | ISP |
+| -------------- | ---- | ------ | ------ | ------ | ------ | --- | --- |
+| Angular CSR    | 8ms  | 1025ms | 1025ms | 1025ms | 16ms   | no  | no  |
+| Angular SSR    | 11ms | 997ms  | 997ms  | 997ms  | 16ms   | yes | yes |
+| React CSR      | 14ms | 451ms  | 926ms  | 903ms  | 399ms  | no  | no  |
+| React SSR      | 11ms | 849ms  | 849ms  | 849ms  | 16ms   | yes | yes |
+| Next           | 11ms | 867ms  | 867ms  | 867ms  | 16ms   | yes | yes |
+| Vue CSR        | 11ms | 573ms  | 1022ms | 1000ms | 404ms  | no  | no  |
+| Vue SSR        | 10ms | 968ms  | 968ms  | 968ms  | 16ms   | yes | yes |
 
 In the second setup, the tests were run against Cloudfront with no network throttling.
 
 #### New Observations:
-* (almost) no difference between CSR and SSR for each setup regarding TTFB. This is the case because the server does not need to render the HTML.   
-* Overall TTFB values are lower than in the first setup. This is the case because in addition to caching, Cloudfront offers further optimizations regarding latency and transfer speeds. 
+* (almost) no difference between CSR and SSR for each setup regarding TTFB. This is the case because the server does not need to render the HTML. The requests are fully answered by the cache. 
+* Overall TTFB values are lower than in the first setup. This is the case because in addition to caching, Cloudfront offers further optimizations regarding latency and transfer speeds. <sup>[[3]](#ref-3)</sup>
 * FCP, FMP and TTI are also slightly lower
-* React and Vue CSR Setups have a slightly lower gap between FMP and FCP
-* React and Vue CSR Setups have a slightly lower Max Potential FID and lower gap between TTI and FCP
 * Angular CSR has an increased FCP. Max Potential FIP is low and there is no gap between FMP/TTI and FCP   
-
-This is the case because the server does not perform any computational tasks here. The requests are fully answered by the cache.
-This is caused by the optimizations that cloudfront offers over the loadbalancer.
 
 ### Setup #3: Cloudfront Cache, Fast 3G
 
 | Implementation | TTFB  | FCP    | FMP    | TTI    | MP FID | CIR | ISP |
 | -------------- | ----- | ------ | ------ | ------ | ------ | --- | --- |
-| Angular CSR    | 130ms | 883ms  | 1089ms | 1081ms | 144ms  | no  | no  |
-| Angular SSR    | 132ms | 1034ms | 1034ms | 1034ms | 16ms   | yes | yes |
-| React CSR      | 130ms | 882ms  | 1316ms | 1292ms | 161ms  | no  | no  |
-| React SSR      | 129ms | 971ms  | 971ms  | 971ms  | 16ms   | yes | yes |
-| Next           | 130ms | 833ms  | 833ms  | 833ms  | 16ms   | yes | yes |
-| Vue CSR        | 130ms | 834ms  | 1041ms | 1020ms | 134ms  | no  | no  |
-| Vue SSR        | 132ms | 1018ms | 1018ms | 1018ms | 16ms   | yes | yes |
+| Angular CSR    | 132ms | 912ms  | 1396ms | 1358ms | 400ms  | no  | no  |
+| Angular SSR    | 131ms | 1287ms | 1287ms | 1287ms | 16ms   | yes | yes |
+| React CSR      | 132ms | 823ms  | 1451ms | 1419ms | 358ms  | no  | no  |
+| React SSR      | 130ms | 1181ms | 1181ms | 1181ms | 16ms   | yes | yes |
+| Next           | 132ms | 1101ms | 1101ms | 1101ms | 16ms   | yes | yes |
+| Vue CSR        | 131ms | 957ms  | 1422ms | 1397ms | 403ms  | no  | no  |
+| Vue SSR        | 129ms | 1124ms | 1124ms | 1366ms | 256ms  | yes | yes |
+
 
 In the third setup, the tests were run against Cloudfront with Fast 3G network throttling.
 
@@ -97,19 +95,19 @@ In the third setup, the tests were run against Cloudfront with Fast 3G network t
 * Overall TTFB values have risen and are marginally higher than the configured request latency (128ms)
 * FCP, FMP and TTI have also risen
 * Angular CSR is back in line among the other CSR setups (Increased Max Potential FIP and gap between FMP/TTI and FCP)
-* React CSR has a larger gap between FMP/TTI and FCP (~440ms vs. ~120ms for Angular and ~180ms for Vue)
+* React CSR has a larger gap between FMP/TTI and FCP (~620ms vs. ~470ms for Angular and Vue)
 
 ### Setup #4: Cloudfront Cache, Slow 3G
 
 | Implementation | TTFB  | FCP    | FMP    | TTI    | MP FID | CIR | ISP |
 | -------------- | ----- | ------ | ------ | ------ | ------ | --- | --- |
-| Angular CSR    | 399ms | 2105ms | 2740ms | 2717ms | 146ms  | no  | no  |
-| Angular SSR    | 402ms | 1826ms | 1826ms | 2074ms | 202ms  | yes | yes |
-| React CSR      | 388ms | 1932ms | 2623ms | 2612ms | 138ms  | no  | no  |
-| React SSR      | 393ms | 1784ms | 1784ms | 1873ms | 90ms   | yes | yes | 
-| Next           | 388ms | 1874ms | 1874ms | 2006ms | 129ms  | yes | yes |
-| Vue CSR        | 395ms | 1862ms | 2409ms | 2403ms | 164ms  | no  | no  |
-| Vue SSR        | 388ms | 2098ms | 2098ms | 2303ms | 207ms  | yes | yes |
+| Angular CSR    | 395ms | 2138ms | 2968ms | 2952ms | 357ms  | no  | no  |
+| Angular SSR    | 391ms | 2091ms | 2091ms | 2322ms | 201ms  | yes | yes |
+| React CSR      | 395ms | 1852ms | 2814ms | 2782ms | 358ms  | no  | no  |
+| React SSR      | 395ms | 2124ms | 2124ms | 2207ms | 92ms   | yes | yes |
+| Next           | 398ms | 2155ms | 2155ms | 2277ms | 124ms  | yes | yes |
+| Vue CSR        | 397ms | 2618ms | 3407ms | 3374ms | 361ms  | no  | no  |
+| Vue SSR        | 397ms | 2146ms | 2146ms | 2567ms | 250ms  | yes | yes |
 
 In the third setup, the tests were run against Cloudfront with Slow 3G network throttling.
 
@@ -118,32 +116,32 @@ In the third setup, the tests were run against Cloudfront with Slow 3G network t
 * Overall TTFB values have risen and are marginally higher than the configured request latency (384ms)
 * FCP, FMP and TTI have also risen
 * CSR Setups have a higher gap between FMP and FCP
-* SSR setups have an increased Max Potential FID which in two cases (Angular, Vue) Max Potential FID for SSR exceeds the value for the related CSR value.
+* SSR setups have an increased Max Potential FID
 * SSR setups have a notable gap between TTI and FMP now
 * FMP for Angular and React SSR are lower then the respective FCP of the respective CSR setup
 
 ## Summary
 
-The tests show that introducing Server Side Rendering has a positive effect regarding perceived user performance.
-In all network setups, the first meaningful paint was lower when Server Side Rendering was enabled.
+The tests show that introducing server side rendering has a positive effect regarding perceived user performance.
+In all network setups, the first meaningful paint was lower when server side rendering was enabled.
 The CSR variants show downsides in user experience regarding responsiveness.
 This is revealed by the gap between TTI and FCP and an increased Max Potential First Input Delay. 
 This effect was observed for the SSR variants as well, but only for the Slow 3G setup.
 On fast network connections, CSR setups offer the benefit of a low FCP. 
-This has the effect that the user is shown some elements of the page very quickly although the main contents are not visible yet.
+This has the effect that the user is shown some elements of the page very quickly although the main content is not visible yet.
 The difference between this low FCP for CSR setups and the FCP (= FMP) for the respective SSR setup is just under 200ms for each framework.
 Moving towards slower connections, this effects fades. 
 For the Slow 3G setup, the FMP of the SSR setup for Angular and React is even lower than the FCP for the relevant CSR setup.
 This means the the SSR versions are able to display the full content before the CSR variant shows anything.
 
 Among the different JavaScript frameworks, the differences in performance were not significant.
-It is notable that Angular CSR performed comparably bad in the second setup (Cloudfront, no network throttling) and showed a deviation from the typical rendering flow for CSR apps.
+It is notable that Angular CSR performed comparably bad in the second setup (Cloudfront, no network throttling) and showed a deviation from the typical [rendering flow for CSR apps](./rendering-strategies#client-side-rendering-(csr)).
 Next.js seems to have the best overall performance (best or joint best in FMP, TTI and MP FID in the first three setups) but it was outperformed by React SSR in the Slow 3G setups.
-Vue revealed a significantly low difference between FMP for CSR and SSR in the Slow 3G setup. 
+Vue.js revealed a significantly low difference between FMP for CSR and SSR in the Slow 3G setup. 
     
 For the blog implementation, the impact of the cache seems negligible user performance wise.
 
-The tests also reveal that Server Side Rendering provides improvements regarding bot performance.
+The tests also reveal that server side rendering provides improvements regarding bot performance.
 The fact that the initial response is contentful and the sharing preview is individual for each sub page represent advantages.
 The TTFB has proved to be slightly worse in the SSR setups.
 This can be bypassed by setting up a http cache.
@@ -153,9 +151,12 @@ This can be bypassed by setting up a http cache.
 The case study served as a good first point of touch with the topic of server side rendered web applications.
 There is still great potential to extend the research on the topic.
 
-* For further tests it would be interesting to see how the numbers change when sub pages with different contents (images, videos, iframes) and more interactivity are visited.
+* For further tests it would be interesting to see how the numbers change when sub pages with different content (images, videos, iframes) and more interactivity are visited.
+* The tests were run with request-level throttling. 
+This has some downsides which are described in the [Lighthouse docs](https://github.com/GoogleChrome/lighthouse/blob/master/docs/throttling.md).
+For more accurate tests, packet-level throttling or testing on real mobile devices could lead to more reliable results.  
 * As Next.js performed quite well, extending the case study to include [Nuxt.js](https://nuxtjs.org/) as an alternative setup to Vue.js could provide new insights.
-* In larger applications, state management libraries like redux, ngrx or vuex are used. These require and allow new approaches in the SSR implementation, e.g. when it comes to avoiding duplicated requests.    
+* In larger applications, state management libraries like [redux](https://redux.js.org/), [ngrx](https://ngrx.io/) or [vuex](https://vuex.vuejs.org/) are used. These require and allow new approaches in the SSR implementation, e.g. when it comes to avoiding duplicated requests.    
 * The negative impacts of re-hydration could be tackled with partial re-hydration, progressive re-hydration or trisomorphic rendering.  
 * A performance comparison between universal JavaScript and pre-rendering would also be interesting.
 

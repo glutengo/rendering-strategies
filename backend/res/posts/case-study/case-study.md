@@ -16,7 +16,7 @@ The full source code is available in this [github repository](https://github.com
 The frontend application consists of three main components:
 
 * The `Post` component displays the current post. This component is mapped to the route `/post/:id`.
-When created, it fetches the contents of this post form the backend using the `id` provided in the URL. 
+When created, it fetches the content of this post form the backend using the `id` provided in the URL. 
 When following an internal link (e.g. a reference to another blog post), there should not be a full page reload.
 The router of the single-page application should handle the navigation instead.
 * The `Header` component contains the page header which displays the title of the blog. 
