@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, Meta, SafeHtml, Title } from '@angular/platform-browser';
-import { ViewportScroller } from '@angular/common';
+import { DOCUMENT, ViewportScroller } from '@angular/common';
 import { BackendService } from '../backend.service';
 
 @Component({
@@ -21,12 +21,14 @@ export class PostComponent implements OnInit {
               private title: Title,
               private viewportScroller: ViewportScroller,
               private changeDetectorRef: ChangeDetectorRef,
-              private backendService: BackendService) {
+              private backendService: BackendService,
+              @Inject(DOCUMENT) private document: Document) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(p => this.http.get(`${this.backendService.getBaseURL()}/post/${p.name}`, { responseType: 'text' })
       .subscribe((data: string) => {
+          this.document.scrollingElement.scrollTop = 0;
           this.meta.updateTag({ name: 'og:title', content: p.name });
           this.title.setTitle(p.name);
           this.content = this.sanitizer.bypassSecurityTrustHtml(data);
