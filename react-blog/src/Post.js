@@ -23,7 +23,10 @@ export function Post(props) {
   useEffect(() => {
     if (!content || (previousId && id !== previousId)) {
       getPost(id)
-        .then(data => setContent(data));
+        .then(data => {
+          document.scrollingElement.scrollTop = 0;
+          setContent(data);
+        });
     }
   }, [ id, content, previousId ]);
 

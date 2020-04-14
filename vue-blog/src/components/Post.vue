@@ -19,6 +19,7 @@
       this.fetchData(this.$route.params.id);
     },
     beforeRouteUpdate(to, from, next) {
+      document.scrollingElement.scrollTop = 0;
       this.setMeta(to.params.id);
       this.fetchData(to.params.id);
       next();
