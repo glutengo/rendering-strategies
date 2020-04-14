@@ -3,23 +3,24 @@
 ## Web Frameworks
 
 Job descriptions for frontend web developer jobs barely hold great surprises these days and this has been the case for the last few years. 
-They very often match in the requirements regarding their applicants' skills in frameworks or pupular libraries for building web applications.
+They very often match in the requirements regarding their applicants' skills in frameworks or popular libraries for building web applications.
 When searching for the term *frontend developer* on job platforms [linkedin.com](https://linkedin.com) and [monster.com](https://monster.com), six out of the ten first listings contained references to [Angular](https://angular.io/), [React](https://reactjs.org/) or both.<sup>[[1](#ref-1)]</sup><sup>[[2](#ref-2)]</sup>
 
 Angular and React are both developed by companies which are considered to be leaders in the digital sector. 
 Their creators [Facebook](https://facebook.com) and [Google](https://google.com) (represented by parent company Alphabet) both make the top ten of [forbes.com's Top 100 Digital Companies List](https://www.forbes.com/top-digital-companies/list/). 
-Considering that these companies created these tools and continue to use them<sup>[[3]](#ref-3)[[4]](#ref-4)</sup>, their quality is considered to be industry proven and many other organisations and developers decided to utilise them as well. 
+Taking into account that these companies created these tools and continue to use them<sup>[[3]](#ref-3)[[4]](#ref-4)</sup>, their quality is considered to be industry proven and many other organisations and developers decided to utilise them as well. 
 
-This has led to a high popularity of these libraries and frameworks among developers worldwide. React is #4 (143 250 Stars) on the list of the highest ranked code repositories on [github](https://github.com), Angular currently ranks on #41 (57 164 Stars) but might have also been among the top 10, had they not chosen to open a new repository in opposition to continuing their work on the repository of predecessor AngularJS (#35, 59 644 Stars). 
+This has led to a high popularity of these libraries and frameworks among developers worldwide. React is #4 (143 250 Stars) on the list of the highest ranked code repositories on [github](https://github.com), Angular currently ranks on #41 (57 164 Stars), but might have also been among the top 10, had they not chosen to open a new repository in opposition to continuing their work on the repository of predecessor AngularJS (#35, 59 644 Stars). 
 Another Web Frontend Framwork with a high position on the list is [Vue.js](https://vuejs.org) (#3, 156 499 Stars).<sup>[[5](#ref-5)]</sup>
-In contrast to React and Facebook, Vue.js was started as a private project by a (now former) Google employee<sup>[[6](#ref-6)]</sup>. 
+In contrast to React and Facebook, Vue.js was started as a private project by a (now former) Google employee.<sup>[[6](#ref-6)]</sup> 
 [stackoverflow.com](https://stackoverflow.com)'s 2019 developer survey shows that React, Vue.js and Angular are the mosted wanted web frameworks.<sup>[[7](#ref-7)]</sup>
 
 ## Single Page Applications
 
 While all of the introduced frameworks offer support for a number of different use cases, the default setup seems to be tailored for building so-called *single page applications*. 
-The React docs list [create-react-app](https://github.com/facebook/create-react-app), a tool for building single page applications with react, as the first of four recommended toolchains.<sup>[[8]](#ref-8)</sup> 
-The Vue.js installation guide introduces its CLI as a tool for "quickly scaffolding ambitious Single Page Applications" <sup>[[9]](#ref-9)</sup> and Angular docs state that "Angular is an app-design framework and development platform for creating efficient and sophisticated single-page apps" <sup>[[10]](#ref-10)</sup>.
+The React docs list [create-react-app](https://github.com/facebook/create-react-app), a tool for building single page applications with React, as the first of four recommended toolchains.<sup>[[8]](#ref-8)</sup> 
+The Vue.js installation guide introduces its command line interface (CLI) as a tool for "quickly scaffolding ambitious Single Page Applications".<sup>[[9]](#ref-9)</sup>
+The Angular docs state that "Angular is an app-design framework and development platform for creating efficient and sophisticated single-page apps" <sup>[[10]](#ref-10)</sup>.
 
 > "A *single page application* is exactily what its name implies: a JavaScript-driven web application that requires only a single page load" <sup>[[11]](#ref-11)</sup>
 
@@ -31,7 +32,7 @@ Additional data may be fetched asynchronously by a script as well.<sup>[[11]](#r
 
 An important reason why single page applications have become so popular is their good look and feel.
 Once the application is bootstrapped, visiting different sub pages does not require a full page reload. 
-Instead, the navigation is performed inside the current page and only the required data is fetched from the server.
+Instead the navigation is performed inside the current page and only the required data is fetched from the server.
 This is considered a big advantage as it results in a smooth, app-like user experience once the application has loaded.<sup>[[12]](#ref-12)</sup>
 
 <p class="image">
@@ -66,11 +67,11 @@ But: The JavaScript is not processed on the first visit of the site. Googlebot f
 Google does not make definite statements on how long it may take for a queue entry to be processed.<sup>[[13]](#ref-13)</sup>
 
 When the server answers each initial request with the same static HTML file, there is also no room for optimizing the sharing behavior for inidividual sub pages of the application. Facebook for instance uses the [Open Graph Protocol](https://ogp.me) to generate the sharing previews for their platform. 
-There are a number of predefined Meta Tags (e.g. `og:title` and `og:image`) which need to be set for a good sharing performance.<sup>[[14]](#ref-14)</sup> If these are only defined once, the sharing preview for each sub page (e.g. `/home` and `/about`) will always look the same. 
+There are a number of predefined meta tags (e.g. `og:title` and `og:image`) which need to be set for a good sharing performance.<sup>[[14]](#ref-14)</sup> If these are only defined once, the sharing preview for each sub page (e.g. `/home` and `/about`) will always look the same. 
 This leaves the developer with only two options: he could either use very general values which are feasible for all pages or he could use specific values for the page he judges the most important. Both options are not really satisfactory.
 
 At last, single page applications have drawbacks regarding performance.
-Although their initial page load may be quick (we will have a look at some more specific [metrics](./metrics) later), the time it takes for the real content to show can be longer because of a higher amount of HTTP roundtrips, especially on mobile devices, where the network conditions may be bad.<sup>[[15]](#ref-15)</sup>   
+Although their initial page load may be quick (we will have a look at some more specific [metrics](./metrics) later), the time it takes for the real content to show can be longer, because of a higher amount of HTTP roundtrips, especially on mobile devices, where the network conditions may be bad.<sup>[[15]](#ref-15)</sup>   
 
 Given these disadvantages, we want to have a look at how single page applications are actually rendered.
 We will compare the used technique to other alternatives and explore potentials to overcome the usual downsides of single page applications.

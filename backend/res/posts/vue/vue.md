@@ -11,12 +11,12 @@ vue create vue-blog
 
 Starting with a scaffolded Vue.js application, we implement the [required components](./case-study#frontend) for realizing our blog application.
 
-The utility functions for fetching data from the server are identical to those that we use in react.
+The utility functions for fetching data from the server are identical to those that we use in React.
 We also use [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch) here to be compatible with both environments (client / server).
 
 To start the application, we run `npm run serve` which is mapped uses `vue-cli-service serve` to run a dev server on port `8080`.
 
-As we are only rendering our application in the browser, our initial DOM is empty.
+As we are only rendering our application in the browser, the initial DOM is empty.
 Without JavaScript enabled in the browser, we will not be presented any relevant data.
 
 <p class="image">
@@ -28,7 +28,7 @@ The source code for this status of development can be assessed [here](https://gi
 
 ## Adding SSR Features
 
-Vue provides a very detailed [guide on SSR](https://ssr.vuejs.org/) implementation.
+Vue.js provides a very detailed [guide on SSR implementation](https://ssr.vuejs.org/).
 We will use this guide when we attempt to render our application on the server.
 
 To get started, we need to install the `vue-server-renderer` package from NPM.
@@ -63,15 +63,15 @@ We also have to make a few adjustments to the build process which was set up for
 * The creation of our vue app was formerly handled in our `main.js` entrypoint file for client side rendering.
 Now that we need two entrypoints, the creation of the app is wrapped in a function and moved to a `app.js` file.
 We then add `entry-client.js` and `entry-server.js` which uses this function and adds the steps required for the respective platform: `app.$mount()` for browser rendering and a utility function which handles initializing the router with the correct URL and can be used in `createBundleRenderer`.
-The latter is a feature of `vue-server-renderer` which adds support for productivity enhancements like source maps and hot-reload<sup>[[4]](#ref-4)</sup>.
+The latter is a feature of `vue-server-renderer` which adds support for productivity enhancements like source maps and hot-reload.<sup>[[4]](#ref-4)</sup>
 * A `vue.config.js` file was added. This is a configuration file which will be loaded by the CLI and is used to override parts of the default configuration.
 We add a minimal client configuration and a configuration for server side rendering so we can build either version using an environment variable.
 * The server script imports the built bundles and uses `bundleRenderer` to render the relevant page and provide the client bundle.
 
 In our initial implementation, the data for our components (e.g. the current blog post in the `Post` component) were loaded in the `mounted` vue lifecycle method.
 This method is not called when our app is rendered on the server.<sup>[[5]](#ref-5)</sup>
-Instead, we are provided with an alternative lifecycle method which is only executed on the server: `serverPrefetch()`<sup>[[5]](#ref-5)</sup>
-So to make sure that our data is fetched in both scenarios, we call our `fetchData` method in lifecycle methods.
+Instead we are provided with an alternative lifecycle method which is only executed on the server: `serverPrefetch()`.<sup>[[5]](#ref-5)</sup>
+So to make sure that our data is fetched in both scenarios, we call our `fetchData` method in both lifecycle methods.
 
 ```javascript
 export default {
@@ -100,7 +100,7 @@ Vue SSR App visited with JavaScript disabled
 ### Avoid duplicated requests
 
 When adding server side rendering, we did make sure that our application was always able to display all data with minimal adjustments to the code.
-However our application is performing some unneeded requests because it re-fetches data which was already given in the DOM before our client application was mounted.
+However our application is performing some unneeded requests, because it re-fetches data which was already given in the DOM before our client application was mounted.
 So we have three unneeded XHR requests performed by our browser application: The data for the current post, the list of rendering options and the post list.
 All of this data is already given when we load the initial document from the server, so we want to get rid of these redundant requests.
 
@@ -109,10 +109,10 @@ This would require setting up a data store and rethinking the data flow of our a
 We did not introduce any state management library when working with Angular and React.
 To keep things consistent and minimize dependencies, we will therefore not use Vuex here either.
 
-Instead, we introduce a simple http cache which collects all http calls which were performed by the server.
+Instead we introduce a simple http cache which collects all http calls which were performed by the server.
 We include this object in the response for the initial request and make sure that the client application consults the cache before performing an actual request.
 Thanks to the distinct lifecycle methods which were used on server and client, the changes could be made without touching the components code.
-Instead, only the util function for fetching the data needed major adjustments, as you can see [here](https://github.com/glutengo/rendering-strategies/commit/c8d8fec1c4b3b798552cd850f758d9afc6b6cb6c).
+Instead only the util function for fetching the data needed major adjustments, as you can see [here](https://github.com/glutengo/rendering-strategies/commit/c8d8fec1c4b3b798552cd850f758d9afc6b6cb6c).
 
 
 ### Sharing
@@ -144,11 +144,11 @@ We simply need to set the `title` attribute of the context and reference this at
 ```   
 
 ### Observations
-* Vue provides a detailed guide on how to add server side rendering to an existing Vue.js app created with the Vue.js CLI. The steps had to be performed manually.
+* Vue.js provides a detailed guide on how to add server side rendering to an existing Vue.js app created with the Vue.js CLI. The steps had to be performed manually.
 * Avoiding duplicated requests without Vuex required some manual implementation
-* Setting the sharing tags required manual implementation and handling the different platforms (server / browser) the code runs on 
-* The changes needed for the SSR setup require a solid knowledge of webpack and the vue build process.
-The docs mention [nuxt.js](https://nuxtjs.org/) as an alternative for new projects or developer teams with limited knowledge in these areas<sup>[[6]](#ref-6)</sup>. 
+* Setting the sharing tags required manual implementation and handling the different platforms (server / browser) the code runs on. 
+* The changes needed for the SSR setup require a solid knowledge of webpack and the Vue.js build process.
+The docs mention [Nuxt.js](https://nuxtjs.org/) as an alternative for new projects or developer teams with limited knowledge in these areas.<sup>[[6]](#ref-6)</sup> 
 
 <hr/>
 

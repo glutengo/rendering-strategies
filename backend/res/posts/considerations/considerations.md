@@ -1,4 +1,4 @@
-# Further Considerations
+# Considerations
 
 When server side rendering is added to a single page application, this is not the last decision that has to be made.
 This post will give you an idea of what other topics are important and need to be considered.
@@ -11,16 +11,16 @@ Also, a [caching proxy](#caching) will be added in front of the application.
 We have seen that server side rendering is likely to slow down the [TTFB](./metrics).
 Also the server needs to be capable of performing the rendering or an external service needs to be added for this purpose.
 Either way, this is likely to produce higher costs than just serving static files.
-Therefore, it is worth questioning which pages to render on the server.
+Therefore it is worth questioning which pages to render on the server.
 
-Web crawlers (e.g. those of search engines or social networks) cannot (or at lease should not be able to) access user specific or other access-controlled content.
+Web crawlers (e.g. those of search engines or social networks) cannot access user specific or other access-controlled content.
 If the primary aim is to improve the search engine performance of the application, it is sufficient to only render those sub pages on the server which are available to the public.<sup>[[1]](#ref-1)</sup>
 We could also go as far as using [dynamic rendering](https://developers.google.com/search/docs/guides/dynamic-rendering). 
 In this case requests by visitors using web browsers are answered with the CSR variant while bots are served a server side rendered static HTML document.<sup>[[2](#ref-2)]</sup>
 This can be considered as an option for improving search engine performance while avoiding the risk of changing the user experience.   
 
 If improving perceived user performance is the main objective, this distinction should not be made and server side rendering (given that it is used at all) should be added for all sub pages instead.
-Rendering authenticated content on the server adds new challenges to the rendering process.
+Rendering authenticated content on the server brings new challenges to the rendering process.
 [Ben Gourleys blog post](https://www.bugsnag.com/blog/server-side-rendering-and-authenticated-content) provides a good introduction on this topic. 
   
 ## When to generate the HTML
@@ -30,9 +30,9 @@ Rendering authenticated content on the server adds new challenges to the renderi
 One approach of generating the HTML is to include a build step which is able to produce the HTML.
 This build step will look different depending on the chosen way of [generating the HTML](#how-to-generate-the-html). 
 
-When creating the HTML during the build time, it is still possible to use a static file server, because the server will only need to deliver static files.
-So if our infrastructure or budget does not allow us to use anything else than that, this is the option to go with.
-This approach requires that all routes to sub pages are known at the moment when the build is created.<sup>[[3]](#ref-3)</sup>
+When creating the HTML during the build process, it is still possible to use a static file server, because the server will only need to deliver static files.
+So if our infrastructure or budget does not allow us to use anything else, this is the option to go with.
+This approach requires that all routes to sub pages are known in the moment the build is created.<sup>[[3]](#ref-3)</sup>
 This may be suitable for static website which have rare changes, but not for applications with more dynamic content and generic routes like content management systems or blogs.
 
 ### Runtime
@@ -40,9 +40,9 @@ This may be suitable for static website which have rare changes, but not for app
 Another option would be to generate the HTML on demand.
 This means that anytime the user makes a request, the server puts together the HTML for the requested page. 
 If the HTML is created at runtime, we need a server which is capable of performing the rendering task or we need to use an external service.
-This tasks requires additional computing power and time and is therefore likely to increase costs and the TTFB.
+This task requires additional computing power and time and is therefore likely to increase costs and the TTFB.
 Amazon for example charges $0.0245 for a gigabyte of statically served files<sup>[[4]](#ref-4)</sup> while an EC2 instance which would be able to render the HTML at runtime would cost about $10.05 per month.<sup>[[5]](#ref-5)</sup>
-It should be added that the costs for rendering on the server could be reduced drastically by using serverless computing.<sup>[[6]](#ref6)</sup><sup>[[7]](#ref-7)</sup>
+It should be added that the costs for rendering on the server could be reduced drastically by using serverless computing<sup>[[6]](#ref6)</sup><sup>[[7]](#ref-7)</sup> and/or adding a [caching proxy](#caching).
 
 The TTFB can be limited by using streaming server rendering.
 This is a feature which was introduced in React 16 and allows the server to send parts of the rendered HTML to the browser before the whole process is finished.
@@ -75,12 +75,12 @@ It is also worth mentioning that there are services like [prerender.io](https://
 ### Universal JavaScript
 
 [Universal JavaScript](https://cdb.reacttraining.com/universal-javascript-4761051b7ae9) (also: Isomorphic JavaScript) means that the same application "can execute both on the client and the server"<sup>[[10]](#ref-10)</sup>. 
-To make use of this technique for server side rendering, the target is to be able to run the code of our single page application on a server.
+To make use of this technique for server side rendering, the target is to be able to run the code of our single page application on a Node.js server.
 To achieve that, instead of mounting the application to a DOM element, the renderer needs to produce a string representation rather than the actual HTML elements.
 
 When using JavaScript frameworks, we barely use calls like `Document.createElement` to create our DOM Elements. 
-Instead, we use higher level APIs provided by these frameworks which then execute the required lower level calls for us.
-The idea behind Universal JavaScript is to keep the high level API the same and swap the implementation provided by the framework. 
+Instead higher level APIs are used which are provided by these frameworks and execute the required lower level calls for us.
+The idea behind universal JavaScript is to keep the high level API the same and swap the implementation provided by the framework. 
 The browser implementation of the framework may still use the mentioned `Document.createElement`, while the server implementation will simply put together a string.<sup>[[11]](#ref-11)</sup>
 
 When developing applications in this manner, it is important to keep up to framework standards and be careful when it comes to using browser specific JavaScript features like the global variables `document` and `window`.<sup>[[12]](#ref-12)</sup>
@@ -88,14 +88,14 @@ These are usually not available when running the code in a Node.js server enviro
 If we still want to use these, we need to either check for their availability first or make use of techniques provided by the used framework.
 This topic is covered in the [case study](./case-study).
 
-Considering that using Universal JavaScript for the rendering process means that the HTML is assembled on the server and pre-rendering means loading the actual page including additional resources like stylesheets, images or videos, it can be assumed, that universal JavaScript needs less computing resources.
-On the other hand, pre-rendering is usually easier to implement because it does not require any changes in the source code of the application.  
+Considering that using universal JavaScript for the rendering process means that the HTML is assembled on the server and pre-rendering means loading the actual page including additional resources like stylesheets, images or videos, it can be assumed, that universal JavaScript needs less computing resources.
+On the other hand, pre-rendering is usually easier to implement, because it does not require any changes in the source code of the application.  
 Both approaches will require more computing resources than a simple file server, so a sensitive strategy regarding caching and selection of server side rendered pages is recommended.
 
 ## (Re-)Hydration
 
-When adding SSR to a Single Page Application, (re-)hydration can help to prevent an intermediate state between the server side rendered HTML and the DOM tree assembled by the browser where the user is presented a blank page.
-However, simple hydration implementations do have disadvantages.
+When adding SSR to a single page application, (re-)hydration can help to prevent an intermediate state between the server side rendered HTML and the DOM tree assembled by the browser where the user is presented a blank page.
+However simple (re-)hydration implementations have disadvantages.
 
 > "The primary downside of SSR with rehydration is that it can have a significant negative impact on Time To Interactive, even if it improves First Paint. 
 > SSR’d pages often look deceptively loaded and interactive, but can’t actually respond to input until the client-side JS is executed and event handlers have been attached. 
@@ -107,9 +107,9 @@ To overcome these issues, a number of approaches have been developed and are sti
 
 *Partial rehydration* describes an approach where a part of the server rendered result is hydrated "while other parts of the page are still loading the code or data. This means that you can start interacting with parts of the screen while others are still hydrating." <sup>[[14]](#ref-14)</sup>
 While the Pull Request where this was discussed was merged for React, this topic is still untackled for Angular.<sup>[[15]](#ref-15)</sup>
-Google names this approach *progressive* rather than *partial* because the first assumes that in the end everything is hydrated (just not everything at once) while the second implies that some parts of the application are not hydrated at all.<sup>[[13]](#ref-13)</sup>
+Google names this approach *progressive* rather than *partial*, because the first assumes that in the end everything is hydrated (just not everything at once) while the second implies that some parts of the application are not hydrated at all.<sup>[[13]](#ref-13)</sup>
 
-Google also suggests a technique called *Trisomorphic Rendering* where streaming server rendering is combined with service workers.<sup>[[9]](#ref-13)</sup>  
+Google also suggests a technique called *trisomorphic rendering*, where streaming server rendering is combined with service workers.<sup>[[9]](#ref-13)</sup>  
 
 ## Caching
 
@@ -117,7 +117,7 @@ Generating the HTML on demand has significant advantages compared to build time 
 However if we decide to generate the HTML on demand, we expect a higher TTFB and more costs.
 A desired scenario would combine the runtime benefits with reduced costs.
 This can be achieved by adding a [http cache](https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html).
-To be more specific, a Caching Proxy would serve our needs:
+To be more specific, a caching proxy would serve our needs:
 
 > "The basic idea in caching is simple: store the retrieved
    document into a local file for further use so it won’t be
@@ -127,12 +127,12 @@ To be more specific, a Caching Proxy would serve our needs:
 If the first request to a page is made, the required HTML is generated by the server and the request is answered with this HTML.
 At the same time a cache entry is created.
 Any future requests to the same resource can be answered by the cache.
-This way, it is possible to reduce the computing time required to answer a request because the task of creating the HTML is not performed for every request.
+This way, it is possible to reduce the computing time required to answer a request, because the task of creating the HTML is not performed for every request.
 Instead it is only performed once for each sub page.
 If we are in an environment where the costs are calculated based on the computing time, this would reduce both the TTFB and the costs.
 
 To assure that the contents are always up to date, the cache needs to be [invalidated](https://foshttpcache.readthedocs.io/en/latest/invalidation-introduction.html) when the contents change.
-This may seem obvious and straightforward but still deserves to be mentioned as it is considered one of the hardest things in computer science.<sup>[[13]](#ref-17)</sup>
+This may seem obvious and straightforward, but still deserves to be mentioned as it is considered one of the hardest things to do in computer science.<sup>[[13]](#ref-17)</sup>
   
 <hr/>
 

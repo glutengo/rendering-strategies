@@ -22,9 +22,9 @@ But his also means that all routes to subpages need to be known at the time the 
 This may be suitable for static website which have rare changes, but not for applications with more dynamic content and generic routes like content management systems or blogs.
 
 Another option is to prerender the page on demand. In this case, the script which creates the markup on the server using a headless browser is run on demand.
-If a user requests a page, let's say `https://my-blog.com/posts/my-post`, the server prerenders the page and returns the resulting HTML to the browser.
+If a user requests a page, let's say `https://my-blog.com/posts/my-post`, the server pre-renders the page and returns the resulting HTML to the browser.
 
-This approach requires the server to be able to run a such script and may require a needlessly high amount of computing power because the page is regenerated on every request.
+This approach requires the server to be able to run a such script and may require a needlessly high amount of computing power, because the page is regenerated on every request.
   
 To address this problem, a strategy regarding when to prerender, when to use a cache or when to not prerender at all needs to be picked.
 

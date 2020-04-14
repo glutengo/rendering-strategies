@@ -2,7 +2,7 @@
 
 ## Standard CSR Setup
 
-To set up the blog as a single-page application which is fully and exclusively rendered in the browser, the Angular CLI (in our case version `9.0.1`) is used:
+To set up the blog as a single page application which is fully and exclusively rendered in the browser, the Angular CLI (in our case version `9.0.1`) is used:
 
 ```shell
 ng new angular-blog
@@ -23,7 +23,7 @@ When the first version of the angular application was ready, its source code was
 
 ## Adding SSR Features
 
-The Angular Website provides a very helpful [guide](https://angular.io/guide/universal) to set up server side rendering for Angular applications which proved good reference for this case study.
+The Angular Website provides a very helpful [guide](https://angular.io/guide/universal) to set up server side rendering for Angular applications which proved to be a good reference for this case study.
 
 To add SSR behavior to an Angular app, [Angular Universal](https://github.com/angular/universal) needs to be added to the project. 
 The required steps can be performed by adding the corresponding [schematic](https://angular.io/guide/schematics):
@@ -35,7 +35,7 @@ ng add @nguniversal/express-engine
 This adds an additional module for a new server renderer application (`app.server.module.ts`). 
 This new module contains a server entry point script (`server.ts`) which sets up an [express.js](https://expressjs.com/) based server which uses our Angular app as its [view engine](https://expressjs.com/en/guide/using-template-engines.html).
 
-We are also provided with a number of helpful scripts in the package.json file which allow us to start a development server with hot-reloading and compilation on save (`dev:ssr`), create a production build (`build:ssr`), serve the previously built server application (`serve:ssr`) or create a pre-rendered version of the pages with fixed routes.   
+We are also provided with a number of helpful scripts in the package.json file which allow us to start a development server with hot-reloading and compilation on save (`dev:ssr`), create a production build (`build:ssr`), serve the previously built server application (`serve:ssr`) or create a pre-rendered version of the pages with fixed routes(`prerender`).   
 
 ```json
 "scripts": {
@@ -64,8 +64,8 @@ The [changes required to achieve this](https://github.com/glutengo/rendering-str
 ### Universal JavaScript
 
 In the current setup, we are using universal JavaScript to run the same application on the server that we are running in the browser.
-This is comfortable because we do not need to rewrite the whole application. However we do need to be careful at some points. 
-Some global browser variables that we may be used to rely on are not available when running the same code on a NodeJS server instead of a browser.
+This is comfortable, because we do not need to rewrite the whole application. However we do need to be careful at some points. 
+Some global browser variables that we may be used to rely on are not available when running the same code on a Node.js server instead of a browser.
 The `document` and the `window` object are examples of these. 
 We may still want to use these objects in our browser app and not wrap every access in a if statement to keep our code clean.
 Angular's solution for this problem is its [dependency injection](https://angular.io/guide/dependency-injection) system.
@@ -83,17 +83,17 @@ By this means we can still use the API without breaking the app when running on 
 
 ### Prerender
 
-As an alternative to rendering at runtime, Angular also provides with the option to use pre-rendering instead.
+As an alternative to rendering at runtime, Angular also provides the option to use pre-rendering instead.
 In this case, the application is not actually run on the server. 
 Instead it is built once and the result is stored. 
 We end up with one or more rich HTML files which can be served by a static file server.
 
-It is notable that Angular does not use a (headless) browser to render the pages but still relies on its universal engine.
+It is notable that Angular does not use a (headless) browser to render the pages, but still relies on its universal engine.
 While pre-rendering usually allows using browser-only JavaScript features like the global `document` object, this does not apply to the Angular `prerender` task.
 We still need to bypass this by using the techniques explained above.
 
 This approach has the advantage that no server side logic is required at runtime. 
-Instead, the rendering is performed at build time. 
+Instead the rendering is performed at build time. 
 However this has its own big downside: We need to know which routes exist when performing the pre-rendering.
 The required routes need to be added in the `angular.json` configuration file:
 
@@ -119,8 +119,8 @@ This is usually not the case in the context of a content management system or a 
 
 ### Sharing
 
-The sharing previews of social media platforms and search engines depend on meta tags.<sup>[[1]](#ref-1)</sup>. 
-Angular offers its [own API](https://angular.io/api/platform-browser/Meta) to handle these meta tags.
+The sharing previews of social media platforms and search engines depend on meta tags.<sup>[[1]](#ref-1)</sup> 
+Angular offers its [own API](https://angular.io/api/platform-browser/Meta) to handle these.
  
 ```typescript
 import { Meta } from '@angular/platform-browser';
@@ -136,25 +136,25 @@ class AppComponent {
 
 ```
 
-This API is not limited for use in server side rendered apps but regarding the tags' importance for web crawlers it is very helpful to improve sharing previews.
+This API is not limited to use in server side rendered apps, but regarding the tags' importance for web crawlers it is very helpful to improve sharing previews.
 A very similar approach can be followed for setting the document title (see [Angular docs](https://angular.io/guide/set-document-title)).
 
 ### Avoid duplicated requests
 
 When we observe the network tab of our SSR application in the browser we will see that some data is needlessly fetched in the browser although it is already available and visible.
-The content of the current post is an excellent example for this. As we have seen earlier, the full content of the post is available in the HTML file provided by the server because the Angular application was executed on the server and this was the result of server side rendering.
+The content of the current post is an excellent example for this. As we have seen earlier, the full content of the post is available in the HTML file provided by the server, because the Angular application was executed on the server and this was the result of server side rendering.
 Our application is then executed in the browser again and our `PostComponent` again fetches the post content from the backend. 
-This is no new data in fact the user is already able to see it. 
+This is no new data and in fact the user is already able to see it. 
 It is desirable to avoid these duplicated requests.
 
 Angular provides a solution for this. 
-As described in their docs<sup>[[2]](#ref-2)</sup>, by the use of the `TransferHttpCacheModule` (part of the @nguniversal/common package) in the App Module and the `ServerTransferStateModule` in the server module, all requests performed with Angular's HttpClient on the server are stored in a key-value store.
+As described in their docs<sup>[[2]](#ref-2)</sup>, by the use of the `TransferHttpCacheModule` (part of the `@nguniversal/common package`) in the app module and the `ServerTransferStateModule` in the server module, all requests performed with Angular's `HttpClient` on the server are stored in a key-value store.
 This store is transferred to the client. 
-HttpClient Requests in the browser are then answered by the store if possible.
+`HttpClient` requests in the browser are then answered by the store if possible.
 This way requests that were already performed on the server are not sent from the browser again. 
 Any other requests are performed as usual.
 
-The changes to enable this feature in our applications can be retraced [here](https://github.com/glutengo/rendering-strategies/commit/a45d54472cfb72f5a3ea9b1abfc4bf9773372ea2).
+The changes to enable this feature in our application can be retraced [here](https://github.com/glutengo/rendering-strategies/commit/a45d54472cfb72f5a3ea9b1abfc4bf9773372ea2).
 
 ### Observations
 

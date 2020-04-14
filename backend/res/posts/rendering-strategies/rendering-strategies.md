@@ -19,13 +19,13 @@ Typical timeline for the rendering process for CSR<sup><a href="#ref-2">[2]</a><
 </p>
 
 The application needs to load and process further resources (primarily JavaScript) to be able to display the content and allow any interaction.
-For client side rendered applications, the TTFB is usually very low because the server only needs to deliver static resources.
+For client side rendered applications, the TTFB is usually very low, because the server only needs to deliver static resources.
 Once the main JavaScript bundle is loaded, the application can produce its FCP which will usually only contain some static site elements (e.g. the page header) and not the actual content.
 The application may then download the content from an API and render the content so it gets visible to the user (FMP).
 As a result, the FMP and the TTI can be quite high which can lead to a bad perceived performance regarding page load.<sup>[[1]](#ref-1)</sup>
-Once the application is fully loaded, it feels very quick and does not need full repaints when navigating to other areas of the application because the logic to render the UI has already been downloaded and the newly needed data can be fetched asynchronously.
+Once the application is fully loaded, it feels very quick and does not need full repaints when navigating to other areas of the application, because the logic to render the UI has already been downloaded and the newly needed data can be fetched asynchronously.
 
-Examples for this technique:
+Examples for this technique are
 * [Microsoft Office Home](https://www.office.com/apps)<sup><a href="#ref-3">[3]</a></sup>
 * gmail.com, [default mail client](https://gmail.com) 
 
@@ -43,12 +43,12 @@ Typical timeline for the rendering process for SSR<sup><a href="#ref-2">[2]</a><
 </p>
 
 In extreme cases, this can lead to FCP, FMP and TTI happening at the same time.
-The application may load and process JavaScript to add enhancements (omitted in the diagram), but these scripts tend to be a lot smaller because they are not responsible for critical tasks like rendering.
+The application may load and process JavaScript to add enhancements (omitted in the diagram), but these scripts tend to be a lot smaller, because they are not responsible for critical tasks like rendering.
 Because the HTML needs to be built on the server and more data is transferred from the server to the client in the initial request, the TTFB is usually higher compared to CSR applications.
-On the other side, the gap between TTI and FMP is smaller (or zero) because the amount of JavaScript that needs to be processed is smaller in most cases.<sup>[[1]](#ref-1)</sup>
-After the loading process, the user experience can be considered worse because navigation to another (sub) page requires a full repaint of the page.
+On the other side, the gap between TTI and FMP is smaller (or non-existent), because the amount of JavaScript that needs to be processed is smaller in most cases.<sup>[[1]](#ref-1)</sup>
+After the loading process, the user experience can be considered worse, because navigation to another (sub) page requires a full repaint of the page.
 
-Examples for this technique:
+Examples for this technique are
 * amazon.com, e.g. the [product detail page](https://www.amazon.de/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
 * [vogue.com](https://vogue.com) as an example for a wordpress website<sup><a href="#ref-4">[4]</a></sup>
 * github.com, e.g. the [repository page](https://github.com/glutengo/rendering-strategies)
@@ -56,10 +56,10 @@ Examples for this technique:
 ## SSR with with re-hydration
 
 Comparing the two techniques, it seems useful to find a solution which combines the best of the two:
-Having a fully rendered DOM in the initial Request and not needing a page reload when navigating through the application.
+Having a fully rendered DOM in the initial request and not needing a page reload when navigating through the application.
 
-To achieve that, we need to to render the initially requested page on the server and still bootstrap the full application in the browser again.
-If we would just do that and let our single page application clean the DOM Element where it uses as a rendering target, we would end up with a temporarily blank screen.
+To achieve that, we need to render the initially requested page on the server and still bootstrap the full application in the browser again.
+If we would just do that and let our single page application clean the DOM element which it uses as a rendering target, we would end up with a temporarily blank screen.
 To avoid that, a technique called *hydration* or *re-hydration* has emerged.
 
 > "Rehydration: “booting up” JavaScript views on the client such that they reuse the server-rendered HTML’s DOM tree and data." <sup>[[1]](#ref-1)</sup> 
@@ -71,15 +71,15 @@ Just like the CSR approach, this solution provides a good user experience in ter
 Typical timeline for the rendering process for SSR with re-hydration<sup><a href="#ref-2">[2]</a></sup>
 </p>
 
-It is slower regarding TTFB because the server needs to do more than just deliver static files and the payload of the initial request is bigger.
+It is slower regarding TTFB, because the server needs to do more than just deliver static files and the payload of the initial request is bigger.
 This can be improved by adding a [cache](./considerations#caching).
-The FMP should be comparably low or at least the difference between FMP and TTFB should be small because our single page application does not need to do any rendering or fetch data before the user is presented with the content.
+The FMP should be comparably low or at least the difference between FMP and TTFB should be small, because our single page application does not need to do any rendering or fetch data before the user is presented with the content.
 Probably the biggest downside of this approach is an increased gap between FMP and TTI. 
-The user may be presented the content very quickly but he still needs to wait until the JavaScript is processed until the application becomes fully reactive.<sup>[[5]](#ref-5)</sup>
+The user may be presented the content very quickly, but he still needs to wait until the JavaScript is processed until the application becomes fully reactive.<sup>[[5]](#ref-5)</sup>
 There are some experimental strategies for overcoming this problem or reducing this effects. 
 These are listed in the [considerations](./considerations#(re-)hydration).
 
-Examples for this technique:
+Examples for this technique are
 * [m.twitch.com](https://m.twitch.tv)<sup><a href="#ref-6">[6]</a></sup>
 * [airbnb.com](https://www.airbnb.com/)<sup><a href="#ref-7">[7]</a></sup>
 * [onefootball.com](https://onefootball.com/)<sup><a href="#ref-3">[3]</a></sup>

@@ -8,7 +8,7 @@ To develop the blog as a fully client side rendered single page application, we 
 npx create-react-app react-blog
 ```
 
-This scaffolds a react application. To realize our blog, we implement the required [components](./case-study#frontend) of the blog application.
+This scaffolds a React application. To realize our blog, we implement the required [components](./case-study#frontend) of the blog application.
 [react-router](https://github.com/ReactTraining/react-router) is used to realise client side routing.
 
 The application is started by running `npm start` which is mapped to `react-scripts start` and runs a dev server on port `3000`.
@@ -23,18 +23,18 @@ The source code for this status of development can be assessed [here](https://gi
 
 ### Adding SSR Features
 
-The React API offers functionality to render a React App on a Node.js server. This is part of the standard [react-dom NPM package](https://www.npmjs.com/package/react-dom).
+The React API offers functionality to render a React app on a Node.js server. This is part of the standard [react-dom NPM package](https://www.npmjs.com/package/react-dom).
 The most straightforward method is `ReactDOMServer.renderToString()` which renders the React app to a string which can be re-hydrated once loaded in the browser using `ReactDOM.hydrate()`.<sup>[[1]](#ref-1)</sup>
 
 There is no simple tool which allows us to just add server side rendering to an existing React app created with CRA. 
 Instead we need to manually set up a Node.js server which makes use of  the method mentioned above. 
-[This post on medium](https://medium.com/bucharestjs/upgrading-a-create-react-app-project-to-a-ssr-code-splitting-setup-9da57df2040a) gives a good overview of the required steps.
-To summarize, we need to:
+[This post on Medium](https://medium.com/bucharestjs/upgrading-a-create-react-app-project-to-a-ssr-code-splitting-setup-9da57df2040a) gives a good overview of the required steps.
+To summarize we need to:
 * Install [express](https://expressjs.com/)
 * Set up a server script which is able to route the HTTP request to our renderer (see below) and serve static files
 * Set up a renderer script as a [express middleware](https://expressjs.com/en/guide/using-middleware.html) which parses our index.html file and eventually calls `ReactDOMServer.renderToString()`
 * Install [babel](https://babeljs.io/) and some utilities
-* Set up a bootstrap script which initializes babel and imports the server script. This step is required because NodeJS does not understand JSX.
+* Set up a bootstrap script which initializes babel and imports the server script. This step is required, because Node.js does not understand [JSX](https://reactjs.org/docs/introducing-jsx.html).
 
 If we follow these instructions, we can get to a version of our app which is running on the server. 
 
@@ -45,8 +45,8 @@ We need to use `StaticRouter` on the server instead and pass the location from t
 * The client app needs to be built before starting the server and the server app has to be restarted on any change manually. 
 The latter can be overcome by using [nodemon](https://www.npmjs.com/package/nodemon) when starting the server.
 If we want the client bundle to be rebuilt on any change as well, we can add a separate script for this, as demonstrated [here](https://gist.github.com/int128/e0cdec598c5b3db728ff35758abdbafd).
-* Backend data is fetched in the `useEffect` hook in the client app and then added to the component state as suggested in the [react docs](https://reactjs.org/docs/hooks-intro.html#complex-components-become-hard-to-understand). 
-This hook is not run when rendering a react app on the server.<sup>[[2]](#ref-2)</sup> 
+* Backend data is fetched in the `useEffect` hook in the client app and then added to the component state as suggested in the [React docs](https://reactjs.org/docs/hooks-intro.html#complex-components-become-hard-to-understand). 
+This hook is not run when rendering a React app on the server.<sup>[[2]](#ref-2)</sup> 
 The same applies to the `ComponentDidMount` lifecycle method<sup>[[5]](#ref-5)</sup>. 
 Instead it is required to prefetch all required data and pass it down to the components.
 This can be achieved by using a component property value as the initial value for the `useState` hook in the relevant components. 
@@ -56,9 +56,9 @@ To avoid any duplicated code, the actual fetch call is moved to a util file whic
 To be able to use the same code in both environments, [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch) is used.
 * The Header contains a `<select>` element which allows to switch between rendering implementations. 
 The currently selected method is preselected. 
-The function which set this preselection used the location property of the browser-only global `document` variable which resulted in errors when running on the server.
+The function which set this pre-selection used the location property of the browser-only global `document` variable which resulted in errors when running on the server.
 To bypass this problem, a util function was written which returns an object containing the required properties when run on the server by reading these from the express request object instead.
-(Note: this was simplified later on. In the current version, the platform is hardcoded (react) and the rendering technique (csr/ssr) is set as an environment variable during the build process)
+(Note: this was simplified later on. In the current version, the platform is hardcoded (React) and the rendering technique (csr/ssr) is set as an environment variable during the build process)
 
 After these issues were resolved, server side rendering was achieved and the initial HTML payload was content-ful:
 
@@ -101,27 +101,70 @@ return <section className="page-header">
  
 #### Avoid duplicated requests
 
-The way we set up our components, the data is loaded twice from the backend: Once when rendering on the server and a second time when executing the code on the client.
+Because of the way we set up our components, the data is loaded twice from the backend: Once when rendering on the server and a second time when executing the code on the client.
 The second request is not needed. We want our browser to not re-fetch any data which is already given.
-To achieve this, we need to initialize our client app with the data already known instead of always performing a http Request.
+To achieve this, we need to initialize our client app with the data already known instead of always performing a HTTP Request.
 
 We store the results of the backend calls performed on the server in a global variable called `REACT_HTTP_CACHE` so it can be accessed in the browser.
 When intializing our client app, we read the values of this cache object and pass them to our React app as component properties.
-Just like when rendering on the server, our react components now have initial access to our data without performing any further http requests.
-Nevertheless, the requests are performed anyways because the `useEffect` hooks run after mounting the component instances.
+
+```javascript
+
+const { toc, postContent, renderingOptions } = window.REACT_HTTP_CACHE;
+
+if (toc && postContent && renderingOptions) {
+  ReactDOM.hydrate(<App toc={toc} postContent={postContent}
+                        renderingOptions={renderingOptions}/>, document.getElementById('root'));
+
+} else {
+  ReactDOM.render(<App/>, document.getElementById('root'))
+}
+
+```
+
+Just like when rendering on the server, our React components now have initial access to our data without performing any further http requests.
+Nevertheless, the requests are performed anyways, because the `useEffect` hooks run after mounting the component instances.
 To avoid this, we add a condition inside the effect handler which checks if the required data is already given.
 This is straightforward for the `PostList` and the `Header` as we simply check if the list of content (TOC / rendering options) is empty.
 If so, we perform the http call (SSR world); if not, we do not fetch anything.
 When it comes to the `Post` component, another condition is required. 
-We do not want the component to fetch any data initially because we know the data is already provided by the component props (passed in from the cache).
+We do not want the component to fetch any data initially, because we know the data is already provided by the component props (passed in from the cache).
 However we do want the component to fetch the data for another post if the id of the post changes i.e. if the user navigates to another blog post.
-To ensure this, we follow the [react docs](https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state) and compare the current post id to the previous post id and only fetch the post data from the backend if the id has changed.
+To ensure this, we follow the [React docs](https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state) and compare the current post id to the previous post id and only fetch the post data from the backend if the id has changed.
+
+```javascript
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+export function Post(props) {
+
+  const [content, setContent] = useState(props.content);
+  const { id } = useParams();
+  const previousId = usePrevious(id);
+
+  useEffect(() => {
+    if (!content || (previousId && id !== previousId)) {
+      getPost(id)
+        .then(data => setContent(data));
+    }
+  }, [ id, content, previousId ]);
+
+  return <div className="post" dangerouslySetInnerHTML={{__html: content}}></div>;
+}
+
+```
 
 [This commit](https://github.com/glutengo/rendering-strategies/commit/e956081bef95f4f3f9e211a440a63d17b13d789a) includes all required changes to avoid any unneeded XHR requests.
  
 ### Observations
-* Adding SSR to a React App which was created with CRA is possible. However, 
-there is no strong tooling support. Instead, the setup has to be performed manually.
+* Adding SSR to a React app which was created with CRA is possible. 
+However there is no strong tooling support. Instead the setup has to be performed manually.
 The documentation gives useful insights and suggestions regarding most of the required steps.
 Helpful tutorials from the community are available for support.
 * The implemented way of pre-fetching data on the server implies that we know which data to fetch in advance. 
@@ -129,12 +172,12 @@ In a larger application with more heterogenous views, it is very likely that thi
 In this case, a more generic approach where any http call which is dispatched when a component is mounted is registered and prefetched.
 * When using [redux](https://redux.js.org) for state management, more alterations have to be made because of the changed flow of data.
 [Their docs](https://redux.js.org/recipes/server-rendering/) provide instructions for this scenario.  
-* Our case study assumes that we start by writing a client side rendered single page application and add server side rendering functionality to id.
-This is the reason for starting with create-react-app. If server side rendering is a requirement from the beginning, the React docs recommend using [next.js](https://nextjs.org/) instead.<sup>[[3](#ref-3)]</sup>   
+* Our case study assumes that we start by writing a client side rendered single page application and add server side rendering functionality to it.
+This is the reason for starting with create-react-app. If server side rendering is a requirement from the beginning, the React docs recommend using [Next.js](https://nextjs.org/) instead.<sup>[[3](#ref-3)]</sup>   
       
 ## Alternative: Next.js
 
-As suggested in the react docs, an alternative to enhancing a react app created with CRA exists in the Next.js Framework.
+As suggested in the React docs, an alternative to enhancing a React app created with CRA exists in the Next.js Framework.
 
 We start by creating a new Next.js application:
 
@@ -142,7 +185,7 @@ We start by creating a new Next.js application:
 npm init next-app
 ``` 
 
-In contrast to the React application created above, Next.js applications are structured a bit differently regarding routing.
+In contrast to the React application created above, Next.js applications are structured differently regarding routing.
 In a CRA app we typically have one root component where we include static elements (in our case: the header and the menu containing the post list) and a placeholder for the actual page content which is filled by the router.
 In a Next.js app, each page has an own file, so there is no root component. 
 To still be able to have static elements which appear on each of these pages and not repeat too much code, the [Next.js guide](https://nextjs.org/learn/basics/using-shared-components) suggests setting them up as shared components and putting them into a higher order `Layout` component.
@@ -182,20 +225,21 @@ This pattern also gives us the ability set the meta tags for sharing in a very d
 
 #### Avoid duplicated requests
 
-As we are still using the react library, our components look almost the same as in our react app created with CRA.
+As we are still using the React library, our components look almost the same as in our React app created with CRA.
 The main difference is that instead of using the `useEffect()` hook, we add a static method called `getInitialProps()` to fetch the required data.
 If a component has this static method and the component is used as a page, it is called by the next framework when it is mounted into the application.
 The method is called on the server if the concerned page is the initially requested page and it is called on the client if the page is displayed after performing a navigation in the browser.<sup>[[4]](#ref-4)</sup>
-Given this knowledge, it is important to not use browser-only features here. Therefore, we use `isomorphic-fetch` for getting any data from the backend.
+Given this knowledge, it is important to not use browser-only features here. 
+Therefore we use `isomorphic-fetch` for getting any data from the backend.
 
 Thanks to `getInitialProps`, we have complete server side rendering out of the box and there are no duplicated requests for the initial page.
 To keep the code clear, we would however not want our page component to be responsible for getting the data for each child component used in the page.
-The Post page should not need to know which data the header or the menu needs to load.
+The post page should not need to know which data the header or the menu needs to load.
 To achieve this, we also create a static `getInitialProps` on each of the child components. 
 This concerns the `Layout` component, the `Header` component and the `PostList` component, whilst the latter two only occur as a child of the first.
-Therefore, the `getInitialProps` function for `Header` and `PostList` fetch their respective data.
+Therefore the `getInitialProps` function for `Header` and `PostList` fetch their respective data.
 The `getInitialProps` function for `Layout` just calls the `getInitialProps` functions of its two child components and passes the results as properties to them.
-This step is required, because next.js only calls `getInitialProps` for pages and not for its child components.<sup>[[4]](#ref-4)</sup>
+This step is required, because Next.js only calls `getInitialProps` for pages and not for its child components.<sup>[[4]](#ref-4)</sup>
 
 ```js
 PostList.getInitialProps = async function(context) {
@@ -212,7 +256,7 @@ Layout.getInitialProps = async function(context) {
 };
 ```
 
-Our page component follows a similar pattern: It fetches the data it needs itself (in case of our Post page: the content of the post) and it calls the static `getInitialProps` function of the `Layout` component and passes down the data.
+Our page component follows a similar pattern: It fetches the data it needs itself (in case of our post page: the content of the post) and it calls the static `getInitialProps` function of the `Layout` component and passes down the data.
   
 ```js
 Post.getInitialProps = async function(context) {
@@ -230,11 +274,11 @@ To be able to access this information in the child components, we always pass th
 
 The source code of this version of the application is available [here](https://github.com/glutengo/rendering-strategies/tree/eab7799e084a8eda767b219ef7208c427489b8c0/next-blog).
 
-As mentioned earlier, we don't have duplicated requests for the initial page load. 
-However if we navigate to another blog post, not only the content of the post is fetched but also the required data for the header and the menu.
-This is the case because of the next.js architecture which gives [pages](https://nextjs.org/docs/basic-features/pages) a central meaning.
+As mentioned earlier, there are no duplicated requests for the initial page load. 
+However if we navigate to another blog post, not only the content of the post is fetched, but also the data for the header and the menu.
+This is the case because of the Next.js architecture which gives [pages](https://nextjs.org/docs/basic-features/pages) a central meaning.
 The `Header` and `PostList` component are not reused when the route is changed. 
-Instead, they are re-created and as we are on the client, their `getInitialProps` functions are called on every page load.
+Instead they are re-created and as we are on the client, their `getInitialProps` functions are called on every page load.
 Their content does not change, so we could easily cache this data.
 
 ```js
@@ -261,11 +305,11 @@ export async function useCache(url, propertyName) {
 ```
 
 To achieve this, we create a simple cache which creates a global object called `NEXT_HTTP_CACHE`.
-When a component is rendered which needs to read or write from the data, it uses the `withCache` function and passes in the concerned props.
-For example when the PostList is rendered, it already knows its initialProps because they were pre-fetched on the server.
+When a component is rendered which needs to read or write from the data, it uses the `withCache` function and passes the concerned props.
+For example when the PostList is rendered, it already knows its initial props, because they were pre-fetched on the server.
 At this point, we store this initial data in our cache object.
 In the `getInitialProps` function, we do not perform `fetch` calls anymore. 
-Instead, we pass the requested URL and the cache key (`propertyName`) to the `useCache` function.
+Instead we pass the requested URL and the cache key (`propertyName`) to the `useCache` function.
 This checks if the requested key exists in the cache and responds with its data our performs the actual fetch call otherwise.
 
 With the http cache added, there are no more duplicated requests, neither for the initial page load, nor for any further navigation. 
