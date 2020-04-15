@@ -3,7 +3,7 @@
 One aim of this blog is to compare the performance of different rendering approaches for web applications built with modern JavaScript frameworks.
 To be able to do this, it is required to find out which metrics are suitable to measure the performance.
 
-### User centric performance metrics
+## User centric performance metrics
 
 Perceived user performance is one of the main reasons to care about website rendering.
 Therefore it is required to have metrics which model this user perception. 

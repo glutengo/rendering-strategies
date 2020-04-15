@@ -16,7 +16,7 @@ While they are largely independent from each other or include links to other pas
 
 My name is Markus Glutting, I am a software developer working at [sprylab](https://sprylab.com/).
 I am currently studying Media Informatics (Master) at [HTW Berlin](https://www.htw-berlin.de/).
-The curriculum includes the elaboration of two so-called [Independent Coursworks](https://imi-master.htw-berlin.de/studium/independent-coursework/).
+The curriculum includes the elaboration of two so-called [Independent Courseworks](https://imi-master.htw-berlin.de/studium/independent-coursework/).
 Students are expected to find a topic which is connected to the course of study and work on that topic independently.
 I chose *Rendering Strategies for Web Apps* as my topic and decided to publish the results in this blog.   
 Independent Courseworks also need a supervisor who helps in case of questions and assesses the final results.
