@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "This repository contains the source code for a blog application which was developed to compare the SSR options in Web Frameworks Angular, React and Vue.js.",
   "scripts": {
-    "analyze": "node scripts/lighthouse.js"
+    "analyze": "node scripts/lighthouse.js",
+    "postinstall": "cd backend && npm install",
+    "start": "cd backend && npm start"
   },
   "repository": {
     "type": "git",

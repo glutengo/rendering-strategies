@@ -7,4 +7,4 @@ if (!process.env.BACKEND_URL) {
 
 const content = require('./content');
 
-content(process.env.BACKEND_PORT);
+content(process.env.PORT || process.env.BACKEND_PORT);
