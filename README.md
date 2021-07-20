@@ -11,7 +11,7 @@ The blog is running here:
 ~~[Vue.js CSR](http://dcktqs7uo9ylw.cloudfront.net)~~
 ~~[Vue.js SSR](http://d3hhz5c0f514y5.cloudfront.net)~~
 
-The blug applications are not running on AWS anymore due to increased costs. A limited version of the project is available at the following URL. Please note that only the Angular CSR variant is running and the switch to the other implementations does not work here.
+The blog applications are not running on AWS anymore due to increased costs. A limited version of the project is available at the following URL. Please note that only the Angular CSR variant is running and the switch to the other implementations does not work here.
 https://rendering-strategies-ng-csr.herokuapp.com
 
 The repository contains subdirectories for the backend application and each frontend implementation.
